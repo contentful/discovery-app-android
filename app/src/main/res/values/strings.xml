@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Discovery</string>
+    <string name="credentials_set">Credentials set, hit "START" to connect.</string>
+    <string name="num_of_entries">%1$d entries</string>
+
+    <!-- Dialogs -->
+    <string name="pd_login_title">Connecting to Space</string>
+    <string name="pd_login_message">Please wait…</string>
+
+    <string name="ad_login_error_title">Error connecting to Space</string>
+    <string name="ad_login_error_message_unauthorized">Unauthorized, invalid credentials..</string>
+    <string name="ad_login_error_message_not_found">Not found, please make sure the Space key is correct.</string>
+    <string name="ad_login_error_message_generic">Oops, something went wrong. Check your network connection and try again.</string>
+
+    <string name="select_locale">Select locale</string>
+
+    <!-- Tabs -->
+    <string name="tab_content_types">Content Types</string>
+    <string name="tab_assets">Assets</string>
+    <string name="tab_list">List</string>
+    <string name="tab_preview">Preview</string>
+
+    <!-- Asset Info -->
+    <string name="asset_info_title">Title</string>
+    <string name="asset_info_description">Description</string>
+    <string name="asset_info_created_at">Creation Date</string>
+    <string name="asset_info_mime_type">MIME Type</string>
+    <string name="asset_info_size">Size</string>
+
+    <!-- Menu -->
+    <string name="menu_action_select_locale">Select locale</string>
+    <string name="ok">OK</string>
+    <string name="ad_unknown_file_title">Unknown file type</string>
+    <string name="ad_unknown_file_message">There are no installed apps available to open this type of file. Would you like to open it with your web browser?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+
+    <!-- Credentials Activity -->
+    <string name="credentials_api_credentials">API Credentials</string>
+    <string name="credentials_space">Space</string>
+    <string name="credentials_access_token">Access Token</string>
+    <string name="credentials_start">Start</string>
+    <string name="history_space">Space Name</string>
+    <string name="history_last_login">Last login</string>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:exitFadeDuration="@android:integer/config_mediumAnimTime">
+
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <solid android:color="@color/theme_control_highlight" />
+            <corners android:radius="@dimen/button_corners_radius" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/theme_accent" />
+            <corners android:radius="@dimen/button_corners_radius" />
+        </shape>
+    </item>
+</selector>

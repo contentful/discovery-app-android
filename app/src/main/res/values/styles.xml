@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Discovery" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:windowAnimationStyle">@style/Theme.Discovery.WindowAnimationStyle</item>
+    </style>
+
+    <style name="FloatingButton">
+        <item name="android:background">@drawable/bg_fbtn</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="FloatingButton.Round">
+        <item name="android:background">@drawable/bg_fbtn_round</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_width">@dimen/fbtn_round_size</item>
+        <item name="android:layout_height">@dimen/fbtn_round_size</item>
+    </style>
+
+    <style name="CFEditText">
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="Theme.Discovery.WindowAnimationStyle">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_close_exit</item>
+    </style>
+</resources>

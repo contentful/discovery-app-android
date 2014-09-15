@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="db_name">cfdiscovery.db</string>
+    <string name="db_version">1</string>
+    
+    <string name="demo_space_key">nvyqx9l6z9z9</string>
+    <string name="demo_space_token">af972a4929249ff278fa09828a4f6d4580ff6cba1d0ca1ef12c0c9afda2fe57e</string>
+    <string name="demo_space_name">"Ancient Myths"</string>
+
+    <string name="maps_api_key">AIzaSyDrnyJFFYqOoFa3u7_dxAJCJxCu5NDEG-Y</string>
+
+    <string name="contentful_uri">https://www.contentful.com</string>
+
+    <string name="static_map_uri">https://maps.googleapis.com/maps/api/staticmap?zoom=%1$d&amp;size=640x640&amp;markers=color:red|%2$f,%3$f</string>
+</resources>

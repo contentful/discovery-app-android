@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tag_credentials" type="id" />
+    <item name="tag_content_type" type="id" />
+    <item name="tag_clickable" type="id" />
+    <item name="tag_header_view" type="id" />
+</resources>

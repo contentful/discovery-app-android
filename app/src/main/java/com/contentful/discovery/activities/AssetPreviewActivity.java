@@ -1,0 +1,132 @@
+package com.contentful.discovery.activities;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Pair;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.ImageView;
+import android.widget.ListView;
+
+import com.contentful.discovery.R;
+import com.contentful.discovery.adapters.AssetInfoAdapter;
+import com.contentful.discovery.utils.IntentConsts;
+import com.contentful.discovery.utils.Utils;
+import com.contentful.java.model.CDAAsset;
+
+import org.apache.commons.lang3.StringUtils;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnItemClick;
+
+/**
+ * Asset Preview Activity.
+ * Displays a single {@code Asset} using a thumbnail and a list of fields.
+ */
+public class AssetPreviewActivity extends Activity {
+    // Views
+    @InjectView(R.id.list) ListView listView;
+
+    private AssetInfoAdapter adapter;
+    private CDAAsset asset;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_asset_preview);
+
+        // Extract arguments from Intent
+        asset = (CDAAsset) getIntent().getSerializableExtra(IntentConsts.EXTRA_ASSET);
+
+        // Inject views
+        ButterKnife.inject(this);
+
+        // Title
+        Utils.setTitleFromIntent(this);
+
+        // Create a new Adapter
+        adapter = new AssetInfoAdapter(this, asset);
+
+        // Setup ListView
+        setupListView();
+    }
+
+    @OnItemClick(R.id.list)
+    void onItemClick(int position, View v) {
+        if (Boolean.TRUE.equals(v.getTag(R.id.tag_header_view))) {
+            // Photo (header view) was clicked
+            onPhotoClicked();
+        } else if (Boolean.TRUE.equals(v.getTag(R.id.tag_clickable))) {
+            // Clickable field clicked
+            Pair<String, String> item = adapter.getItem(position - listView.getHeaderViewsCount());
+
+            if (StringUtils.isNotBlank(item.second)) {
+                // Field value is not empty, display in Text Preview Activity.
+                startActivity(new Intent(this, TextPreviewActivity.class)
+                        .putExtra(IntentConsts.EXTRA_TITLE, item.first)
+                        .putExtra(IntentConsts.EXTRA_TEXT, item.second));
+            }
+        }
+    }
+
+    /**
+     * {@code ListView} initialization
+     */
+    private void setupListView() {
+        // Create & add header views
+        ImageView imageView = new ImageView(this);
+
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int screenHeight = displayMetrics.heightPixels;
+
+        AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                (int) (screenHeight / 2.0f));
+
+        imageView.setLayoutParams(lp);
+        imageView.setTag(R.id.tag_header_view, true);
+        listView.addHeaderView(imageView);
+        Utils.loadThumbnailForAsset(this, asset, imageView);
+
+        // Set the Adapter
+        listView.setAdapter(adapter);
+    }
+
+    /**
+     * Callback method to be called when the {@code Asset}'s thumbnail (header view) is clicked.
+     * This will check if an {@link Intent#ACTION_VIEW} implicit {@code Intent} along with
+     * the {@code Asset}'s URL can be resolved by any application on the system, and if so will
+     * fire the {@code Intent}, otherwise will fallback to display an {@code AlertDialog}
+     * asking the user whether or not to attempt and open it without enforcing the {@code Asset}'s
+     * mime-type (i.e. using their web browser).
+     */
+    void onPhotoClicked() {
+        final Uri uri = Uri.parse(asset.getUrl());
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(uri, asset.getMimeType());
+
+        if (Utils.resolveActivity(intent)) {
+            startActivity(intent);
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.ad_unknown_file_title)
+                    .setMessage(R.string.ad_unknown_file_message)
+                    .setNegativeButton(R.string.no, null)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                        }
+                    }).show();
+        }
+    }
+}
