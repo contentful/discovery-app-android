@@ -42,4 +42,8 @@
     <string name="credentials_start">Start</string>
     <string name="history_space">Space Name</string>
     <string name="history_last_login">Last login</string>
+
+    <!-- Toasts -->
+    <string name="toast_invalid_space">Invalid space.</string>
+    <string name="toast_invalid_access_token">Invalid access token.</string>
 </resources>

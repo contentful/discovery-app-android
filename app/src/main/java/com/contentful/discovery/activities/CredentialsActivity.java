@@ -304,12 +304,12 @@ public class CredentialsActivity extends FragmentActivity {
      */
     private boolean validateCredentials(Credentials credentials) {
         if (StringUtils.isBlank(credentials.getSpace())) {
-            Toast.makeText(this, "Invalid space.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_invalid_space), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (StringUtils.isBlank(credentials.getAccessToken())) {
-            Toast.makeText(this, "Invalid access token.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_invalid_access_token), Toast.LENGTH_SHORT).show();
             return false;
         }
 
