@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Static Resource Array Loader.
  */
 public class ResourceArrayLoader extends AbsResourceListLoader {
-    private ArrayList<CDAResource> resources;
+    private final ArrayList<CDAResource> resources;
 
     public ResourceArrayLoader(ArrayList<CDAResource> resources) {
         super();

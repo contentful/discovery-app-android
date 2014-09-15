@@ -28,7 +28,7 @@ import java.util.LinkedHashMap;
  * Utils.
  */
 public class Utils {
-    private static LinkedHashMap<Class, Integer> sLoaders = new LinkedHashMap<Class, Integer>();
+    private static final LinkedHashMap<Class, Integer> sLoaders = new LinkedHashMap<Class, Integer>();
     private static HashMap<String, String> mimeTypesMap;
 
     /**

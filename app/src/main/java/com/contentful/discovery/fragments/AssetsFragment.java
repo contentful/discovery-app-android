@@ -33,6 +33,7 @@ public class AssetsFragment extends Fragment implements
 
     // Views
     @InjectView(R.id.grid) GridView gridView;
+    @InjectView(R.id.empty) View emptyView;
 
     private AssetsAdapter adapter;
 
@@ -61,6 +62,7 @@ public class AssetsFragment extends Fragment implements
         ButterKnife.inject(this, view);
 
         gridView.setAdapter(adapter);
+        gridView.setEmptyView(emptyView);
     }
 
     @Override

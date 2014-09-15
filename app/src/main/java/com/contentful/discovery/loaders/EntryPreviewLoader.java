@@ -19,8 +19,8 @@ import java.util.Map;
  * Prepares a {@code CDAEntry} to be displayed in preview mode.
  */
 public class EntryPreviewLoader extends AbsAsyncTaskLoader<List<DisplayItem>> {
-    private CDAEntry entry;
-    private CDAContentType contentType;
+    private final CDAEntry entry;
+    private final CDAContentType contentType;
 
     public EntryPreviewLoader(CDAEntry entry, CDAContentType contentType) {
         super();

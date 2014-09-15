@@ -78,8 +78,8 @@ public class HistoryAdapter extends BaseAdapter {
      * View Holder
      */
     private class ViewHolder {
-        TextView tvSpaceName;
-        TextView tvLastLogin;
+        final TextView tvSpaceName;
+        final TextView tvLastLogin;
 
         ViewHolder(View v) {
             this.tvSpaceName = (TextView) v.findViewById(R.id.tv_space_name);

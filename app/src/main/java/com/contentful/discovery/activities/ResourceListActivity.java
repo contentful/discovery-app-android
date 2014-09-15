@@ -2,10 +2,8 @@ package com.contentful.discovery.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.widget.ListView;
 
 import com.contentful.discovery.R;
 import com.contentful.discovery.ResourceList;
@@ -15,37 +13,22 @@ import com.contentful.java.model.CDAAsset;
 import com.contentful.java.model.CDAEntry;
 import com.contentful.java.model.CDAResource;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 /**
  * Abstract {@code Resource} List {@code Activity}.
  * Displays a collection of CDA {@code Resources} in a list.
  */
-public abstract class ResourceListActivity extends FragmentActivity implements
+public abstract class ResourceListActivity extends ListActivity implements
         LoaderManager.LoaderCallbacks<ResourceList> {
 
-    // Views
-    @InjectView(R.id.list) ListView listView;
-
     protected ResourcesAdapter adapter;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_resource_list);
-
-        // Inject views
-        ButterKnife.inject(this);
-    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        // Set Adapter
+        // Configure ListView
         listView.setAdapter(adapter = new ResourcesAdapter(this));
 
         // Initialize Loader

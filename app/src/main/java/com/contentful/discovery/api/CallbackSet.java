@@ -10,7 +10,7 @@ import java.util.HashSet;
  * instances and allows easy cancelling of the entire {@code Set}.
  */
 public class CallbackSet {
-    private HashSet<CDACallback> data;
+    private final HashSet<CDACallback> data;
 
     public CallbackSet() {
         this.data = new HashSet<CDACallback>();

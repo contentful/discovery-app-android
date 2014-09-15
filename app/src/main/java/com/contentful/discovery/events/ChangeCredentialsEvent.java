@@ -8,7 +8,7 @@ import com.contentful.discovery.api.Credentials;
  * history view.
  */
 public class ChangeCredentialsEvent {
-    public Credentials credentials;
+    public final Credentials credentials;
 
     public ChangeCredentialsEvent(Credentials credentials) {
         this.credentials = credentials;

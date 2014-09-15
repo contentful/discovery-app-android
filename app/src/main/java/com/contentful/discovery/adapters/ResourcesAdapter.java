@@ -18,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Map;
 
 /**
- * Created by tom on 04/09/14.
+ * Resources Adapter.
  */
 public class ResourcesAdapter extends BaseAdapter {
     private final Context context;

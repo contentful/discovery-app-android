@@ -71,9 +71,9 @@ public class ContentTypesAdapter extends BaseAdapter {
      * View Holder
      */
     private class ViewHolder {
-        TextView tvName;
-        TextView tvDescription;
-        TextView tvEntriesCount;
+        final TextView tvName;
+        final TextView tvDescription;
+        final TextView tvEntriesCount;
 
         ViewHolder(View v) {
             this.tvName = (TextView) v.findViewById(R.id.tv_name);

@@ -1,6 +1,5 @@
 package com.contentful.discovery.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.contentful.discovery.FieldViewHolder;
 import com.contentful.discovery.R;
@@ -18,27 +16,16 @@ import com.contentful.discovery.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 /**
  * String List Activity.
  * Displays a collection of objects as a list of strings.
  */
-public class StringListActivity extends Activity implements AbsListView.RecyclerListener {
-    // Views
-    @InjectView(R.id.list) ListView listView;
-
+public class StringListActivity extends ListActivity implements AbsListView.RecyclerListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_string_list);
-
-        // Inject views
-        ButterKnife.inject(this);
-
-        // Setup ListView & Adapter
+        // Configure ListView
         listView.setAdapter(new StringListAdapter(this,
                 (ArrayList<Object>) getIntent().getSerializableExtra(IntentConsts.EXTRA_LIST)));
 

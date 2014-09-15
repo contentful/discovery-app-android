@@ -1,43 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
 
-    <LinearLayout
-        android:id="@+id/fields_wrapper"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="36dp"
-        android:orientation="horizontal"
-        android:padding="15dp">
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/view_field_margin_end"
+        android:layout_marginRight="@dimen/view_field_margin_end"
+        android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/view_field_margin_end"
-            android:layout_marginEnd="@dimen/view_field_margin_end"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/tv_value"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:singleLine="true"
-            android:visibility="gone"/>
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/iv_arrow"
+        android:layout_toRightOf="@id/tv_title"
+        android:layout_alignWithParentIfMissing="true"
+        android:gravity="end"
+        android:singleLine="true"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/iv_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_gravity="center_vertical|end"
-        android:src="@drawable/arrow_right" /> <!-- todo dimens.xml -->
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/arrow_right"/>
 
-</FrameLayout>
+</RelativeLayout>

@@ -1,6 +1,5 @@
 package com.contentful.discovery.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import com.contentful.discovery.R;
 import com.contentful.discovery.adapters.AssetInfoAdapter;
@@ -22,18 +20,13 @@ import com.contentful.java.model.CDAAsset;
 
 import org.apache.commons.lang3.StringUtils;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 /**
  * Asset Preview Activity.
  * Displays a single {@code Asset} using a thumbnail and a list of fields.
  */
-public class AssetPreviewActivity extends Activity {
-    // Views
-    @InjectView(R.id.list) ListView listView;
-
+public class AssetPreviewActivity extends ListActivity {
     private AssetInfoAdapter adapter;
     private CDAAsset asset;
 
@@ -41,13 +34,8 @@ public class AssetPreviewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_asset_preview);
-
         // Extract arguments from Intent
         asset = (CDAAsset) getIntent().getSerializableExtra(IntentConsts.EXTRA_ASSET);
-
-        // Inject views
-        ButterKnife.inject(this);
 
         // Title
         Utils.setTitleFromIntent(this);

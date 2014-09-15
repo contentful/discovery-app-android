@@ -80,6 +80,7 @@ abstract class AbsTabsActivity extends FragmentActivity {
      *
      * @param position Integer representing the selected tab index.
      */
+    @SuppressWarnings("EmptyMethod")
     protected void onTabSelected(int position) {
         // Do nothing
     }

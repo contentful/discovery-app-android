@@ -219,7 +219,7 @@ public class CredentialsActivity extends FragmentActivity {
                 true,
                 false);
 
-        // Initialize client singleton & test our credentials while  attempting to fetch
+        // Initialize client singleton & test our credentials while attempting to fetch
         // their corresponding {@link Space}.
         // Note that we're adding the CDACallback instance to our callbacks set, case we
         // would need to cancel the request in the future (i.e. onDestroy).

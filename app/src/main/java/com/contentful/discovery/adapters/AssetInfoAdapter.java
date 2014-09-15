@@ -25,11 +25,11 @@ import java.util.Map;
  * Asset Info Adapter.
  */
 public class AssetInfoAdapter extends BaseAdapter {
-    private Context context;
+    private final Context context;
 
-    private ArrayList<Pair<String, String>> fields;
+    private final ArrayList<Pair<String, String>> fields;
 
-    private static HashSet<String> clickableTitles = new HashSet<String>(
+    private final static HashSet<String> clickableTitles = new HashSet<String>(
             Arrays.asList(new String[]{
                     CFApp.getInstance().getString(R.string.asset_info_title),
                     CFApp.getInstance().getString(R.string.asset_info_description)
@@ -96,12 +96,15 @@ public class AssetInfoAdapter extends BaseAdapter {
             vh = new FieldViewHolder(convertView);
         }
 
+
         Pair<String, String> item = getItem(position); // Title, Value
 
         vh.tvTitle.setText(item.first);
         vh.tvValue.setText(item.second);
 
-        convertView.setTag(R.id.tag_clickable, clickableTitles.contains(item.first));
+        boolean clickable = clickableTitles.contains(item.first);
+        convertView.setTag(R.id.tag_clickable, clickable);
+        vh.ivArrow.setVisibility(clickable ? View.VISIBLE : View.GONE);
 
         return convertView;
     }

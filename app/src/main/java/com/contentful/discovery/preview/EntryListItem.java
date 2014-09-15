@@ -6,9 +6,9 @@ import android.content.Intent;
  * Entry List Item.
  */
 class EntryListItem {
-    public String title;
-    public String value;
-    public Intent intent;
+    public final String title;
+    public final String value;
+    public final Intent intent;
 
     EntryListItem(String title, String value, Intent intent) {
         this.title = title;

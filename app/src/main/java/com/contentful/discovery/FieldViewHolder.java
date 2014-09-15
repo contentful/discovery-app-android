@@ -1,7 +1,6 @@
 package com.contentful.discovery;
 
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,7 +11,6 @@ import butterknife.InjectView;
  * Field View Holder.
  */
 public class FieldViewHolder {
-    public @InjectView(R.id.fields_wrapper) ViewGroup wrapper;
     public @InjectView(R.id.tv_title) TextView tvTitle;
     public @InjectView(R.id.tv_value) TextView tvValue;
     public @InjectView(R.id.iv_arrow) ImageView ivArrow;

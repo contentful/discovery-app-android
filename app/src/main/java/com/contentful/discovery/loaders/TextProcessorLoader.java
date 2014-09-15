@@ -7,7 +7,7 @@ import org.markdownj.MarkdownProcessor;
  * Processes plain text, generating HTML for Markdown.
  */
 public class TextProcessorLoader extends AbsAsyncTaskLoader<String> {
-    private String text;
+    private final String text;
 
     public TextProcessorLoader(String text) {
         super();

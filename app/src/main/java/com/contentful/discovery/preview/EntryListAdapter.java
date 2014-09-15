@@ -19,9 +19,9 @@ import static com.contentful.java.lib.Constants.CDAFieldType;
  * Entry List Adapter.
  */
 public class EntryListAdapter extends BaseAdapter {
-    private Context context;
-    private CDAEntry entry;
-    private List<Map> contentTypeFields;
+    private final Context context;
+    private final CDAEntry entry;
+    private final List<Map> contentTypeFields;
 
     public EntryListAdapter(Context context, CDAEntry entry, CDAContentType contentType) {
         this.context = context;

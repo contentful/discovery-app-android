@@ -2,17 +2,12 @@ package com.contentful.discovery.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.ListView;
 
 import com.contentful.discovery.DisplayItem;
-import com.contentful.discovery.R;
 import com.contentful.discovery.loaders.EntryPreviewLoader;
 import com.contentful.discovery.preview.EntryPreviewAdapter;
 import com.contentful.discovery.utils.IntentConsts;
@@ -22,18 +17,12 @@ import com.contentful.java.model.CDAEntry;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 /**
  * Entry Preview Fragment.
  * Displays a single Entry in preview mode.
  */
-public class EntryPreviewFragment extends Fragment implements
+public class EntryPreviewFragment extends ListFragment implements
         LoaderManager.LoaderCallbacks<List<DisplayItem>> {
-
-    // Views
-    @InjectView(R.id.list) ListView listView;
 
     private CDAEntry entry;
     private CDAContentType contentType;
@@ -65,20 +54,8 @@ public class EntryPreviewFragment extends Fragment implements
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-
-        super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_entry_preview, container, false);
-    }
-
-    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        // Inject views
-        ButterKnife.inject(this, view);
 
         // Configure ListView
         listView.setAdapter(adapter);
@@ -88,13 +65,6 @@ public class EntryPreviewFragment extends Fragment implements
                 adapter.reset(view);
             }
         });
-    }
-
-    @Override
-    public void onDestroyView() {
-        ButterKnife.reset(this);
-
-        super.onDestroyView();
     }
 
     @Override

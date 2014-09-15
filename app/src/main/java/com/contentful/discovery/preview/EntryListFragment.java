@@ -3,11 +3,7 @@ package com.contentful.discovery.preview;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.contentful.discovery.R;
 import com.contentful.discovery.activities.AssetPreviewActivity;
@@ -16,6 +12,7 @@ import com.contentful.discovery.activities.MapActivity;
 import com.contentful.discovery.activities.ResourceArrayActivity;
 import com.contentful.discovery.activities.StringListActivity;
 import com.contentful.discovery.activities.TextPreviewActivity;
+import com.contentful.discovery.fragments.ListFragment;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.java.lib.Constants;
 import com.contentful.java.model.CDAContentType;
@@ -27,8 +24,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 import static com.contentful.java.lib.Constants.CDAFieldType;
@@ -36,10 +31,7 @@ import static com.contentful.java.lib.Constants.CDAFieldType;
 /**
  * Entry List Fragment.
  */
-public class EntryListFragment extends Fragment {
-    // Views
-    @InjectView(R.id.list) ListView listView;
-
+public class EntryListFragment extends ListFragment {
     private CDAEntry entry;
     private CDAContentType contentType;
     private EntryListAdapter adapter;
@@ -78,30 +70,11 @@ public class EntryListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-
-        super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_entry, container, false);
-    }
-
-    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Inject views
-        ButterKnife.inject(this, view);
-
         // Configure ListView
         listView.setAdapter(adapter);
-    }
-
-    @Override
-    public void onDestroyView() {
-        ButterKnife.reset(this);
-
-        super.onDestroyView();
     }
 
     @OnItemClick(R.id.list)

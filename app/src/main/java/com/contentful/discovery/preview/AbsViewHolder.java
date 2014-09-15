@@ -6,8 +6,8 @@ import android.view.View;
  * Abstract View Holder class.
  */
 abstract class AbsViewHolder {
-    public View rootView;
-    public Object factoryKey;
+    public final View rootView;
+    public final Object factoryKey;
 
     AbsViewHolder(Object factoryKey, View rootView) {
         this.factoryKey = factoryKey;

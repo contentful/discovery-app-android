@@ -2,13 +2,10 @@ package com.contentful.discovery.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.contentful.discovery.ContentTypeWrapper;
 import com.contentful.discovery.R;
@@ -20,18 +17,13 @@ import com.contentful.discovery.utils.Utils;
 
 import java.util.ArrayList;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 /**
- * Created by tom on 03/09/14.
+ * Content Types Fragment.
  */
-public class ContentTypesFragment extends Fragment implements
+public class ContentTypesFragment extends ListFragment implements
         LoaderManager.LoaderCallbacks<ArrayList<ContentTypeWrapper>> {
-
-    // Views
-    @InjectView(R.id.list) ListView listView;
 
     private ContentTypesAdapter adapter;
 
@@ -42,33 +34,14 @@ public class ContentTypesFragment extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         adapter = new ContentTypesAdapter(getActivity());
-
         getLoaderManager().initLoader(Utils.getLoaderId(this), null, this);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_content_types, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        // Inject views
-        ButterKnife.inject(this, view);
-
         listView.setAdapter(adapter);
-    }
-
-    @Override
-    public void onDestroyView() {
-        ButterKnife.reset(this);
-
-        super.onDestroyView();
     }
 
     @Override

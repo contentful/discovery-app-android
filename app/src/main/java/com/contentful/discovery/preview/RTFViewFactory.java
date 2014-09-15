@@ -11,10 +11,8 @@ import com.contentful.discovery.activities.TextPreviewActivity;
 
 import org.apache.commons.lang3.CharEncoding;
 
-import java.nio.charset.StandardCharsets;
-
 /**
- * Created by tom on 10/09/14.
+ * RTF View Factory.
  */
 public class RTFViewFactory extends PreviewViewFactory<RTFViewHolder> {
     @Override

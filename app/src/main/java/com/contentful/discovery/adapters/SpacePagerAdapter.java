@@ -10,7 +10,7 @@ import com.contentful.discovery.fragments.AssetsFragment;
 import com.contentful.discovery.fragments.ContentTypesFragment;
 
 /**
- * Created by tom on 03/09/14.
+ * Space PagerAdapter.
  */
 public class SpacePagerAdapter extends FragmentPagerAdapter {
     private final Context context;

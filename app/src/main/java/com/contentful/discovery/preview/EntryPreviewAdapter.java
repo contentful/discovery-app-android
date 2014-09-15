@@ -22,7 +22,7 @@ public class EntryPreviewAdapter extends BaseAdapter {
     public static final int VIEW_TYPE_RTF = 1;
     public static final int VIEW_TYPE_ARRAY = 2;
 
-    private Context context;
+    private final Context context;
     private List<DisplayItem> data = new ArrayList<DisplayItem>();
 
     // View Factories

@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Assets Adapter.
  */
 public class AssetsAdapter extends BaseAdapter {
-    private Context context;
+    private final Context context;
     private ArrayList<CDAAsset> data = new ArrayList<CDAAsset>();
 
     public AssetsAdapter(Context context) {
@@ -63,7 +63,7 @@ public class AssetsAdapter extends BaseAdapter {
      * View Holder
      */
     private class ViewHolder {
-        ImageView ivThumbnail;
+        final ImageView ivThumbnail;
 
         ViewHolder(View v) {
             this.ivThumbnail = (ImageView) v.findViewById(R.id.iv_thumbnail);
