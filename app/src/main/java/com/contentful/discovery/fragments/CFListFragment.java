@@ -16,7 +16,7 @@ import butterknife.InjectView;
 /**
  * List Fragment.
  */
-public class ListFragment extends Fragment {
+public class CFListFragment extends Fragment {
     // Views
     protected @InjectView(R.id.list) ListView listView;
     @InjectView(R.id.empty) View emptyView;

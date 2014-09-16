@@ -1,7 +1,7 @@
 <manifest
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.contentful.discovery"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -27,8 +27,8 @@
         <activity
             android:name=".activities.CredentialsActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:theme="@style/Theme.Discovery.NoActionBar">
+            android:theme="@style/Theme.Discovery.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -39,13 +39,13 @@
 
         <activity
             android:name=".activities.HistoryActivity"
-            android:parentActivityName=".activities.CredentialsActivity"
             android:label="@string/ac_title_history"
+            android:parentActivityName=".activities.CredentialsActivity"
             tools:ignore="UnusedAttribute">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.contentful.discovery.CredentialsActivity" />
+                android:value="com.contentful.discovery.CredentialsActivity"/>
 
         </activity>
 
@@ -56,7 +56,7 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.contentful.discovery.CredentialsActivity" />
+                android:value="com.contentful.discovery.CredentialsActivity"/>
 
         </activity>
 
@@ -67,7 +67,7 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.contentful.discovery.CredentialsActivity" />
+                android:value="com.contentful.discovery.CredentialsActivity"/>
 
         </activity>
 
@@ -79,7 +79,7 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.contentful.discovery.CredentialsActivity" />
+                android:value="com.contentful.discovery.CredentialsActivity"/>
 
         </activity>
 
@@ -90,7 +90,7 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.contentful.discovery.CredentialsActivity" />
+                android:value="com.contentful.discovery.CredentialsActivity"/>
 
         </activity>
 
@@ -102,7 +102,7 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.contentful.discovery.CredentialsActivity" />
+                android:value="com.contentful.discovery.CredentialsActivity"/>
 
         </activity>
 
@@ -113,7 +113,7 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.contentful.discovery.CredentialsActivity" />
+                android:value="com.contentful.discovery.CredentialsActivity"/>
 
         </activity>
 
@@ -124,7 +124,7 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.contentful.discovery.CredentialsActivity" />
+                android:value="com.contentful.discovery.CredentialsActivity"/>
 
         </activity>
 
@@ -135,18 +135,31 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.contentful.discovery.CredentialsActivity" />
+                android:value="com.contentful.discovery.CredentialsActivity"/>
 
         </activity>
 
         <activity
             android:name=".activities.AboutActivity"
+            android:label="@string/ac_title_about"
             android:parentActivityName=".activities.CredentialsActivity"
             tools:ignore="UnusedAttribute">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.contentful.discovery.CredentialsActivity" />
+                android:value="com.contentful.discovery.CredentialsActivity"/>
+
+        </activity>
+
+        <activity
+            android:name=".activities.WebActivity"
+            android:parentActivityName=".activities.CredentialsActivity"
+            android:hardwareAccelerated="false"
+            tools:ignore="UnusedAttribute">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.contentful.discovery.CredentialsActivity"/>
 
         </activity>
 

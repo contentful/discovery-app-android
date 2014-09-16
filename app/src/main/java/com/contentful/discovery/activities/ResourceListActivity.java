@@ -19,7 +19,7 @@ import butterknife.OnItemClick;
  * Abstract {@code Resource} List {@code Activity}.
  * Displays a collection of CDA {@code Resources} in a list.
  */
-public abstract class ResourceListActivity extends ListActivity implements
+public abstract class ResourceListActivity extends CFListActivity implements
         LoaderManager.LoaderCallbacks<ResourceList> {
 
     protected ResourcesAdapter adapter;

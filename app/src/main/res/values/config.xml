@@ -12,4 +12,8 @@
     <string name="contentful_uri">https://www.contentful.com</string>
 
     <string name="static_map_uri">https://maps.googleapis.com/maps/api/staticmap?zoom=%1$d&amp;size=640x640&amp;markers=color:red|%2$f,%3$f</string>
+
+    <string name="url_faq" formatted="false">https://support.contentful.com/hc/en-us/?utm_source=Discovery%20app&amp;utm_medium=Android&amp;utm_campaign=faq</string>
+    <string name="url_feedback" formatted="false">https://support.contentful.com/hc/en-us/requests/new/?utm_source=Discovery%20app&amp;utm_medium=Android&amp;utm_campaign=feedback</string>
+    <string name="url_contact" formatted="false">https://support.contentful.com/hc/en-us/requests/new/?utm_source=Discovery%20app&amp;utm_medium=iOS&amp;utm_campaign=feedback</string>
 </resources>

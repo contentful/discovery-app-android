@@ -12,7 +12,7 @@ import com.contentful.discovery.activities.MapActivity;
 import com.contentful.discovery.activities.ResourceArrayActivity;
 import com.contentful.discovery.activities.StringListActivity;
 import com.contentful.discovery.activities.TextPreviewActivity;
-import com.contentful.discovery.fragments.ListFragment;
+import com.contentful.discovery.fragments.CFListFragment;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.java.lib.Constants;
 import com.contentful.java.model.CDAContentType;
@@ -31,7 +31,7 @@ import static com.contentful.java.lib.Constants.CDAFieldType;
 /**
  * Entry List Fragment.
  */
-public class EntryListFragment extends ListFragment {
+public class EntryListFragment extends CFListFragment {
     private CDAEntry entry;
     private CDAContentType contentType;
     private EntryListAdapter adapter;

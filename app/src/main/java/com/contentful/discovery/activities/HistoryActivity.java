@@ -23,7 +23,7 @@ import butterknife.OnItemClick;
  * History Activity.
  * Displays a list of all previously used Credentials which resulted in successful authentications.
  */
-public class HistoryActivity extends ListActivity implements
+public class HistoryActivity extends CFListActivity implements
         LoaderManager.LoaderCallbacks<LinkedHashSet<Credentials>> {
 
     private HistoryAdapter adapter;

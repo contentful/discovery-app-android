@@ -12,7 +12,7 @@ import butterknife.InjectView;
 /**
  * List Activity.
  */
-public class ListActivity extends CFFragmentActivity {
+public class CFListActivity extends CFFragmentActivity {
     // Views
     protected @InjectView(R.id.list) ListView listView;
     @InjectView(R.id.empty) View emptyView;

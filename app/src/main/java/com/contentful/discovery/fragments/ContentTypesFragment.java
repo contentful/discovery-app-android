@@ -22,7 +22,7 @@ import butterknife.OnItemClick;
 /**
  * Content Types Fragment.
  */
-public class ContentTypesFragment extends ListFragment implements
+public class ContentTypesFragment extends CFListFragment implements
         LoaderManager.LoaderCallbacks<ArrayList<ContentTypeWrapper>> {
 
     private ContentTypesAdapter adapter;

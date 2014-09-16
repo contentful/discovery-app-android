@@ -38,12 +38,14 @@ public class TextPreviewActivity extends CFFragmentActivity implements
         ButterKnife.inject(this);
 
         // Setup WebView
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return true;
-            }
-        });
+        if (!getIntent().getBooleanExtra(IntentConsts.EXTRA_ALLOW_LINKS, false)) {
+            webView.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    return true;
+                }
+            });
+        }
 
         // Title
         Utils.setTitleFromIntent(this);

@@ -24,6 +24,11 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="CFButton.About" parent="CFButton">
+        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
     <style name="CFButton.Inverse" parent="CFButton">
         <item name="android:background">@drawable/bg_cfbutton_secondary</item>
         <item name="android:textColor">@drawable/cfbutton_secondary_textcolor</item>

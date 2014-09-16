@@ -20,7 +20,7 @@ import java.util.List;
  * String List Activity.
  * Displays a collection of objects as a list of strings.
  */
-public class StringListActivity extends ListActivity implements AbsListView.RecyclerListener {
+public class StringListActivity extends CFListActivity implements AbsListView.RecyclerListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

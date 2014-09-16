@@ -26,7 +26,7 @@ import butterknife.OnItemClick;
  * Asset Preview Activity.
  * Displays a single {@code Asset} using a thumbnail and a list of fields.
  */
-public class AssetPreviewActivity extends ListActivity {
+public class AssetPreviewActivity extends CFListActivity {
     private AssetInfoAdapter adapter;
     private CDAAsset asset;
 

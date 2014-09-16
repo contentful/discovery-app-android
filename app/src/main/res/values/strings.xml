@@ -47,6 +47,11 @@
     <string name="history_last_login">Last login: %1$s</string>
     <string name="btn_secondary_demo">Open demo space</string>
     <string name="btn_secondary_history">History</string>
+    <string name="need_help">Need help?</string>
+    <string name="open_space">Open space</string>
+    <string name="open_demo_space">Open demo space</string>
+    <string name="discovery_app">Discovery App</string>
+    <string name="access_your_space">Access your space</string>
 
     <!-- Toasts -->
     <string name="toast_invalid_space">Invalid space.</string>
@@ -54,4 +59,14 @@
 
     <!-- Activity Titles -->
     <string name="ac_title_history">History</string>
+    <string name="ac_title_about">About</string>
+
+    <!-- About Activity -->
+    <string name="faq">FAQ</string>
+    <string name="send_feedback">Send feedback</string>
+    <string name="contact_us">Contact us</string>
+    <string name="visit_product_tour">Visit product tour</string>
+    <string name="licensing_information">Licensing information</string>
+    <string name="contentful_gmbh">Contentful GmbH</string>
+    <string name="version_name">Version %1$s</string>
 </resources>

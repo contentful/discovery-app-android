@@ -17,6 +17,8 @@ public class IntentConsts {
     public static final String EXTRA_LOCATION = PACKAGE_NAME + ".EXTRA_LOCATION";
     public static final String EXTRA_TITLE = PACKAGE_NAME + ".EXTRA_TITLE";
     public static final String EXTRA_LIST = PACKAGE_NAME + ".EXTRA_LIST";
+    public static final String EXTRA_URL = PACKAGE_NAME + ".EXTRA_URL";
+    public static final String EXTRA_ALLOW_LINKS = PACKAGE_NAME + ".EXTRA_ALLOW_LINKS";
 
     /**
      * DBIntentService

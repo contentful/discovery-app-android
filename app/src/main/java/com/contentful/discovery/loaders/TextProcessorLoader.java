@@ -1,5 +1,7 @@
 package com.contentful.discovery.loaders;
 
+import com.contentful.discovery.utils.Utils;
+
 import org.markdownj.MarkdownProcessor;
 
 /**
@@ -22,15 +24,12 @@ public class TextProcessorLoader extends AbsAsyncTaskLoader<String> {
     public static String wrapHtml(String html) {
         return new StringBuilder()
                 .append("<html><head>")
-                .append("<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css' />")
                 .append("<style type=\"text/css\">")
-                .append("@font-face {")
-                .append("font-family: \"lato\";")
-                .append("src: url('file:///android_asset/fonts/lato_regular.ttf');")
-                .append("}")
+                .append("@font-face {font-family: \"lato\"; src: url('file:///android_asset/")
+                .append(Utils.FONT_LATO_REGULAR)
+                .append("'); }")
                 .append("body {font-family: \"lato\";}")
-                .append("</style>")
-                .append("</head><body>")
+                .append("</style></head><body>")
                 .append(html)
                 .append("</body></html>")
                 .toString();

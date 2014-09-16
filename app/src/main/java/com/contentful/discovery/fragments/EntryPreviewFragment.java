@@ -21,7 +21,7 @@ import java.util.List;
  * Entry Preview Fragment.
  * Displays a single Entry in preview mode.
  */
-public class EntryPreviewFragment extends ListFragment implements
+public class EntryPreviewFragment extends CFListFragment implements
         LoaderManager.LoaderCallbacks<List<DisplayItem>> {
 
     private CDAEntry entry;

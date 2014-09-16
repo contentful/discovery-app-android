@@ -8,6 +8,7 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -173,7 +174,13 @@ public class CredentialsActivity extends CFFragmentActivity {
                 getString(R.string.pd_login_title),
                 getString(R.string.pd_login_message),
                 true,
-                false);
+                true,
+                new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        callbacks.cancelAndClear();
+                    }
+                });
 
         // Initialize client singleton & test our credentials while attempting to fetch
         // their corresponding {@link Space}.
@@ -183,6 +190,7 @@ public class CredentialsActivity extends CFFragmentActivity {
                 .fetchSpace(callbacks.addObject(new CDACallback<CDASpace>() {
                     @Override
                     protected void onSuccess(CDASpace space, Response response) {
+
                         // Invalidate options menu
                         supportInvalidateOptionsMenu();
 
