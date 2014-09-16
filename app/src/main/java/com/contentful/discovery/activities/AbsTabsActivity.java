@@ -1,12 +1,11 @@
 package com.contentful.discovery.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.astuetz.PagerSlidingTabStrip;
 import com.contentful.discovery.R;
+import com.contentful.discovery.widget.PagerSlidingTabStrip;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -14,9 +13,9 @@ import butterknife.InjectView;
 /**
  * Abstract Tabs Activity.
  * Consists of a simple tabbed layout using a {@code ViewPager} and
- * a {@link com.astuetz.PagerSlidingTabStrip} view.
+ * a {@link com.contentful.discovery.widget.PagerSlidingTabStrip} view.
  */
-abstract class AbsTabsActivity extends FragmentActivity {
+abstract class AbsTabsActivity extends CFFragmentActivity {
     // Views
     @InjectView(R.id.tabs) PagerSlidingTabStrip tabStrip;
     @InjectView(R.id.view_pager) ViewPager viewPager;

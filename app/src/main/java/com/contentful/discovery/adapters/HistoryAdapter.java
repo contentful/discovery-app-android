@@ -11,7 +11,6 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.api.Credentials;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 
 import java.util.ArrayList;
 
@@ -19,6 +18,8 @@ import java.util.ArrayList;
  * History Adapter.
  */
 public class HistoryAdapter extends BaseAdapter {
+    private static final String DATE_PATTERN = "EEE', 'MMM dd yyyy";
+
     private final Context context;
     private ArrayList<Credentials> data = new ArrayList<Credentials>();
 
@@ -64,7 +65,8 @@ public class HistoryAdapter extends BaseAdapter {
         if (lastLogin == null || lastLogin == 0) {
             vh.tvLastLogin.setVisibility(View.GONE);
         } else {
-            vh.tvLastLogin.setText(new DateTime(lastLogin).toString(DateTimeFormat.forStyle("MM")));
+            vh.tvLastLogin.setText(context.getString(R.string.history_last_login,
+                    new DateTime(lastLogin).toString(DATE_PATTERN)));
         }
 
         return convertView;

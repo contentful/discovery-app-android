@@ -48,6 +48,8 @@ public class RTFViewFactory extends PreviewViewFactory<RTFViewHolder> {
                 TextPreviewActivity.MIME_TYPE_TEXT_HTML,
                 CharEncoding.UTF_8,
                 null);
+
+        viewHolder.webView.setBackgroundColor(0);
     }
 
     @Override

@@ -5,7 +5,7 @@
                 android:layout_height="wrap_content"
                 android:padding="15dp">
 
-    <TextView
+    <com.contentful.discovery.widget.CFTextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         android:layout_marginRight="@dimen/view_field_margin_end"
         android:textStyle="bold"/>
 
-    <TextView
+    <com.contentful.discovery.widget.CFTextView
         android:id="@+id/tv_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +24,7 @@
         android:layout_alignWithParentIfMissing="true"
         android:gravity="end"
         android:singleLine="true"
+        android:textColor="@color/cf_gray_listtext"
         android:visibility="gone"/>
 
     <ImageView

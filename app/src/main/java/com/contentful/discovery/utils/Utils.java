@@ -28,7 +28,14 @@ import java.util.LinkedHashMap;
  * Utils.
  */
 public class Utils {
+    // Fonts
+    public static final String FONT_LATO_REGULAR = "fonts/lato_regular.ttf";
+    public static final String FONT_LATO_BOLD = "fonts/lato_bold.ttf";
+
+    // Loaders
     private static final LinkedHashMap<Class, Integer> sLoaders = new LinkedHashMap<Class, Integer>();
+
+    // Mime Types
     private static HashMap<String, String> mimeTypesMap;
 
     /**

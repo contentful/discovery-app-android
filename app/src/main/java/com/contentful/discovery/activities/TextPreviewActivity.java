@@ -1,7 +1,6 @@
 package com.contentful.discovery.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.webkit.WebView;
@@ -21,7 +20,7 @@ import butterknife.InjectView;
  * Text Preview Activity.
  * Displays text inside a {@code WebView}, supporting Markdown.
  */
-public class TextPreviewActivity extends FragmentActivity implements
+public class TextPreviewActivity extends CFFragmentActivity implements
         LoaderManager.LoaderCallbacks<String> {
 
     public static final String MIME_TYPE_TEXT_HTML = "text/html";
@@ -74,6 +73,8 @@ public class TextPreviewActivity extends FragmentActivity implements
                 MIME_TYPE_TEXT_HTML,
                 CharEncoding.UTF_8,
                 null);
+
+        webView.setBackgroundColor(0);
     }
 
     @Override

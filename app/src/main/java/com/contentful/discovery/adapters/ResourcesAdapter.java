@@ -55,6 +55,8 @@ public class ResourcesAdapter extends BaseAdapter {
 
             vh.tvValue.setVisibility(View.GONE);
             vh.ivArrow.setVisibility(View.VISIBLE);
+
+            vh.tvTitle.setFont(false);
         } else {
             vh = (FieldViewHolder) convertView.getTag();
         }

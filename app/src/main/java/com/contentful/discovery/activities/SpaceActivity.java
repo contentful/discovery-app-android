@@ -2,6 +2,7 @@ package com.contentful.discovery.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.view.Menu;
@@ -38,9 +39,15 @@ public class SpaceActivity extends AbsTabsActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_locale) {
-            selectLocale();
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_locale:
+                selectLocale();
+                return true;
+
+            case R.id.action_about:
+                startActivity(new Intent(this, AboutActivity.class));
+                return true;
+
         }
 
         return super.onOptionsItemSelected(item);

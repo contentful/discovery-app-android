@@ -27,12 +27,25 @@
         <activity
             android:name=".activities.CredentialsActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+            android:theme="@style/Theme.Discovery.NoActionBar">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".activities.HistoryActivity"
+            android:parentActivityName=".activities.CredentialsActivity"
+            android:label="@string/ac_title_history"
+            tools:ignore="UnusedAttribute">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.contentful.discovery.CredentialsActivity" />
 
         </activity>
 
@@ -117,6 +130,17 @@
 
         <activity
             android:name=".activities.StringListActivity"
+            android:parentActivityName=".activities.CredentialsActivity"
+            tools:ignore="UnusedAttribute">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.contentful.discovery.CredentialsActivity" />
+
+        </activity>
+
+        <activity
+            android:name=".activities.AboutActivity"
             android:parentActivityName=".activities.CredentialsActivity"
             tools:ignore="UnusedAttribute">
 

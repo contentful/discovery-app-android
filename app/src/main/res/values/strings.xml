@@ -13,6 +13,7 @@
     <string name="ad_login_error_message_generic">Oops, something went wrong. Check your network connection and try again.</string>
 
     <string name="select_locale">Select locale</string>
+    <string name="open">Open</string>
 
     <!-- Tabs -->
     <string name="tab_content_types">Content Types</string>
@@ -29,6 +30,8 @@
 
     <!-- Menu -->
     <string name="menu_action_select_locale">Select locale</string>
+    <string name="menu_action_about">About</string>
+
     <string name="ok">OK</string>
     <string name="ad_unknown_file_title">Unknown file type</string>
     <string name="ad_unknown_file_message">There are no installed apps available to open this type of file. Would you like to open it with your web browser?</string>
@@ -41,9 +44,14 @@
     <string name="credentials_access_token">Access Token</string>
     <string name="credentials_start">Start</string>
     <string name="history_space">Space Name</string>
-    <string name="history_last_login">Last login</string>
+    <string name="history_last_login">Last login: %1$s</string>
+    <string name="btn_secondary_demo">Open demo space</string>
+    <string name="btn_secondary_history">History</string>
 
     <!-- Toasts -->
     <string name="toast_invalid_space">Invalid space.</string>
     <string name="toast_invalid_access_token">Invalid access token.</string>
+
+    <!-- Activity Titles -->
+    <string name="ac_title_history">History</string>
 </resources>

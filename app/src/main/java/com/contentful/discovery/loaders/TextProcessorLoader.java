@@ -16,6 +16,23 @@ public class TextProcessorLoader extends AbsAsyncTaskLoader<String> {
 
     @Override
     protected String performLoad() {
-        return new MarkdownProcessor().markdown(text);
+        return wrapHtml(new MarkdownProcessor().markdown(text));
+    }
+
+    public static String wrapHtml(String html) {
+        return new StringBuilder()
+                .append("<html><head>")
+                .append("<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css' />")
+                .append("<style type=\"text/css\">")
+                .append("@font-face {")
+                .append("font-family: \"lato\";")
+                .append("src: url('file:///android_asset/fonts/lato_regular.ttf');")
+                .append("}")
+                .append("body {font-family: \"lato\";}")
+                .append("</style>")
+                .append("</head><body>")
+                .append(html)
+                .append("</body></html>")
+                .toString();
     }
 }

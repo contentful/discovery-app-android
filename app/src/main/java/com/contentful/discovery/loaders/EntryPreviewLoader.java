@@ -122,6 +122,6 @@ public class EntryPreviewLoader extends AbsAsyncTaskLoader<List<DisplayItem>> {
      * Prepares item of type {@code Text}.
      */
     private void prepareTextItem(DisplayItem displayItem, Object value, MarkdownProcessor processor) {
-        displayItem.displayValue = processor.markdown((String) value);
+        displayItem.displayValue = TextProcessorLoader.wrapHtml(processor.markdown((String) value));
     }
 }

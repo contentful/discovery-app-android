@@ -5,17 +5,16 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.BounceInterpolator;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -24,16 +23,13 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.api.CFClient;
 import com.contentful.discovery.api.CallbackSet;
 import com.contentful.discovery.api.Credentials;
-import com.contentful.discovery.events.ChangeCredentialsEvent;
-import com.contentful.discovery.events.ReloadHistoryEvent;
 import com.contentful.discovery.services.DBIntentService;
 import com.contentful.discovery.utils.AnimHelper;
-import com.contentful.discovery.utils.CFBusProvider;
+import com.contentful.discovery.utils.CFPrefs;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.ViewHelper;
 import com.contentful.java.api.CDACallback;
 import com.contentful.java.model.CDASpace;
-import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
 import org.apache.commons.lang3.StringUtils;
@@ -42,24 +38,22 @@ import org.apache.http.HttpStatus;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import butterknife.OnFocusChange;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
  * Credentials Activity.
- * Allows the users to log in to different {@code Space}s by supplying their credentials.
- * <p/>
- * In addition, this allows easy selection of previously supplied credentials by persisting
- * those in a local database.
  */
-public class CredentialsActivity extends FragmentActivity {
+public class CredentialsActivity extends CFFragmentActivity {
+    private static final int RC_HISTORY = 1;
+
     // Views
-    @InjectView(R.id.wrapper_main) ViewGroup mainWrapper;
+    @InjectView(R.id.iv_background) ImageView ivBackground;
     @InjectView(R.id.iv_logo) ImageView ivLogo;
-    @InjectView(R.id.wrapper_history) ViewGroup historyWrapper;
+    @InjectView(R.id.btn_secondary) Button btnSecondary;
     @InjectView(R.id.et_space) EditText etSpace;
     @InjectView(R.id.et_token) EditText etToken;
+    @InjectView(R.id.btn_go) Button btnGo;
 
     // Animations stuff
     private Handler animHandler;
@@ -70,25 +64,32 @@ public class CredentialsActivity extends FragmentActivity {
     // Set of pending request callbacks, for cancelling requests.
     private CallbackSet callbacks;
 
+    private boolean didLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credentials);
 
+        didLogin = CFPrefs.didLogin();
+
         // Inject views
         ButterKnife.inject(this);
 
-        // Callbacks Set
+        // Callbacks
         callbacks = new CallbackSet();
+
+        // Background
+        initBackground();
+
+        // Logo
+        initLogo();
 
         // Animations
         setupAnimations();
 
-        // Setup logo
-        setupLogo();
-
-        // Event bus
-        CFBusProvider.getInstance().register(this);
+        // Demo / History button
+        updateSecondaryButton();
     }
 
     @Override
@@ -112,9 +113,6 @@ public class CredentialsActivity extends FragmentActivity {
 
     @Override
     protected void onDestroy() {
-        // Unregister from event bus
-        CFBusProvider.getInstance().unregister(this);
-
         // Cancel & clear all pending/ongoing requests
         callbacks.cancelAndClear();
 
@@ -122,27 +120,16 @@ public class CredentialsActivity extends FragmentActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if (AnimHelper.isRevealingOrVisible(historyWrapper)) {
-            // History view is visible, hide it.
-            AnimHelper.hideView(historyWrapper);
-            return;
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_HISTORY) {
+            handleHistoryActivityResult(resultCode, data);
         }
-
-        super.onBackPressed();
     }
 
-    @OnClick(R.id.btn_history)
-    void onClickHistory() {
-        // Show history view
-        AnimHelper.toggle(historyWrapper);
-
-        // Request reload history
-        CFBusProvider.getInstance().post(new ReloadHistoryEvent());
-    }
-
-    @OnClick(R.id.btn_start)
-    void onClickStart() {
+    @OnClick(R.id.btn_go)
+    void onClickGo() {
         Credentials credentials = getCredentials();
 
         if (validateCredentials(credentials)) {
@@ -151,58 +138,27 @@ public class CredentialsActivity extends FragmentActivity {
         }
     }
 
-    @OnFocusChange({R.id.et_space, R.id.et_token})
-    void onFocusChange(EditText view, boolean focused) {
-        if (focused) {
-            // Clear the contents of this EditText when focused.
-            view.setText(null);
+    @OnClick(R.id.btn_secondary)
+    void onClickSecondary() {
+        if (didLogin) {
+            startActivityForResult(new Intent(this, HistoryActivity.class), RC_HISTORY);
+        } else {
+            etSpace.setText(R.string.demo_space_key);
+            etToken.setText(R.string.demo_space_token);
+
+            btnGo.performClick();
         }
     }
 
-    @Subscribe
-    public void onChangeCredentials(ChangeCredentialsEvent e) {
-        // Populate the selected Credentials
-        etSpace.setText(e.credentials.getSpace());
-        etToken.setText(e.credentials.getAccessToken());
-
-        // Notify user
-        Toast.makeText(this, R.string.credentials_set, Toast.LENGTH_SHORT).show();
-    }
-
     /**
-     * Sets up the {@code ImageView} displaying Contentful logo.
-     * For portrait orientation, the size of the logo (width & height) would be the remaining height
-     * of the main content view, deducting our inflated layout height sum.
-     * For landscape orientation, the logo will be hidden.
+     * Handle Activity result from HistoryActivity
      */
-    private void setupLogo() {
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            ViewHelper.addGlobalLayoutListener(mainWrapper, new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    ViewHelper.removeGlobalLayoutListener(mainWrapper, this);
+    private void handleHistoryActivityResult(int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            Credentials credentials = data.getParcelableExtra(IntentConsts.EXTRA_CREDENTIALS);
 
-                    // Calculate available height
-                    int availableHeight = ((ViewGroup) mainWrapper.getParent()).getHeight() -
-                            mainWrapper.getHeight();
-
-                    int size = Math.min(availableHeight, mainWrapper.getWidth());
-
-                    // Set dimensions
-                    ViewGroup.LayoutParams lp = ivLogo.getLayoutParams();
-                    lp.width = lp.height = size;
-                    ivLogo.requestLayout();
-
-                    // Load Contentful logo
-                    Picasso.with(CredentialsActivity.this)
-                            .load(R.drawable.logo_contentful)
-                            .fit()
-                            .centerInside()
-                            .into(ivLogo);
-                }
-            });
-        } else {
-            ivLogo.setVisibility(View.GONE);
+            etSpace.setText(credentials.getSpace());
+            etToken.setText(credentials.getAccessToken());
         }
     }
 
@@ -242,6 +198,8 @@ public class CredentialsActivity extends FragmentActivity {
                         startService(
                                 DBIntentService.withAction(IntentConsts.DB.ACTION_SAVE_CREDENTIALS)
                                         .putExtra(IntentConsts.EXTRA_CREDENTIALS, credentials));
+
+                        updateDidLogin(credentials);
 
                         // Start Space Activity
                         startActivity(new Intent(
@@ -283,16 +241,17 @@ public class CredentialsActivity extends FragmentActivity {
                 }));
     }
 
-    /**
-     * Creates a set of {@code Credentials} from the UI fields.
-     *
-     * @return {@code Credentials} instance.
-     */
-    private Credentials getCredentials() {
-        String space = etSpace.getText().toString();
-        String token = etToken.getText().toString();
+    private void updateDidLogin(Credentials credentials) {
+        if (!getString(R.string.demo_space_key).equals(credentials.getSpace())) {
+            // Update 'didLogin' flag
+            CFPrefs.getInstance().edit()
+                    .putBoolean(CFPrefs.KEY_DID_LOGIN, true)
+                    .apply();
 
-        return new Credentials(null, space, token, null);
+            didLogin = true;
+
+            updateSecondaryButton();
+        }
     }
 
     /**
@@ -314,6 +273,56 @@ public class CredentialsActivity extends FragmentActivity {
         }
 
         return true;
+    }
+
+    /**
+     * Creates a set of {@code Credentials} from the UI fields.
+     *
+     * @return {@code Credentials} instance.
+     */
+    private Credentials getCredentials() {
+        String space = etSpace.getText().toString();
+        String token = etToken.getText().toString();
+
+        return new Credentials(null, space, token, null);
+    }
+
+    private void updateSecondaryButton() {
+        if (didLogin) {
+            btnSecondary.setText(R.string.btn_secondary_history);
+        } else {
+            btnSecondary.setText(R.string.btn_secondary_demo);
+        }
+    }
+
+    private void initLogo() {
+        Picasso.with(this)
+                .load(R.drawable.logo_contentful)
+                .fit()
+                .centerCrop()
+                .into(ivLogo);
+    }
+
+    private void initBackground() {
+        Picasso.with(this)
+                .load(R.drawable.bg)
+                .fit()
+                .centerCrop()
+                .into(ivBackground);
+
+        ViewHelper.addGlobalLayoutListener(ivBackground, new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                ViewHelper.removeGlobalLayoutListener(ivBackground, this);
+
+                ViewGroup.LayoutParams lp = ivBackground.getLayoutParams();
+                lp.width = ivBackground.getWidth();
+                lp.height = ivBackground.getHeight();
+
+                // no need to requestLayout here, the dimensions are explicitly specified to avoid
+                // scaling of the background image when adjustResize occurs.
+            }
+        });
     }
 
     /**

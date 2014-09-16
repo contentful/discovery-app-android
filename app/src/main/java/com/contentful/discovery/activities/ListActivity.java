@@ -1,7 +1,6 @@
 package com.contentful.discovery.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.ListView;
 
@@ -13,7 +12,7 @@ import butterknife.InjectView;
 /**
  * List Activity.
  */
-public class ListActivity extends FragmentActivity {
+public class ListActivity extends CFFragmentActivity {
     // Views
     protected @InjectView(R.id.list) ListView listView;
     @InjectView(R.id.empty) View emptyView;

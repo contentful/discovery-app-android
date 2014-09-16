@@ -60,6 +60,8 @@ public class StringListActivity extends ListActivity implements AbsListView.Recy
                 convertView.setTag(vh = new FieldViewHolder(convertView));
                 vh.tvValue.setVisibility(View.GONE);
                 vh.ivArrow.setVisibility(View.GONE);
+
+                vh.tvTitle.setFont(false);
             } else {
                 vh = (FieldViewHolder) convertView.getTag();
             }

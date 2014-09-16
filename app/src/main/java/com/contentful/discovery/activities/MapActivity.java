@@ -1,6 +1,5 @@
 package com.contentful.discovery.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,7 +17,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * {@link com.google.android.gms.maps.model.Marker} representing the {@code LatLng} coordinates
  * carried with the {@code Intent}.
  */
-public class MapActivity extends Activity {
+public class MapActivity extends CFFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
