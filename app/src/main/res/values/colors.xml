@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- new -->
+    <color name="cf_blue">#4a90e2</color>
+    <color name="cf_blue_active">#6db0ff</color>
+    <color name="cf_gray_border">#b7c2cc</color>
+    <color name="cf_gray_disabled">#d7dce0</color>
+
+    <color name="cf_blue_secondary">#4580d7</color>
+    <color name="cf_blue_secondary_active">#66a3fb</color>
+
+    <color name="cf_gray_background">#f3f5f8</color>
+    <color name="cf_gray_listtext">#a2a9b1</color>
+    <color name="cf_gray_version">#7690aa</color>
+
+    <color name="cf_yellow">#fbeb27</color>
+
+    <color name="psts_tab_pressed">#6633b5e5</color>
+    <color name="credentials_window_bg">#122440</color>
+</resources>

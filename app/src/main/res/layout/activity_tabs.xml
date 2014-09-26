@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cf="http://schemas.android.com/apk/res-auto">
+
+    <com.contentful.discovery.ui.PagerSlidingTabStrip
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabs_height"
+        android:background="@color/cf_gray_background"
+        cf:pstsDividerColor="#abb5c0"
+        cf:pstsIndicatorColor="@color/cf_blue_secondary"
+        cf:pstsShouldExpand="true"
+        cf:pstsUnderlineColor="#abb5c0"
+        cf:pstsUnderlineHeight="1dp"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/tabs_height"/>
+
+</merge>

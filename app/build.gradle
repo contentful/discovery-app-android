@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 20
+        applicationId "com.contentful.discovery"
+        versionCode 5
+        versionName "1.0.0"
+    }
+
+    signingConfigs {
+        release {}
+    }
+
+    buildTypes {
+        release {
+            runProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'LICENSE.txt'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // remote
+    compile 'com.android.support:support-v4:20.0.0'
+    compile 'com.google.android.gms:play-services:5.0.89'
+    compile 'com.jakewharton:butterknife:5.1.2'
+    compile 'com.squareup.picasso:picasso:2.3.4'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile 'commons-io:commons-io:2.4'
+    compile 'org.markdownj:markdownj-core:0.4'
+    compile 'joda-time:joda-time:2.4'
+    compile 'com.contentful.java:java-sdk:1.0.4'
+    compile 'com.viewpagerindicator:library:2.4.1@aar'
+}
+
+// Sign properties
+File f = file(project.file("sign.properties"))
+
+if (f.exists()) {
+    Properties props = new Properties()
+    props.load(new FileInputStream(file(project.file("sign.properties"))))
+
+    android.signingConfigs.release.storeFile = file((String) props["key.store"].toURI())
+    android.signingConfigs.release.keyAlias = props["key.alias"]
+    android.signingConfigs.release.storePassword = props["key.store.password"]
+    android.signingConfigs.release.keyPassword = props["key.alias.password"]
+}

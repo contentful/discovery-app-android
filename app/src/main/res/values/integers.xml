@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="anim_logo_bounce_delay_ms">10000</integer>
+    <integer name="anim_logo_scale_duration_ms">1000</integer>
+    <integer name="anim_logo_rotate_duration_ms">15000</integer>
+    <integer name="activity_anim_duration">300</integer>
+    <integer name="map_default_zoom">15</integer>
+    <integer name="button_exit_fade_duration_ms">200</integer>
+</resources>

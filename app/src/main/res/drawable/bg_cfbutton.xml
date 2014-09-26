@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+          android:exitFadeDuration="@integer/button_exit_fade_duration_ms">
+
+    <item android:drawable="@color/cf_blue_active" android:state_enabled="true" android:state_pressed="true"/>
+    <item android:drawable="@color/cf_blue" android:state_enabled="true"/>
+    <item android:drawable="@color/cf_gray_disabled" android:state_enabled="false"/>
+</selector>

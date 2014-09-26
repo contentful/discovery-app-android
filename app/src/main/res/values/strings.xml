@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">Discovery</string>
+    <string name="num_of_entries">%1$d entries</string>
+
+    <!-- Dialogs -->
+    <string name="pd_login_title">Connecting to Space</string>
+    <string name="pd_login_message">Please wait…</string>
+
+    <string name="pd_tutorial_title">Loading tutorial</string>
+    <string name="pd_tutorial_message">Please wait…</string>
+
+    <string name="ad_login_error_title">Error connecting to Space</string>
+    <string name="ad_login_error_message_unauthorized">Unauthorized, invalid credentials..</string>
+    <string name="ad_login_error_message_not_found">Not found, please make sure the Space key is correct.</string>
+    <string name="ad_error_message_generic">Oops, something went wrong. Check your network connection and try again.</string>
+    <string name="ad_error_title_generic">Error</string>
+
+    <string name="select_locale">Select locale</string>
+    <string name="open">Open</string>
+    <string name="no_results">Sorry, no results found :(</string>
+
+    <!-- Tabs -->
+    <string name="tab_content_types">Content Types</string>
+    <string name="tab_assets">Assets</string>
+    <string name="tab_list">List</string>
+    <string name="tab_preview">Preview</string>
+
+    <!-- Asset Info -->
+    <string name="asset_info_title">Title</string>
+    <string name="asset_info_description">Description</string>
+    <string name="asset_info_created_at">Creation Date</string>
+    <string name="asset_info_mime_type">MIME Type</string>
+    <string name="asset_info_size">Size</string>
+
+    <!-- Menu -->
+    <string name="menu_action_select_locale">Select locale</string>
+    <string name="menu_action_about">About</string>
+
+    <string name="ok">OK</string>
+    <string name="ad_unknown_file_title">Unknown file type</string>
+    <string name="ad_unknown_file_message">There are no installed apps available to open this type of file. Here you can choose whether to download this file, or attempt to open it with your web browser. You can also tap the back button in order to cancel this operation.</string>
+    <string name="download">Download</string>
+    <string name="open_in_browser">Open in browser</string>
+
+    <!-- Credentials Activity -->
+    <string name="credentials_space">Space</string>
+    <string name="credentials_access_token">Access Token</string>
+    <string name="history_last_login">Last login: %1$s</string>
+    <string name="btn_secondary_demo">Open demo space</string>
+    <string name="btn_secondary_history">History</string>
+    <string name="need_help">Need help?</string>
+    <string name="open_space">Open space</string>
+    <string name="open_demo_space">Open demo space</string>
+    <string name="discovery_app">Discovery App</string>
+    <string name="access_your_space">Access your space</string>
+
+    <!-- Toasts -->
+    <string name="toast_invalid_space">Invalid space.</string>
+    <string name="toast_invalid_access_token">Invalid access token.</string>
+
+    <!-- Activity Titles -->
+    <string name="ac_title_history">History</string>
+    <string name="ac_title_about">About</string>
+    <string name="ac_title_help">Help</string>
+
+    <!-- About Activity -->
+    <string name="faq">FAQ</string>
+    <string name="send_feedback">Send feedback</string>
+    <string name="contact_us">Contact us</string>
+    <string name="visit_product_tour">Visit product tour</string>
+    <string name="licensing_information">Licensing information</string>
+    <string name="contentful_gmbh">Contentful GmbH</string>
+    <string name="version_name">Version %1$s</string>
+
+    <!-- Tutorial -->
+    <string name="skip_tour">Skip tour</string>
+</resources>

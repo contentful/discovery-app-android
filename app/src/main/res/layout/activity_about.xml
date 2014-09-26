@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- About -->
+    <com.contentful.discovery.ui.AboutLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <!-- Top section (logo and stuff) -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/logo_contentful"/>
+
+                <com.contentful.discovery.ui.CFTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/contentful_gmbh"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"/>
+
+                <com.contentful.discovery.ui.CFTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:text="@string/discovery_app"
+                    android:textAllCaps="true"
+                    android:textColor="@color/cf_yellow"
+                    android:textSize="16sp"/>
+
+                <com.contentful.discovery.ui.CFTextView
+                    android:id="@+id/tv_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/cf_gray_version"
+                    android:textSize="14sp"
+                    tools:text="Version X"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- Buttons -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.contentful.discovery.ui.CFButton
+                    android:id="@+id/btn_faq"
+                    style="@style/CFButton.About"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/faq"/>
+
+                <include layout="@layout/view_dividier"/>
+
+                <com.contentful.discovery.ui.CFButton
+                    android:id="@+id/btn_feedback"
+                    style="@style/CFButton.About"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send_feedback"/>
+
+                <include layout="@layout/view_dividier"/>
+
+                <com.contentful.discovery.ui.CFButton
+                    android:id="@+id/btn_contact"
+                    style="@style/CFButton.About"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contact_us"/>
+
+                <include layout="@layout/view_dividier"/>
+
+                <com.contentful.discovery.ui.CFButton
+                    android:id="@+id/btn_product_tour"
+                    style="@style/CFButton.About"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/visit_product_tour"/>
+
+                <include layout="@layout/view_dividier"/>
+
+                <com.contentful.discovery.ui.CFButton
+                    android:id="@+id/btn_licensing"
+                    style="@style/CFButton.About"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/licensing_information"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </com.contentful.discovery.ui.AboutLinearLayout>
+
+    <!-- Tutorial Fragment -->
+    <FrameLayout
+        android:id="@+id/tutorial_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+</merge>
+

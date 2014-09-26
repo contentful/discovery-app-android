@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:paddingLeft="15dp"
+              android:paddingRight="15dp"
+              android:paddingTop="15dp">
+
+    <com.contentful.discovery.ui.CFTextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
+    <com.contentful.discovery.ui.CFTextView
+        android:id="@+id/tv_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/iv_thumbnail"
+        android:layout_width="@dimen/entry_preview_image_size"
+        android:layout_height="@dimen/entry_preview_image_size"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="15dp"
+        android:visibility="gone"/>
+
+</LinearLayout>
+

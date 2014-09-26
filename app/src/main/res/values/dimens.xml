@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tabs_height">48dp</dimen>
+    <dimen name="gallery_image_size">100dp</dimen>
+    <dimen name="help_title_font_size">20sp</dimen>
+    <dimen name="global_max_width">660dp</dimen>
+
+    <dimen name="entry_preview_image_size">300dp</dimen>
+    <dimen name="entry_preview_padding">15dp</dimen>
+
+    <!-- FieldView -->
+    <dimen name="view_field_margin_end">10dp</dimen>
+
+    <!-- TutorialView -->
+    <dimen name="view_tutorial_padding">20dp</dimen>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DB -->
+    <string name="db_name">cfdiscovery.db</string>
+    <string name="db_version">1</string>
+
+    <!-- Demo Space -->
+    <string name="demo_space_key">nvyqx9l6z9z9</string>
+    <string name="demo_space_token">af972a4929249ff278fa09828a4f6d4580ff6cba1d0ca1ef12c0c9afda2fe57e</string>
+    <string name="demo_space_name">Ancient Myths</string>
+
+    <!-- Discovery Space -->
+    <string name="discovery_space_key">tyqxsw7o3ipi</string>
+    <string name="discovery_space_token">5ddd61286e007dd90a78549abd753c96ec7b6d8498e6217fb18328f3842b55b3</string>
+    <string name="discovery_space_entry_id">4qigoc7Yw0OqyE6I0Ic8Gu</string>
+    <string name="discovery_space_tutorial_id">3dqGz5zXQsK0kmeMCSMgKs</string>
+
+    <!-- Maps -->
+    <string name="maps_api_key"></string>
+    <string name="static_map_uri">https://maps.googleapis.com/maps/api/staticmap?zoom=%1$d&amp;size=640x640&amp;markers=color:red|%2$f,%3$f</string>
+
+    <!-- Contentful URLs -->
+    <string name="url_contentful" formatted="false">https://www.contentful.com</string>
+    <string name="url_contentful_video" formatted="false">file:///android_asset/contentful_video.mp4</string>
+    <string name="url_faq" formatted="false">https://support.contentful.com/hc/en-us/?utm_source=Discovery%20app&amp;utm_medium=Android&amp;utm_campaign=faq</string>
+    <string name="url_feedback" formatted="false">https://support.contentful.com/hc/en-us/requests/new/?utm_source=Discovery%20app&amp;utm_medium=Android&amp;utm_campaign=feedback</string>
+    <string name="url_contact" formatted="false">https://support.contentful.com/hc/en-us/requests/new/?utm_source=Discovery%20app&amp;utm_medium=Android&amp;utm_campaign=feedback</string>
+</resources>

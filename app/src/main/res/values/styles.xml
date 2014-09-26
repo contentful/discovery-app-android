@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Discovery" parent="android:Theme.Holo.Light">
+        <item name="android:windowAnimationStyle">@style/Theme.Discovery.WindowAnimationStyle</item>
+        <item name="android:editTextBackground">@drawable/bg_cfedittext</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorHint">@color/cf_gray_border</item>
+        <item name="android:actionBarStyle">@style/CFActionBarStyle</item>
+        <item name="android:windowContentOverlay">@drawable/window_content_overlay</item>
+        <item name="android:windowBackground">@color/cf_gray_background</item>
+        <item name="android:itemTextAppearance">@style/CFItemTextAppearance</item>
+        <item name="vpiCirclePageIndicatorStyle">@style/CFCirclePageIndicator</item>
+    </style>
+
+    <style name="Theme.Discovery.NoActionBar" parent="android:Theme.Holo.Light.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/Theme.Discovery.WindowAnimationStyle</item>
+        <item name="android:windowBackground">@color/credentials_window_bg</item>
+        <item name="android:editTextBackground">@drawable/bg_cfedittext</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorHint">@color/cf_gray_border</item>
+        <item name="vpiCirclePageIndicatorStyle">@style/CFCirclePageIndicator</item>
+    </style>
+
+    <style name="CFButton">
+        <item name="android:background">@drawable/bg_cfbutton</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="CFButton.Inverse" parent="CFButton">
+        <item name="android:background">@drawable/bg_cfbutton_secondary</item>
+        <item name="android:textColor">@drawable/cfbutton_secondary_textcolor</item>
+    </style>
+
+    <style name="CFButton.About" parent="CFButton">
+        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="Theme.Discovery.WindowAnimationStyle">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_close_exit</item>
+    </style>
+
+    <style name="CFActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@color/cf_gray_background</item>
+        <item name="android:titleTextStyle">@style/CFActionBarTitleTextStyle</item>
+    </style>
+
+    <style name="CFActionBarTitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="CFItemTextAppearance">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="CFCirclePageIndicator">
+        <item name="strokeColor">@color/cf_blue_secondary</item>
+        <item name="fillColor">#AA888888</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="radius">8dp</item>
+        <item name="centered">true</item>
+    </style>
+</resources>
