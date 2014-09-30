@@ -69,6 +69,10 @@ public class AssetsAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public void clear() {
+        data.clear();
+    }
+
     /**
      * View Holder
      */

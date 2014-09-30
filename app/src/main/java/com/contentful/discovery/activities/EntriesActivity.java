@@ -32,6 +32,11 @@ public class EntriesActivity extends ResourceListActivity {
     }
 
     @Override
+    protected void restartLoader() {
+        getSupportLoaderManager().restartLoader(Utils.getLoaderId(this), null, this);
+    }
+
+    @Override
     public Loader<ResourceList> onCreateLoader(int i, Bundle bundle) {
         return new EntriesByContentTypeLoader(contentType);
     }

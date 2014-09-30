@@ -1,41 +1,41 @@
 package com.contentful.discovery.fragments;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 
 import com.contentful.discovery.R;
 import com.contentful.discovery.activities.AssetPreviewActivity;
 import com.contentful.discovery.adapters.AssetsAdapter;
 import com.contentful.discovery.loaders.AssetsLoader;
+import com.contentful.discovery.ui.AbsListContainer;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
 import com.contentful.java.model.CDAAsset;
 
 import java.util.ArrayList;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnItemClick;
-
 /**
  * Assets Fragment.
  * Displays a collection of Assets inside a list.
  */
 public class AssetsFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<ArrayList<CDAAsset>> {
+        LoaderManager.LoaderCallbacks<ArrayList<CDAAsset>>,
+        AdapterView.OnItemClickListener,
+        AbsListContainer.Listener {
 
-    // Views
-    @InjectView(R.id.grid) GridView gridView;
-    @InjectView(R.id.empty) View emptyView;
-    @InjectView(R.id.stub_no_results) ViewStub stubNoResults;
+    AbsListContainer<GridView> listContainerView;
+    GridView gridView;
 
     private AssetsAdapter adapter;
 
@@ -53,25 +53,28 @@ public class AssetsFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_assets, container, false);
+
+        initGridView();
+
+        gridView.setOnItemClickListener(this);
+
+        listContainerView = new AbsListContainer<GridView>(getActivity()) {
+            @Override
+            protected GridView inflateList() {
+                return gridView;
+            }
+        };
+
+        return listContainerView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Inject views
-        ButterKnife.inject(this, view);
-
         gridView.setAdapter(adapter);
-        gridView.setEmptyView(emptyView);
-    }
 
-    @Override
-    public void onDestroyView() {
-        ButterKnife.reset(this);
-
-        super.onDestroyView();
+        listContainerView.setListener(this);
     }
 
     @Override
@@ -81,15 +84,12 @@ public class AssetsFragment extends Fragment implements
 
     @Override
     public void onLoadFinished(Loader<ArrayList<CDAAsset>> loader, ArrayList<CDAAsset> data) {
-        boolean error = data == null;
-
-        if (error || data.size() == 0) {
-            showNoResults();
-
-            if (error) {
-                Utils.showGenericError(getActivity());
-            }
+        if (data == null) {
+            listContainerView.showExtraView(R.id.network_error);
+        } else if (data.size() == 0) {
+            listContainerView.showExtraView(R.id.no_results);
         } else {
+            listContainerView.hideExtraViews();
             adapter.setData(data);
             adapter.notifyDataSetInvalidated();
         }
@@ -100,13 +100,41 @@ public class AssetsFragment extends Fragment implements
 
     }
 
-    @OnItemClick(R.id.grid)
-    void onItemClick(int position, View v) {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         startActivity(new Intent(getActivity(), AssetPreviewActivity.class)
                 .putExtra(IntentConsts.EXTRA_ASSET, adapter.getItem(position)));
     }
 
-    private void showNoResults() {
-        Utils.showNoResults(gridView, stubNoResults, emptyView);
+    private void initGridView() {
+        gridView = new GridView(getActivity());
+
+        gridView.setLayoutParams(new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+        ));
+
+        gridView.setColumnWidth(
+                getResources().getDimensionPixelSize(R.dimen.assets_grid_column_width));
+
+        gridView.setGravity(Gravity.CENTER);
+
+        gridView.setSelector(new ColorDrawable(
+                getResources().getColor(android.R.color.transparent)));
+
+        gridView.setNumColumns(GridView.AUTO_FIT);
+
+        int padding = getResources().getDimensionPixelSize(R.dimen.assets_grid_vertical_padding);
+        gridView.setPadding(0, padding, 0, padding);
+        gridView.setVerticalSpacing(padding);
+
+        gridView.setStretchMode(GridView.STRETCH_SPACING_UNIFORM);
+    }
+
+    @Override
+    public void retryLoad() {
+        adapter.clear();
+        adapter.notifyDataSetChanged();
+        getLoaderManager().restartLoader(Utils.getLoaderId(this), null, this);
     }
 }

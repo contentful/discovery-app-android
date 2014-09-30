@@ -43,7 +43,7 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'org.markdownj:markdownj-core:0.4'
     compile 'joda-time:joda-time:2.4'
-    compile 'com.contentful.java:java-sdk:1.0.4'
+    compile 'com.contentful.java:java-sdk:1.0.5'
     compile 'com.viewpagerindicator:library:2.4.1@aar'
 }
 

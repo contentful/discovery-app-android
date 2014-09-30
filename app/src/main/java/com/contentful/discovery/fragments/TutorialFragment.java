@@ -1,6 +1,7 @@
 package com.contentful.discovery.fragments;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -70,15 +71,21 @@ public class TutorialFragment extends Fragment implements TutorialAdapter.Listen
                     public void onLoadFinished(Loader<TutorialLoader.Tutorial> tutorialLoader,
                                                TutorialLoader.Tutorial tutorial) {
 
-                        if (tutorial == null) {
-                            Utils.showGenericError(getActivity());
-                        } else {
-                            displayTutorial(tutorial);
-                        }
-
                         if (tutDialog != null) {
                             tutDialog.cancel();
                             tutDialog = null;
+                        }
+
+                        if (tutorial == null) {
+                            Utils.showGenericError(getActivity(),
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            getActivity().onBackPressed();
+                                        }
+                                    });
+                        } else {
+                            displayTutorial(tutorial);
                         }
                     }
 

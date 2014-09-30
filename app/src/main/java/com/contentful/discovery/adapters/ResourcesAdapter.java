@@ -67,7 +67,10 @@ public class ResourcesAdapter extends BaseAdapter {
 
         if (resource instanceof CDAEntry) {
             String displayField = getEntryDisplayField((CDAEntry) resource);
-            name = (String) ((CDAEntry) resource).getFields().get(displayField);
+
+            if (StringUtils.isNotBlank(displayField)) {
+                name = (String) ((CDAEntry) resource).getFields().get(displayField);
+            }
         }
 
         if (StringUtils.isBlank(name)) {
@@ -89,5 +92,9 @@ public class ResourcesAdapter extends BaseAdapter {
 
     public void setResourceList(ResourceList resourceList) {
         this.data = resourceList;
+    }
+
+    public void clear() {
+        data = null;
     }
 }

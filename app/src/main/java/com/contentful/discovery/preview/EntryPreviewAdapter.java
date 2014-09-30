@@ -99,6 +99,7 @@ public class EntryPreviewAdapter extends BaseAdapter {
         typeToViewFactoryMap.put(fieldType, factory);
     }
 
+    @SuppressWarnings({"SuspiciousMethodCalls", "unchecked"})
     public void reset(View v) {
         Object tag = v.getTag();
 

@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.AdapterView;
 
-import com.contentful.discovery.R;
 import com.contentful.discovery.activities.AssetPreviewActivity;
 import com.contentful.discovery.activities.EntryActivity;
 import com.contentful.discovery.activities.MapActivity;
@@ -24,8 +24,6 @@ import com.google.android.gms.maps.model.LatLng;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
-import butterknife.OnItemClick;
 
 import static com.contentful.java.lib.Constants.CDAFieldType;
 
@@ -51,6 +49,7 @@ public class EntryListFragment extends CFListFragment {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -81,8 +80,10 @@ public class EntryListFragment extends CFListFragment {
         listView.setAdapter(adapter);
     }
 
-    @OnItemClick(R.id.list)
-    void onItemClick(int position) {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        super.onItemClick(parent, view, position, id);
+
         Map item = adapter.getItem(position);
         CDAFieldType fieldType = CDAFieldType.valueOf((String) item.get("type"));
         Object value = entry.getFields().get(item.get("id"));
@@ -124,6 +125,7 @@ public class EntryListFragment extends CFListFragment {
     /**
      * Click handler for a field of type {@code Location}.
      */
+    @SuppressWarnings("unchecked")
     private void onLocationItemClicked(Map item, Object value) {
         Map<String, Object> map = (Map) value;
 

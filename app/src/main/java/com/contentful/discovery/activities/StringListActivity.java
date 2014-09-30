@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class StringListActivity extends CFListActivity implements AbsListView.RecyclerListener {
     @Override
+    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

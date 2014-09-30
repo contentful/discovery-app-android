@@ -29,6 +29,7 @@ public class EntryActivity extends AbsTabsActivity {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void initOnCreate(Bundle savedInstanceState) {
         entry = (CDAEntry) getIntent().getSerializableExtra(IntentConsts.EXTRA_ENTRY);
 
@@ -40,7 +41,7 @@ public class EntryActivity extends AbsTabsActivity {
 
     @Override
     protected String getTitleForActivity() {
-        return (String) entry.getFields().get(contentType.getDisplayField());
+        return Utils.getTitleForEntry(entry, contentType);
     }
 
     @Override

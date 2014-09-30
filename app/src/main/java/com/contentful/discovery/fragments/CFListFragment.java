@@ -6,48 +6,48 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
-import com.contentful.discovery.R;
-import com.contentful.discovery.utils.Utils;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+import com.contentful.discovery.ui.AbsListContainer;
 
 /**
- * List Fragment.
+ * ListFragment.
  */
-public class CFListFragment extends Fragment {
-    // Views
-    protected @InjectView(R.id.list) ListView listView;
-    @InjectView(R.id.stub_no_results) ViewStub stubNoResults;
-    @InjectView(R.id.empty) View emptyView;
+public class CFListFragment extends Fragment implements AdapterView.OnItemClickListener {
+    protected ListView listView;
+    AbsListContainer<ListView> listContainerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_list, container, false);
+
+        listView = new ListView(getActivity());
+
+        listView.setLayoutParams(new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+        ));
+
+        listView.setOnItemClickListener(this);
+
+        listContainerView = new AbsListContainer<ListView>(getActivity()) {
+            @Override
+            protected ListView inflateList() {
+                return listView;
+            }
+        };
+
+        return listContainerView;
+    }
+
+    public AbsListContainer<ListView> getListContainerView() {
+        return listContainerView;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        // Inject views
-        ButterKnife.inject(this, view);
-
-        // Configure ListView
-        listView.setEmptyView(emptyView);
-    }
-
-    @Override
-    public void onDestroyView() {
-        ButterKnife.reset(this);
-        super.onDestroyView();
-    }
-
-    protected void showNoResults() {
-        Utils.showNoResults(listView, stubNoResults, emptyView);
     }
 }

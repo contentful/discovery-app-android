@@ -66,6 +66,7 @@ public class HelpActivity extends CFFragmentActivity {
         CFDiscoveryClient.getClient().fetchEntriesMatching(query, callbacks.add(
                 new CDACallback<CDAArray>() {
                     @Override
+                    @SuppressWarnings("unchecked")
                     protected void onSuccess(CDAArray array, Response response) {
                         for (CDAResource res : array.getItems()) {
                             CDAEntry entry = (CDAEntry) res;

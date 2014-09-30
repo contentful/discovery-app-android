@@ -21,7 +21,6 @@
 
     <!-- Contentful URLs -->
     <string name="url_contentful" formatted="false">https://www.contentful.com</string>
-    <string name="url_contentful_video" formatted="false">file:///android_asset/contentful_video.mp4</string>
     <string name="url_faq" formatted="false">https://support.contentful.com/hc/en-us/?utm_source=Discovery%20app&amp;utm_medium=Android&amp;utm_campaign=faq</string>
     <string name="url_feedback" formatted="false">https://support.contentful.com/hc/en-us/requests/new/?utm_source=Discovery%20app&amp;utm_medium=Android&amp;utm_campaign=feedback</string>
     <string name="url_contact" formatted="false">https://support.contentful.com/hc/en-us/requests/new/?utm_source=Discovery%20app&amp;utm_medium=Android&amp;utm_campaign=feedback</string>

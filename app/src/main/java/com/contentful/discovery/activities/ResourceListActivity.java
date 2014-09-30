@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.contentful.discovery.R;
 import com.contentful.discovery.adapters.ResourcesAdapter;
 import com.contentful.discovery.api.ResourceList;
+import com.contentful.discovery.ui.AbsListContainer;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.java.model.CDAAsset;
 import com.contentful.java.model.CDAContentType;
@@ -16,8 +19,6 @@ import com.contentful.java.model.CDAResource;
 
 import java.io.Serializable;
 import java.util.Map;
-
-import butterknife.OnItemClick;
 
 /**
  * Abstract {@code Resource} List {@code Activity}.
@@ -37,12 +38,28 @@ public abstract class ResourceListActivity extends CFListActivity implements
 
         // Initialize Loader
         initLoader();
+
+        listContainerView.setListener(new AbsListContainer.Listener() {
+            @Override
+            public void retryLoad() {
+                adapter.clear();
+                adapter.notifyDataSetChanged();
+                restartLoader();
+            }
+        });
     }
 
     @Override
     public void onLoadFinished(Loader<ResourceList> resourceListLoader, ResourceList resourceList) {
-        adapter.setResourceList(resourceList);
-        adapter.notifyDataSetInvalidated();
+        if (resourceList == null || resourceList.resources == null) {
+            getListContainerView().showExtraView(R.id.network_error);
+        } else if (resourceList.resources.size() == 0) {
+            getListContainerView().showExtraView(R.id.no_results);
+        } else {
+            getListContainerView().hideExtraViews();
+            adapter.setResourceList(resourceList);
+            adapter.notifyDataSetInvalidated();
+        }
     }
 
     @Override
@@ -51,9 +68,12 @@ public abstract class ResourceListActivity extends CFListActivity implements
     }
 
     protected abstract void initLoader();
+    protected abstract void restartLoader();
 
-    @OnItemClick(R.id.list)
-    void onItemClick(int position) {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        super.onItemClick(parent, view, position, id);
+
         CDAResource res = adapter.getItem(position);
 
         if (res instanceof CDAAsset) {

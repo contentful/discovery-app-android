@@ -7,6 +7,7 @@ import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.AbsListView;
 
+import com.contentful.discovery.R;
 import com.contentful.discovery.loaders.EntryPreviewLoader;
 import com.contentful.discovery.preview.EntryPreviewAdapter;
 import com.contentful.discovery.ui.DisplayItem;
@@ -74,8 +75,13 @@ public class EntryPreviewFragment extends CFListFragment implements
 
     @Override
     public void onLoadFinished(Loader<List<DisplayItem>> loader, List<DisplayItem> data) {
-        adapter.setData(data);
-        adapter.notifyDataSetInvalidated();
+        if (data == null || data.size() == 0) {
+            listContainerView.showExtraView(R.id.no_results);
+        } else {
+            getListContainerView().hideExtraViews();
+            adapter.setData(data);
+            adapter.notifyDataSetInvalidated();
+        }
     }
 
     @Override
