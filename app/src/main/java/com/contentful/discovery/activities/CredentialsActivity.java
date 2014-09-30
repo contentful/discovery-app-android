@@ -60,7 +60,7 @@ public class CredentialsActivity extends CFFragmentActivity {
     @InjectView(R.id.btn_go) Button btnGo;
 
     // Animations stuff
-    private Handler animHandler;
+    private Handler handler;
     private ObjectAnimator rotationAnimator;
     private AnimatorSet scaleAnimatorSet;
     private Runnable bounceRunnable;
@@ -123,7 +123,7 @@ public class CredentialsActivity extends CFFragmentActivity {
         // Pause animations
         AnimHelper.pauseOrStopAnimator(rotationAnimator);
         AnimHelper.pauseOrStopAnimator(scaleAnimatorSet);
-        animHandler.removeCallbacksAndMessages(null);
+        handler.removeCallbacksAndMessages(null);
     }
 
     @Override
@@ -216,61 +216,86 @@ public class CredentialsActivity extends CFFragmentActivity {
                 .fetchSpace(callbacks.add(new CDACallback<CDASpace>() {
                     @Override
                     protected void onSuccess(CDASpace space, Response response) {
-
-                        // Invalidate options menu
-                        supportInvalidateOptionsMenu();
-
-                        // Dismiss ProgressDialog
                         loginDialog.dismiss();
-
-                        // Set additional data on Credentials instance
-                        credentials.setSpaceName(space.getName());
-                        credentials.setLastLogin(System.currentTimeMillis());
-
-                        // Since request was successful, save these Credentials to the database
-                        // for future reference via history, using DBIntentService class.
-                        startService(
-                                DBIntentService.withAction(IntentConsts.DB.ACTION_SAVE_CREDENTIALS)
-                                        .putExtra(IntentConsts.EXTRA_CREDENTIALS, credentials));
-
-                        updateDidLogin(credentials);
-
-                        // Start Space Activity
-                        startActivity(new Intent(CredentialsActivity.this, SpaceActivity.class)
-                                .putExtra(IntentConsts.EXTRA_SPACE, space));
+                        handleLoginSuccess(space, response, credentials);
                     }
 
                     @Override
                     protected void onFailure(RetrofitError retrofitError) {
-                        int statusCode = retrofitError.getResponse().getStatus();
-
-                        // Set error message according to HTTP status code
-                        String title = getString(R.string.ad_login_error_title);
-                        String body;
-
-                        switch (statusCode) {
-                            case HttpStatus.SC_UNAUTHORIZED:
-                                body = getString(R.string.ad_login_error_message_unauthorized);
-                                break;
-
-                            case HttpStatus.SC_NOT_FOUND:
-                                body = getString(R.string.ad_login_error_message_not_found);
-                                break;
-
-                            default:
-                                body = getString(R.string.ad_error_message_generic);
-                        }
-
                         loginDialog.dismiss();
-
-                        // Show error AlertDialog
-                        new AlertDialog.Builder(CredentialsActivity.this)
-                                .setTitle(title)
-                                .setMessage(body)
-                                .setPositiveButton(R.string.ok, null)
-                                .show();
+                        handleLoginFailure(retrofitError, credentials);
                     }
                 }));
+    }
+
+    private void handleLoginFailure(RetrofitError retrofitError, final Credentials credentials) {
+        // Set error message according to HTTP status code
+        String title = getString(R.string.ad_login_error_title);
+        String body = getString(R.string.ad_error_message_generic);
+        boolean retry = true;
+
+        if (!retrofitError.isNetworkError()) {
+            int statusCode = retrofitError.getResponse().getStatus();
+
+            switch (statusCode) {
+                case HttpStatus.SC_UNAUTHORIZED:
+                    body = getString(R.string.ad_login_error_message_unauthorized);
+                    retry = false;
+                    break;
+
+                case HttpStatus.SC_NOT_FOUND:
+                    body = getString(R.string.ad_login_error_message_not_found);
+                    retry = false;
+                    break;
+            }
+        }
+
+        // Show error AlertDialog
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(CredentialsActivity.this)
+                        .setTitle(title)
+                        .setMessage(body);
+
+        if (retry) {
+            builder.setPositiveButton(R.string.try_again, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            login(credentials);
+                        }
+                    });
+                }
+            });
+
+            builder.setNegativeButton(R.string.cancel, null);
+        } else {
+            builder.setPositiveButton(R.string.ok, null);
+        }
+
+        builder.show();
+    }
+
+    private void handleLoginSuccess(CDASpace space, Response response, Credentials credentials) {
+        // Invalidate options menu
+        supportInvalidateOptionsMenu();
+
+        // Set additional data on Credentials instance
+        credentials.setSpaceName(space.getName());
+        credentials.setLastLogin(System.currentTimeMillis());
+
+        // Since request was successful, save these Credentials to the database
+        // for future reference via history, using DBIntentService class.
+        startService(
+                DBIntentService.withAction(IntentConsts.DB.ACTION_SAVE_CREDENTIALS)
+                        .putExtra(IntentConsts.EXTRA_CREDENTIALS, credentials));
+
+        updateDidLogin(credentials);
+
+        // Start Space Activity
+        startActivity(new Intent(CredentialsActivity.this, SpaceActivity.class)
+                .putExtra(IntentConsts.EXTRA_SPACE, space));
     }
 
     private void updateDidLogin(Credentials credentials) {
@@ -362,7 +387,7 @@ public class CredentialsActivity extends CFFragmentActivity {
      */
     private void setupAnimations() {
         // Animations Handler
-        animHandler = new Handler();
+        handler = new Handler();
 
         // Rotation animator
         rotationAnimator = ObjectAnimator.ofFloat(ivLogo, "rotation", 0, 360);
@@ -406,7 +431,7 @@ public class CredentialsActivity extends CFFragmentActivity {
      * Posts bounce {@code Runnable} using a pre-defined delay.
      */
     private void postBounceRunnable() {
-        animHandler.postDelayed(bounceRunnable,
+        handler.postDelayed(bounceRunnable,
                 getResources().getInteger(R.integer.anim_logo_bounce_delay_ms));
     }
 }

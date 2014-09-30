@@ -18,6 +18,8 @@
     <string name="select_locale">Select locale</string>
     <string name="open">Open</string>
     <string name="no_results">Sorry, no results found :(</string>
+    <string name="try_again">Try Again</string>
+    <string name="cancel">Cancel</string>
 
     <!-- Tabs -->
     <string name="tab_content_types">Content Types</string>
