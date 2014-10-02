@@ -63,3 +63,7 @@
 
 # OkHttp
 -keep class com.squareup.okhttp.** { *; }
+
+# okio
+-dontwarn java.nio.file.*
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement

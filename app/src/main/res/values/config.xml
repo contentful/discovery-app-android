@@ -17,7 +17,7 @@
 
     <!-- Maps -->
     <string name="maps_api_key"></string>
-    <string name="static_map_uri">https://maps.googleapis.com/maps/api/staticmap?zoom=%1$d&amp;size=640x640&amp;markers=color:red|%2$f,%3$f</string>
+    <string name="static_map_uri">https://maps.googleapis.com/maps/api/staticmap?zoom=%1$d&amp;size=640x640&amp;markers=color%%3Ared%%7C%2$f%%2C%3$f</string>
 
     <!-- Contentful URLs -->
     <string name="url_contentful" formatted="false">https://www.contentful.com</string>
