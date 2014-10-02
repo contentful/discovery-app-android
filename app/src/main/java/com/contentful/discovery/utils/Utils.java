@@ -3,14 +3,12 @@ package com.contentful.discovery.utils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
-import android.view.ViewStub;
-import android.widget.AbsListView;
 import android.widget.ImageView;
 
 import com.contentful.discovery.CFApp;
@@ -232,23 +230,15 @@ public class Utils {
     }
 
     /**
-     * Show no results view and hide previous empty view.
-     */
-    public static void showNoResults(AbsListView view, ViewStub stubNoResults, View emptyView) {
-        View noResultsView = stubNoResults.inflate();
-        view.setEmptyView(noResultsView);
-        emptyView.setVisibility(View.GONE);
-        noResultsView.findViewById(R.id.tv_title).setVisibility(View.VISIBLE);
-    }
-
-    /**
      * Shows {@code AlertDialog} with a generic message.
      */
-    public static void showGenericError(Activity activity) {
+    public static void showGenericError(Activity activity,
+                                        DialogInterface.OnClickListener clickListener) {
+
         new AlertDialog.Builder(activity)
                 .setTitle(R.string.ad_error_title_generic)
                 .setMessage(R.string.ad_error_message_generic)
-                .setPositiveButton(R.string.ok, null)
+                .setPositiveButton(R.string.ok, clickListener)
                 .show();
     }
 
@@ -279,5 +269,19 @@ public class Utils {
                         TutorialFragment.class.getName())
                 .addToBackStack(null)
                 .commit();
+    }
+
+    public static String getTitleForEntry(CDAEntry entry, CDAContentType contentType) {
+        String displayField = contentType.getDisplayField();
+
+        if (!StringUtils.isBlank(displayField)) {
+            String result = (String) entry.getFields().get(displayField);
+
+            if (StringUtils.isNotBlank(result)) {
+                return result;
+            }
+        }
+
+        return CFApp.getInstance().getString(R.string.content_type_default_title);
     }
 }

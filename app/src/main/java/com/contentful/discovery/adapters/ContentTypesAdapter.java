@@ -70,6 +70,10 @@ public class ContentTypesAdapter extends BaseAdapter {
         this.data = data;
     }
 
+    public void clear() {
+        data.clear();
+    }
+
     /**
      * View Holder
      */

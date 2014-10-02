@@ -19,6 +19,9 @@ public class SpacePagerAdapter extends FragmentPagerAdapter {
     public static final int TAB_POS_CONTENT_TYPES = 0;
     public static final int TAB_POS_ASSETS = 1;
 
+    private ContentTypesFragment contentTypesFragment;
+    private AssetsFragment assetsFragment;
+
     public SpacePagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         this.context = context;
@@ -33,10 +36,18 @@ public class SpacePagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case TAB_POS_CONTENT_TYPES:
-                return ContentTypesFragment.newInstance();
+                if (contentTypesFragment == null) {
+                    contentTypesFragment = ContentTypesFragment.newInstance();
+                }
+
+                return contentTypesFragment;
 
             case TAB_POS_ASSETS:
-                return AssetsFragment.newInstance();
+                if (assetsFragment == null) {
+                    assetsFragment = AssetsFragment.newInstance();
+                }
+
+                return assetsFragment;
         }
 
         throw new IllegalStateException("Invalid adapter count");

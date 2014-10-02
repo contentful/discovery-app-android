@@ -12,6 +12,7 @@ import com.contentful.discovery.ui.DisplayItem;
  * Abstract Preview View Factory.
  */
 public abstract class PreviewViewFactory<T extends AbsViewHolder> {
+    @SuppressWarnings("unchecked")
     public T getView(Context context, View convertView, ViewGroup parent, DisplayItem displayItem, Object factoryKey) {
         T viewHolder;
 

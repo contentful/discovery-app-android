@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
-import com.contentful.discovery.R;
 import com.contentful.discovery.adapters.HistoryAdapter;
 import com.contentful.discovery.api.Credentials;
 import com.contentful.discovery.loaders.CredentialsLoader;
@@ -16,8 +17,6 @@ import com.contentful.discovery.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-
-import butterknife.OnItemClick;
 
 /**
  * History Activity.
@@ -70,8 +69,10 @@ public class HistoryActivity extends CFListActivity implements
 
     }
 
-    @OnItemClick(R.id.list)
-    void onItemClicked(int position) {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        super.onItemClick(parent, view, position, id);
+
         Credentials credentials = adapter.getItem(position);
 
         setResult(Activity.RESULT_OK, new Intent().putExtra(

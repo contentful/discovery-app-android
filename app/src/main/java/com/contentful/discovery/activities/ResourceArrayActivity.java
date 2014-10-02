@@ -21,6 +21,12 @@ public class ResourceArrayActivity extends ResourceListActivity {
     }
 
     @Override
+    protected void restartLoader() {
+        getSupportLoaderManager().restartLoader(Utils.getLoaderId(this), null, this);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
     public Loader<ResourceList> onCreateLoader(int i, Bundle bundle) {
         return new ResourceArrayLoader((ArrayList<Object>) getIntent()
                 .getSerializableExtra(IntentConsts.EXTRA_LIST));

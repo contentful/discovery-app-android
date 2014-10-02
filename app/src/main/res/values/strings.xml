@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Discovery</string>
     <string name="num_of_entries">%1$d entries</string>
+    <string name="content_type_default_title">Untitled</string>
 
     <!-- Dialogs -->
     <string name="pd_login_title">Connecting to Space</string>
@@ -18,6 +19,8 @@
     <string name="select_locale">Select locale</string>
     <string name="open">Open</string>
     <string name="no_results">Sorry, no results found :(</string>
+    <string name="try_again">Try Again</string>
+    <string name="cancel">Cancel</string>
 
     <!-- Tabs -->
     <string name="tab_content_types">Content Types</string>
@@ -74,4 +77,8 @@
 
     <!-- Tutorial -->
     <string name="skip_tour">Skip tour</string>
+
+    <!-- Network Error -->
+    <string name="request_failed">Oops, something went wrong…</string>
+    <string name="tap_to_retry">Tap here to retry</string>
 </resources>

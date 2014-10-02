@@ -1,39 +1,50 @@
 package com.contentful.discovery.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewStub;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
-import com.contentful.discovery.R;
-import com.contentful.discovery.utils.Utils;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+import com.contentful.discovery.ui.AbsListContainer;
 
 /**
- * List Activity.
+ * ListActivity.
  */
-public class CFListActivity extends CFFragmentActivity {
+@SuppressLint("Registered")
+public class CFListActivity extends CFFragmentActivity implements AdapterView.OnItemClickListener {
     // Views
-    protected @InjectView(R.id.list) ListView listView;
-    @InjectView(R.id.empty) View emptyView;
-    @InjectView(R.id.stub_no_results) ViewStub stubNoResults;
+    AbsListContainer<ListView> listContainerView;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_list);
+        listView = new ListView(this);
 
-        // Inject views
-        ButterKnife.inject(this);
+        listView.setLayoutParams(new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
 
-        // Configure ListView
-        listView.setEmptyView(emptyView);
+        setContentView(listContainerView = new AbsListContainer<ListView>(this) {
+            @Override
+            protected ListView inflateList() {
+                return listView;
+            }
+        });
+
+        listView.setOnItemClickListener(this);
     }
 
-    protected void showNoResults() {
-        Utils.showNoResults(listView, stubNoResults, emptyView);
+    public AbsListContainer<ListView> getListContainerView() {
+        return listContainerView;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

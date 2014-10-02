@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import retrofit.RetrofitError;
+
 /**
  * Abstract Resource List Loader.
  */
@@ -19,14 +21,21 @@ public abstract class AbsResourceListLoader extends AbsAsyncTaskLoader<ResourceL
     @Override
     protected ResourceList performLoad() {
         CDAClient client = CFClient.getClient();
-        ResourceList tmp = performLoad(client);
-        setContentTypes(client, tmp);
-        return tmp;
+
+        try {
+            ResourceList tmp = performLoad(client);
+            setContentTypes(client, tmp);
+            return tmp;
+        } catch (RetrofitError e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     protected abstract ResourceList performLoad(CDAClient client);
 
-    protected void setContentTypes(CDAClient client, ResourceList resourceList) {
+    protected void setContentTypes(CDAClient client, ResourceList resourceList) throws RetrofitError {
         HashMap<String, CDAContentType> map = new HashMap<String, CDAContentType>();
         CDAArray array = client.fetchContentTypesBlocking();
 

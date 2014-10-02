@@ -13,4 +13,11 @@
 
     <!-- TutorialView -->
     <dimen name="view_tutorial_padding">20dp</dimen>
+
+    <!-- Network Error -->
+    <dimen name="nev_padding">20dp</dimen>
+
+    <!-- Assets Grid -->
+    <dimen name="assets_grid_column_width">100dp</dimen>
+    <dimen name="assets_grid_vertical_padding">10dp</dimen>
 </resources>

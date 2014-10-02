@@ -82,6 +82,7 @@ public class EntryPreviewLoader extends AbsAsyncTaskLoader<List<DisplayItem>> {
     /**
      * Prepares item of type {@code Array}.
      */
+    @SuppressWarnings("unchecked")
     private void prepareArrayItem(DisplayItem displayItem, Object value, Map arrayItems) {
         displayItem.arrayItemType = Constants.CDAFieldType.valueOf((String) arrayItems.get("type"));
 
@@ -113,8 +114,7 @@ public class EntryPreviewLoader extends AbsAsyncTaskLoader<List<DisplayItem>> {
         displayItem.resource = (CDAResource) value;
 
         if (value instanceof CDAEntry) {
-            displayItem.displayValue = (String) ((CDAEntry) value).getFields()
-                    .get(contentType.getDisplayField());
+            displayItem.displayValue = Utils.getTitleForEntry((CDAEntry) value, contentType);
         }
     }
 

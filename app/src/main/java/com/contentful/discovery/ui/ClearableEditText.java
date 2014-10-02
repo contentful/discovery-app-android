@@ -1,6 +1,7 @@
 package com.contentful.discovery.ui;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
@@ -45,7 +46,7 @@ public class ClearableEditText extends EditText {
     }
 
     @Override
-    public boolean dispatchKeyEventPreIme(KeyEvent event) {
+    public boolean dispatchKeyEventPreIme(@NonNull KeyEvent event) {
         if (!super.dispatchKeyEventPreIme(event)) {
             int keyCode = event.getKeyCode();
 

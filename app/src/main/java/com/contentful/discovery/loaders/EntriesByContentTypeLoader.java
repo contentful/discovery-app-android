@@ -11,6 +11,8 @@ import com.contentful.java.model.CDAResource;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import retrofit.RetrofitError;
+
 /**
  * Entries by Content Type Loader.
  * Use to load all CDA Entries matching the given CDAContentType, from the current Space.
@@ -25,30 +27,36 @@ public class EntriesByContentTypeLoader extends AbsResourceListLoader {
 
     @Override
     protected ResourceList performLoad(CDAClient client) {
-        ResourceList resourceList = new ResourceList();
+        try {
+            ResourceList resourceList = new ResourceList();
 
-        // Prepare query
-        HashMap<String, String> query = new HashMap<String, String>();
-        query.put("content_type", (String) contentType.getSys().get("id"));
+            // Prepare query
+            HashMap<String, String> query = new HashMap<String, String>();
+            query.put("content_type", (String) contentType.getSys().get("id"));
 
-        // Set the locale if non-default locale is currently configured
-        String locale = CFClient.getLocale();
+            // Set the locale if non-default locale is currently configured
+            String locale = CFClient.getLocale();
 
-        if (locale != null) {
-            query.put("locale", locale);
-        }
-
-        // Make the request
-        CDAArray cdaArray = client.fetchEntriesMatchingBlocking(query);
-        resourceList.resources = new ArrayList<CDAResource>();
-
-        // Prepare the result
-        for (CDAResource res : cdaArray.getItems()) {
-            if (res instanceof CDAEntry) {
-                resourceList.resources.add(res);
+            if (locale != null) {
+                query.put("locale", locale);
             }
+
+            // Make the request
+            CDAArray cdaArray = client.fetchEntriesMatchingBlocking(query);
+            resourceList.resources = new ArrayList<CDAResource>();
+
+            // Prepare the result
+            for (CDAResource res : cdaArray.getItems()) {
+                if (res instanceof CDAEntry) {
+                    resourceList.resources.add(res);
+                }
+            }
+
+            return resourceList;
+        } catch (RetrofitError e) {
+            e.printStackTrace();
         }
 
-        return resourceList;
+        return null;
     }
 }

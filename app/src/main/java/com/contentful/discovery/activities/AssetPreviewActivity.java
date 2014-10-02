@@ -12,6 +12,7 @@ import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 
 import com.contentful.discovery.R;
@@ -21,8 +22,6 @@ import com.contentful.discovery.utils.Utils;
 import com.contentful.java.model.CDAAsset;
 
 import org.apache.commons.lang3.StringUtils;
-
-import butterknife.OnItemClick;
 
 /**
  * Asset Preview Activity.
@@ -49,12 +48,14 @@ public class AssetPreviewActivity extends CFListActivity {
         setupListView();
     }
 
-    @OnItemClick(R.id.list)
-    void onItemClick(int position, View v) {
-        if (Boolean.TRUE.equals(v.getTag(R.id.tag_header_view))) {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        super.onItemClick(parent, view, position, id);
+
+        if (Boolean.TRUE.equals(view.getTag(R.id.tag_header_view))) {
             // Photo (header view) was clicked
             onPhotoClicked();
-        } else if (Boolean.TRUE.equals(v.getTag(R.id.tag_clickable))) {
+        } else if (Boolean.TRUE.equals(view.getTag(R.id.tag_clickable))) {
             // Clickable field clicked
             Pair<String, String> item = adapter.getItem(position - listView.getHeaderViewsCount());
 
