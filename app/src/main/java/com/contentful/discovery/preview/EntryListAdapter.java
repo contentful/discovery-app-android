@@ -11,6 +11,7 @@ import com.contentful.java.model.CDAContentType;
 import com.contentful.java.model.CDAEntry;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static com.contentful.java.lib.Constants.CDAFieldType;
@@ -107,7 +108,7 @@ public class EntryListAdapter extends BaseAdapter {
             Double lat = (Double) map.get("lat");
             Double lon = (Double) map.get("lon");
 
-            return String.format("(%.2f, %.2f)", lat, lon);
+            return String.format(Locale.getDefault(), "(%.2f, %.2f)", lat, lon);
         }
 
         return object.toString();

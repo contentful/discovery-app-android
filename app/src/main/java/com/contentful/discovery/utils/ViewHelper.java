@@ -1,5 +1,6 @@
 package com.contentful.discovery.utils;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -34,6 +35,7 @@ public class ViewHelper {
      * @see #addGlobalLayoutListener(View, ViewTreeObserver.OnGlobalLayoutListener).
      */
     @SuppressWarnings("deprecation")
+    @SuppressLint("NewApi")
     public static void removeGlobalLayoutListener(View v, ViewTreeObserver.OnGlobalLayoutListener listener) {
         ViewTreeObserver observer = v.getViewTreeObserver();
         if (observer == null || !observer.isAlive()) {
