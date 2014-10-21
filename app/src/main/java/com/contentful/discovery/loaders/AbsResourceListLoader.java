@@ -6,59 +6,56 @@ import com.contentful.java.api.CDAClient;
 import com.contentful.java.model.CDAArray;
 import com.contentful.java.model.CDAContentType;
 import com.contentful.java.model.CDAResource;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import retrofit.RetrofitError;
 
 /**
  * Abstract Resource List Loader.
  */
 public abstract class AbsResourceListLoader extends AbsAsyncTaskLoader<ResourceList> {
-    @Override
-    protected ResourceList performLoad() {
-        CDAClient client = CFClient.getClient();
+  @Override protected ResourceList performLoad() {
+    CDAClient client = CFClient.getClient();
 
-        try {
-            ResourceList tmp = performLoad(client);
-            setContentTypes(client, tmp);
-            return tmp;
-        } catch (RetrofitError e) {
-            e.printStackTrace();
-        }
-
-        return null;
+    try {
+      ResourceList tmp = performLoad(client);
+      setContentTypes(client, tmp);
+      return tmp;
+    } catch (RetrofitError e) {
+      e.printStackTrace();
     }
 
-    protected abstract ResourceList performLoad(CDAClient client);
+    return null;
+  }
 
-    protected void setContentTypes(CDAClient client, ResourceList resourceList) throws RetrofitError {
-        HashMap<String, CDAContentType> map = new HashMap<String, CDAContentType>();
-        CDAArray array = client.fetchContentTypesBlocking();
+  protected abstract ResourceList performLoad(CDAClient client);
 
-        for (CDAResource res : array.getItems()) {
-            CDAContentType contentType = (CDAContentType) res;
+  protected void setContentTypes(CDAClient client, ResourceList resourceList) throws RetrofitError {
+    HashMap<String, CDAContentType> map = new HashMap<String, CDAContentType>();
+    CDAArray array = client.fetchContentTypesBlocking();
 
-            // Exclude disabled fields
-            List<Map> fields = contentType.getFields();
-            ArrayList<Map> filteredFields = new ArrayList<Map>();
+    for (CDAResource res : array.getItems()) {
+      CDAContentType contentType = (CDAContentType) res;
 
-            for (Map f : fields) {
-                if (Boolean.TRUE.equals(f.get("disabled"))) {
-                    continue;
-                }
+      // Exclude disabled fields
+      List<Map> fields = contentType.getFields();
+      ArrayList<Map> filteredFields = new ArrayList<Map>();
 
-                filteredFields.add(f);
-            }
-
-            contentType.setFields(filteredFields);
-
-            map.put((String) contentType.getSys().get("id"), contentType);
+      for (Map f : fields) {
+        if (Boolean.TRUE.equals(f.get("disabled"))) {
+          continue;
         }
 
-        resourceList.contentTypes = map;
+        filteredFields.add(f);
+      }
+
+      contentType.setFields(filteredFields);
+
+      map.put((String) contentType.getSys().get("id"), contentType);
     }
+
+    resourceList.contentTypes = map;
+  }
 }

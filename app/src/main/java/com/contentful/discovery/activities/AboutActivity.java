@@ -6,85 +6,77 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.TextView;
-
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 import com.contentful.discovery.CFApp;
 import com.contentful.discovery.R;
 import com.contentful.discovery.fragments.TutorialFragment;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
-
 /**
  * About Activity.
  */
 public class AboutActivity extends CFFragmentActivity {
-    @InjectView(R.id.tv_version) TextView tvVersion;
+  @InjectView(R.id.tv_version) TextView tvVersion;
 
-    private static SparseArray<String> sLinks;
+  private static SparseArray<String> sLinks;
 
-    static {
-        CFApp context = CFApp.getInstance();
+  static {
+    CFApp context = CFApp.getInstance();
 
-        sLinks = new SparseArray<String>();
-        sLinks.put(R.id.btn_faq, context.getString(R.string.url_faq));
-        sLinks.put(R.id.btn_feedback, context.getString(R.string.url_feedback));
-        sLinks.put(R.id.btn_contact, context.getString(R.string.url_contact));
+    sLinks = new SparseArray<String>();
+    sLinks.put(R.id.btn_faq, context.getString(R.string.url_faq));
+    sLinks.put(R.id.btn_feedback, context.getString(R.string.url_feedback));
+    sLinks.put(R.id.btn_contact, context.getString(R.string.url_contact));
+  }
+
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_about);
+
+    // Inject views
+    ButterKnife.inject(this);
+
+    // Set version
+    setVersion();
+  }
+
+  @Override public void onBackPressed() {
+    if (!TutorialFragment.handleOnBackPressed(getSupportFragmentManager())) {
+      super.onBackPressed();
     }
+  }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  @OnClick({ R.id.btn_faq, R.id.btn_feedback, R.id.btn_contact })
+  void onClickWebReference(View v) {
+    startActivity(new Intent(this, WebActivity.class)
+        .putExtra(IntentConsts.EXTRA_URL, sLinks.get(v.getId())));
+  }
 
-        setContentView(R.layout.activity_about);
+  @OnClick(R.id.btn_product_tour)
+  void onClickProductTour() {
+    Utils.attachTutorialFragment(getSupportFragmentManager(), R.id.tutorial_wrapper,
+        new TutorialFragment());
+  }
 
-        // Inject views
-        ButterKnife.inject(this);
+  @OnClick(R.id.btn_licensing)
+  void onClickLicensing() {
+    startActivity(new Intent(this, WebActivity.class)
+        .putExtra(IntentConsts.EXTRA_URL,
+            "file:///android_asset/license.html")
+        .putExtra(IntentConsts.EXTRA_ALLOW_LINKS, true));
+  }
 
-        // Set version
-        setVersion();
+  private void setVersion() {
+    try {
+      String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+
+      tvVersion.setText(getString(R.string.version_name, versionName));
+    } catch (PackageManager.NameNotFoundException e) {
+      e.printStackTrace();
     }
-
-    @Override
-    public void onBackPressed() {
-        if (!TutorialFragment.handleOnBackPressed(getSupportFragmentManager())) {
-            super.onBackPressed();
-        }
-    }
-
-    @OnClick({R.id.btn_faq,
-            R.id.btn_feedback,
-            R.id.btn_contact})
-    void onClickWebReference(View v) {
-        startActivity(new Intent(this, WebActivity.class)
-                .putExtra(IntentConsts.EXTRA_URL, sLinks.get(v.getId())));
-    }
-
-    @OnClick(R.id.btn_product_tour)
-    void onClickProductTour() {
-        Utils.attachTutorialFragment(
-                getSupportFragmentManager(),
-                R.id.tutorial_wrapper,
-                new TutorialFragment());
-    }
-
-    @OnClick(R.id.btn_licensing)
-    void onClickLicensing() {
-        startActivity(new Intent(this, WebActivity.class)
-                .putExtra(IntentConsts.EXTRA_URL, "file:///android_asset/license.html")
-                .putExtra(IntentConsts.EXTRA_ALLOW_LINKS, true));
-    }
-
-    private void setVersion() {
-        try {
-            String versionName = getPackageManager()
-                    .getPackageInfo(getPackageName(), 0).versionName;
-
-            tvVersion.setText(getString(R.string.version_name, versionName));
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+  }
 }

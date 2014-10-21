@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
-
 import com.contentful.discovery.ui.AbsListContainer;
 
 /**
@@ -15,36 +14,31 @@ import com.contentful.discovery.ui.AbsListContainer;
  */
 @SuppressLint("Registered")
 public class CFListActivity extends CFFragmentActivity implements AdapterView.OnItemClickListener {
-    // Views
-    AbsListContainer<ListView> listContainerView;
-    ListView listView;
+  // Views
+  AbsListContainer<ListView> listContainerView;
+  ListView listView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-        listView = new ListView(this);
+    listView = new ListView(this);
 
-        listView.setLayoutParams(new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
+    listView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.MATCH_PARENT));
 
-        setContentView(listContainerView = new AbsListContainer<ListView>(this) {
-            @Override
-            protected ListView inflateList() {
-                return listView;
-            }
-        });
+    setContentView(listContainerView = new AbsListContainer<ListView>(this) {
+      @Override protected ListView inflateList() {
+        return listView;
+      }
+    });
 
-        listView.setOnItemClickListener(this);
-    }
+    listView.setOnItemClickListener(this);
+  }
 
-    public AbsListContainer<ListView> getListContainerView() {
-        return listContainerView;
-    }
+  public AbsListContainer<ListView> getListContainerView() {
+    return listContainerView;
+  }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-    }
+  @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+  }
 }

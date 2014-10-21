@@ -4,40 +4,37 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import com.contentful.discovery.R;
-import com.contentful.discovery.utils.IntentConsts;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import com.contentful.discovery.R;
+import com.contentful.discovery.utils.IntentConsts;
 
 /**
  * Web Activity.
  */
 public class WebActivity extends CFFragmentActivity {
-    @InjectView(R.id.web_view) WebView webView;
-    @InjectView(R.id.empty) View emptyView;
+  @InjectView(R.id.web_view) WebView webView;
+  @InjectView(R.id.empty) View emptyView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_web);
+    setContentView(R.layout.activity_web);
 
-        // Inject views
-        ButterKnife.inject(this);
+    // Inject views
+    ButterKnife.inject(this);
 
-        webView.setWebViewClient(new WebViewClient(){
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
+    webView.setWebViewClient(new WebViewClient() {
+      @Override
+      public void onPageFinished(WebView view, String url) {
+        super.onPageFinished(view, url);
 
-                emptyView.setVisibility(View.GONE);
-            }
-        });
+        emptyView.setVisibility(View.GONE);
+      }
+    });
 
-        webView.loadUrl(getIntent().getStringExtra(IntentConsts.EXTRA_URL));
+    webView.loadUrl(getIntent().getStringExtra(IntentConsts.EXTRA_URL));
 
-        emptyView.setVisibility(View.VISIBLE);
-    }
+    emptyView.setVisibility(View.VISIBLE);
+  }
 }

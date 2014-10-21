@@ -2,7 +2,6 @@ package com.contentful.discovery.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import com.contentful.discovery.R;
 import com.contentful.discovery.utils.IntentConsts;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,26 +17,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * carried with the {@code Intent}.
  */
 public class MapActivity extends CFFragmentActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_map);
+    setContentView(R.layout.activity_map);
 
-        // Extract arguments from Intent
-        Intent intent = getIntent();
-        LatLng latLng = intent.getParcelableExtra(IntentConsts.EXTRA_LOCATION);
-        String title = intent.getStringExtra(IntentConsts.EXTRA_TITLE);
+    // Extract arguments from Intent
+    Intent intent = getIntent();
+    LatLng latLng = intent.getParcelableExtra(IntentConsts.EXTRA_LOCATION);
+    String title = intent.getStringExtra(IntentConsts.EXTRA_TITLE);
 
-        // Setup map (marker & auto-zoom)
-        GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.fragment_map))
-                .getMap();
+    // Setup map (marker & auto-zoom)
+    GoogleMap map =
+        ((MapFragment) getFragmentManager().findFragmentById(R.id.fragment_map)).getMap();
 
-        map.addMarker(new MarkerOptions()
-                .title(title)
-                .position(latLng));
+    map.addMarker(new MarkerOptions().title(title).position(latLng));
 
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,
-                (float) getResources().getInteger(R.integer.map_default_zoom)));
-    }
+    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,
+        (float) getResources().getInteger(R.integer.map_default_zoom)));
+  }
 }
