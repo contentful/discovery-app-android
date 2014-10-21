@@ -6,19 +6,19 @@ import com.contentful.java.model.CDAContentType;
  * Content Type Wrapper.
  */
 public class ContentTypeWrapper {
-    private final CDAContentType contentType;
-    private final int entriesCount;
+  private final CDAContentType contentType;
+  private final int entriesCount;
 
-    public ContentTypeWrapper(CDAContentType contentType, int entriesCount) {
-        this.contentType = contentType;
-        this.entriesCount = entriesCount;
-    }
+  public ContentTypeWrapper(CDAContentType contentType, int entriesCount) {
+    this.contentType = contentType;
+    this.entriesCount = entriesCount;
+  }
 
-    public CDAContentType getContentType() {
-        return contentType;
-    }
+  public CDAContentType getContentType() {
+    return contentType;
+  }
 
-    public int getEntriesCount() {
-        return entriesCount;
-    }
+  public int getEntriesCount() {
+    return entriesCount;
+  }
 }

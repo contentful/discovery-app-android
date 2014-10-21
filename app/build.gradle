@@ -59,3 +59,5 @@ if (f.exists()) {
     android.signingConfigs.release.storePassword = props["key.store.password"]
     android.signingConfigs.release.keyPassword = props["key.alias.password"]
 }
+
+apply from: rootProject.file('gradle/checkstyle.gradle')

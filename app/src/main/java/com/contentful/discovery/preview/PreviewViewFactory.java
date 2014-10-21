@@ -5,37 +5,36 @@ import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.contentful.discovery.ui.DisplayItem;
 
 /**
  * Abstract Preview View Factory.
  */
 public abstract class PreviewViewFactory<T extends AbsViewHolder> {
-    @SuppressWarnings("unchecked")
-    public T getView(Context context, View convertView, ViewGroup parent, DisplayItem displayItem, Object factoryKey) {
-        T viewHolder;
+  @SuppressWarnings("unchecked")
+  public T getView(Context context, View convertView, ViewGroup parent, DisplayItem displayItem,
+      Object factoryKey) {
+    T viewHolder;
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(getLayoutResId(), parent, false);
-            convertView.setTag(viewHolder = createViewHolder(factoryKey, convertView));
-        } else {
-            viewHolder = (T) convertView.getTag();
-        }
-
-        setViewData(viewHolder, displayItem);
-
-        return viewHolder;
+    if (convertView == null) {
+      convertView = LayoutInflater.from(context).inflate(getLayoutResId(), parent, false);
+      convertView.setTag(viewHolder = createViewHolder(factoryKey, convertView));
+    } else {
+      viewHolder = (T) convertView.getTag();
     }
 
-    @LayoutRes
-    protected abstract int getLayoutResId();
+    setViewData(viewHolder, displayItem);
 
-    protected abstract T createViewHolder(Object factoryKey, View v);
+    return viewHolder;
+  }
 
-    protected abstract void setViewData(T viewHolder, DisplayItem displayItem);
+  @LayoutRes protected abstract int getLayoutResId();
 
-    protected abstract int getItemViewType();
+  protected abstract T createViewHolder(Object factoryKey, View v);
 
-    public abstract void reset(T viewHolder);
+  protected abstract void setViewData(T viewHolder, DisplayItem displayItem);
+
+  protected abstract int getItemViewType();
+
+  public abstract void reset(T viewHolder);
 }

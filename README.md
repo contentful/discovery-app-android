@@ -1,5 +1,7 @@
 ## Discovery app
 
+[![Build Status](https://travis-ci.org/contentful/discovery-app-android.svg)](https://travis-ci.org/contentful/discovery-app-android/builds#)
+
 This app enables you to browse and preview your [Contentful][1] Spaces on Android. It is compatible with API 14 or higher, and released as open source under the [MIT license][2].
 
 Quick intro:

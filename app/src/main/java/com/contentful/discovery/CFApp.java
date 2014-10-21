@@ -6,16 +6,16 @@ import android.app.Application;
  * Application Class.
  */
 public class CFApp extends Application {
-    public static CFApp sInstance;
+  public static CFApp sInstance;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+  @Override
+  public void onCreate() {
+    super.onCreate();
 
-        sInstance = this;
-    }
+    sInstance = this;
+  }
 
-    public static CFApp getInstance() {
-        return sInstance;
-    }
+  public static CFApp getInstance() {
+    return sInstance;
+  }
 }

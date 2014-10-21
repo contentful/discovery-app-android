@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.contentful.discovery.loaders.TutorialLoader;
 import com.contentful.discovery.ui.TutorialView;
 
@@ -12,60 +11,60 @@ import com.contentful.discovery.ui.TutorialView;
  * TutorialAdapter.
  */
 public class TutorialAdapter extends PagerAdapter {
-    private static final int POS_VIDEO = 0;
+  private static final int POS_VIDEO = 0;
 
-    private Context context;
-    private TutorialLoader.Tutorial tutorial;
-    private Listener listener;
+  private Context context;
+  private TutorialLoader.Tutorial tutorial;
+  private Listener listener;
 
-    public interface Listener {
-        void onVideoClicked();
+  public interface Listener {
+    void onVideoClicked();
+  }
+
+  public TutorialAdapter(Context context) {
+    this.context = context;
+  }
+
+  @Override public int getCount() {
+    if (tutorial == null) {
+      return 0;
     }
 
-    public TutorialAdapter(Context context) {
-        this.context = context;
-    }
+    return tutorial.pages.size();
+  }
 
-    @Override
-    public int getCount() {
-        return tutorial == null ? 0 : tutorial.pages.size();
-    }
+  @Override public Object instantiateItem(ViewGroup container, int position) {
+    TutorialView tutorialView = new TutorialView(context);
+    tutorialView.setPage(tutorial.pages.get(position));
+    container.addView(tutorialView);
 
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        TutorialView tutorialView = new TutorialView(context);
-        tutorialView.setPage(tutorial.pages.get(position));
-        container.addView(tutorialView);
-
-        if (position == POS_VIDEO) {
-            tutorialView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onVideoClicked();
-                    }
-                }
-            });
+    if (position == POS_VIDEO) {
+      tutorialView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          if (listener != null) {
+            listener.onVideoClicked();
+          }
         }
-
-        return tutorialView;
+      });
     }
 
-    @Override
-    public boolean isViewFromObject(View view, Object o) {
-        return view == o;
-    }
+    return tutorialView;
+  }
 
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View) object);
-    }
+  @Override public boolean isViewFromObject(View view, Object o) {
+    return view == o;
+  }
 
-    public void setTutorial(TutorialLoader.Tutorial tutorial) {
-        this.tutorial = tutorial;
-    }
+  @Override public void destroyItem(ViewGroup container, int position, Object object) {
+    container.removeView((View) object);
+  }
 
-    public void setListener(Listener listener) {
-        this.listener = listener;
-    }
+  public void setTutorial(TutorialLoader.Tutorial tutorial) {
+    this.tutorial = tutorial;
+  }
+
+  public void setListener(Listener listener) {
+    this.listener = listener;
+  }
 }
