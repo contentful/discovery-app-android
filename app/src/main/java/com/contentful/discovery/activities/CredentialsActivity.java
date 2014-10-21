@@ -234,7 +234,7 @@ public class CredentialsActivity extends CFFragmentActivity {
         String body = getString(R.string.ad_error_message_generic);
         boolean retry = true;
 
-        if (!retrofitError.isNetworkError()) {
+        if (!RetrofitError.Kind.NETWORK.equals(retrofitError.getKind())) {
             int statusCode = retrofitError.getResponse().getStatus();
 
             switch (statusCode) {
