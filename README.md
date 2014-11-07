@@ -16,6 +16,19 @@ Quick intro:
 
 Google Maps Android API V2 requires that you create an API key which corresponds with your keystore used to sign the APK once it is compiled. Please refer to the [official documentation][3] and follow a few easy steps to create an API key with your debug/release keystores, depending on your usage. When required to specify your SHA1 fingerprint along with the package name, you should provide the package name of this project: "**com.contentful.discovery**". Once you have created your API key, please update [config.xml][4] accordingly.
 
+In the Android SDK Manager, ensure that the following are installed, and are updated to the latest available version:
+- Tools > Android SDK Platform-tools (rev 21 or above)
+- Tools > Android SDK Tools (rev 23.0.5 or above)
+- Tools > Android SDK Build-tools version 20
+- Tools > Android SDK Build-tools version 21 (rev 21.0.1 or above)
+- Android 5.0 > SDK Platform (API 21)
+- Extras > Android Support Repository
+- Extras > Android Support Library
+- Extras > Google Play services
+- Extras > Google Repository
+
+Also, make sure to have JDK 7 installed on your machine, and configured in your IDE.
+
 ## Screenshots
 
 ![Screenshots](screenshots/sc.jpg)
