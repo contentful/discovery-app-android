@@ -1,8 +1,8 @@
 package com.contentful.discovery.loaders;
 
 import com.contentful.discovery.api.ResourceList;
-import com.contentful.java.api.CDAClient;
-import com.contentful.java.model.CDAResource;
+import com.contentful.java.cda.CDAClient;
+import com.contentful.java.cda.model.CDAResource;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +18,7 @@ public class ResourceArrayLoader extends AbsResourceListLoader {
 
   @Override protected ResourceList performLoad(CDAClient client) {
     ResourceList resourceList = new ResourceList();
-    resourceList.resources = new ArrayList<CDAResource>();
+    resourceList.resources = new ArrayList<>();
 
     for (Object obj : resources) {
       // Filter out any unresolved Links

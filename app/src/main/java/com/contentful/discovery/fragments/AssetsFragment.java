@@ -20,7 +20,7 @@ import com.contentful.discovery.loaders.AssetsLoader;
 import com.contentful.discovery.ui.AbsListContainer;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.model.CDAAsset;
+import com.contentful.java.cda.model.CDAAsset;
 import java.util.ArrayList;
 
 /**

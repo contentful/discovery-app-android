@@ -56,7 +56,7 @@ public class HistoryActivity extends CFListActivity
   @Override public void onLoadFinished(Loader<LinkedHashSet<Credentials>> loader,
       LinkedHashSet<Credentials> credentials) {
 
-    adapter.setData(new ArrayList<Credentials>(credentials));
+    adapter.setData(new ArrayList<>(credentials));
     adapter.notifyDataSetInvalidated();
   }
 

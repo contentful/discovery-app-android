@@ -9,9 +9,9 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.api.ResourceList;
 import com.contentful.discovery.ui.FieldViewHolder;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.model.CDAContentType;
-import com.contentful.java.model.CDAEntry;
-import com.contentful.java.model.CDAResource;
+import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.model.CDAEntry;
+import com.contentful.java.cda.model.CDAResource;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 

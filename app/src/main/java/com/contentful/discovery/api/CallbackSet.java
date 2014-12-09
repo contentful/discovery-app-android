@@ -1,12 +1,12 @@
 package com.contentful.discovery.api;
 
-import com.contentful.java.api.CDACallback;
+import com.contentful.java.cda.CDACallback;
 import java.util.HashMap;
 import java.util.HashSet;
 
 /**
  * CallbackSet.
- * A thread-safe container of {@link com.contentful.java.api.CDACallback} instances.
+ * A thread-safe container of {@link com.contentful.java.cda.CDACallback} instances.
  */
 public class CallbackSet {
   private final HashSet<CDACallback> data;
@@ -14,8 +14,8 @@ public class CallbackSet {
   private final Object lock = new Object();
 
   public CallbackSet() {
-    this.data = new HashSet<CDACallback>();
-    this.tags = new HashMap<String, HashSet<CDACallback>>();
+    this.data = new HashSet<>();
+    this.tags = new HashMap<>();
   }
 
   public <T extends CDACallback> T add(T callback) {
@@ -31,7 +31,7 @@ public class CallbackSet {
       HashSet<CDACallback> set = tags.get(tag);
 
       if (set == null) {
-        set = new HashSet<CDACallback>();
+        set = new HashSet<>();
         tags.put(tag, set);
       }
 

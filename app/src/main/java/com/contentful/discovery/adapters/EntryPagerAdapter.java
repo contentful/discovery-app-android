@@ -7,8 +7,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.contentful.discovery.R;
 import com.contentful.discovery.fragments.EntryPreviewFragment;
 import com.contentful.discovery.preview.EntryListFragment;
-import com.contentful.java.model.CDAContentType;
-import com.contentful.java.model.CDAEntry;
+import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.model.CDAEntry;
 import java.util.Map;
 
 /**

@@ -1,7 +1,7 @@
 package com.contentful.discovery.api;
 
-import com.contentful.java.model.CDAContentType;
-import com.contentful.java.model.CDAResource;
+import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.model.CDAResource;
 import java.util.List;
 import java.util.Map;
 

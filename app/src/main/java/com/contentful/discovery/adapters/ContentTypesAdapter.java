@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ContentTypesAdapter extends BaseAdapter {
   private final Context context;
 
-  private ArrayList<ContentTypeWrapper> data = new ArrayList<ContentTypeWrapper>();
+  private ArrayList<ContentTypeWrapper> data = new ArrayList<>();
 
   public ContentTypesAdapter(Context context) {
     this.context = context;

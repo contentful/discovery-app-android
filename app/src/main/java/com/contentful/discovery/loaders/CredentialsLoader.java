@@ -25,7 +25,7 @@ public class CredentialsLoader extends AbsAsyncTaskLoader<LinkedHashSet<Credenti
     try {
       cursor = db.query(CredentialsTable.NAME, columns, null, null, null, null, order);
       if (cursor.moveToFirst()) {
-        loadResult = new LinkedHashSet<Credentials>();
+        loadResult = new LinkedHashSet<>();
         int spaceNameIndex = cursor.getColumnIndex(CredentialsTable.Columns.SPACE_NAME);
         int spaceIndex = cursor.getColumnIndex(CredentialsTable.Columns.SPACE);
         int tokenIndex = cursor.getColumnIndex(CredentialsTable.Columns.TOKEN);

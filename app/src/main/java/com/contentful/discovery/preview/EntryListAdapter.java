@@ -7,13 +7,13 @@ import android.widget.BaseAdapter;
 import com.contentful.discovery.R;
 import com.contentful.discovery.ui.FieldViewHolder;
 import com.contentful.discovery.utils.ViewHelper;
-import com.contentful.java.model.CDAContentType;
-import com.contentful.java.model.CDAEntry;
+import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.model.CDAEntry;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.contentful.java.lib.Constants.CDAFieldType;
+import static com.contentful.java.cda.Constants.CDAFieldType;
 
 /**
  * Entry List Adapter.

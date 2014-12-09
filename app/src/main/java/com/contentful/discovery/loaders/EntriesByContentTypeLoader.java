@@ -2,11 +2,11 @@ package com.contentful.discovery.loaders;
 
 import com.contentful.discovery.api.CFClient;
 import com.contentful.discovery.api.ResourceList;
-import com.contentful.java.api.CDAClient;
-import com.contentful.java.model.CDAArray;
-import com.contentful.java.model.CDAContentType;
-import com.contentful.java.model.CDAEntry;
-import com.contentful.java.model.CDAResource;
+import com.contentful.java.cda.CDAClient;
+import com.contentful.java.cda.model.CDAArray;
+import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.model.CDAEntry;
+import com.contentful.java.cda.model.CDAResource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import retrofit.RetrofitError;
@@ -28,7 +28,7 @@ public class EntriesByContentTypeLoader extends AbsResourceListLoader {
       ResourceList resourceList = new ResourceList();
 
       // Prepare query
-      HashMap<String, String> query = new HashMap<String, String>();
+      HashMap<String, String> query = new HashMap<>();
       query.put("content_type", (String) contentType.getSys().get("id"));
 
       // Set the locale if non-default locale is currently configured
@@ -39,8 +39,8 @@ public class EntriesByContentTypeLoader extends AbsResourceListLoader {
       }
 
       // Make the request
-      CDAArray cdaArray = client.fetchEntriesMatchingBlocking(query);
-      resourceList.resources = new ArrayList<CDAResource>();
+      CDAArray cdaArray = client.entries().fetchAll(query);
+      resourceList.resources = new ArrayList<>();
 
       // Prepare the result
       for (CDAResource res : cdaArray.getItems()) {

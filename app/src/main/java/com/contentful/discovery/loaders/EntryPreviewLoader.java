@@ -2,10 +2,10 @@ package com.contentful.discovery.loaders;
 
 import com.contentful.discovery.ui.DisplayItem;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.lib.Constants;
-import com.contentful.java.model.CDAContentType;
-import com.contentful.java.model.CDAEntry;
-import com.contentful.java.model.CDAResource;
+import com.contentful.java.cda.Constants;
+import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.model.CDAEntry;
+import com.contentful.java.cda.model.CDAResource;
 import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class EntryPreviewLoader extends AbsAsyncTaskLoader<List<DisplayItem>> {
   }
 
   @Override protected List<DisplayItem> performLoad() {
-    List<DisplayItem> tmp = new ArrayList<DisplayItem>();
+    List<DisplayItem> tmp = new ArrayList<>();
     List<Map> fields = contentType.getFields();
     MarkdownProcessor processor = new MarkdownProcessor();
 

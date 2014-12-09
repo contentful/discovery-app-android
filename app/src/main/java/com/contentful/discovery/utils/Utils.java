@@ -13,9 +13,9 @@ import android.widget.ImageView;
 import com.contentful.discovery.CFApp;
 import com.contentful.discovery.R;
 import com.contentful.discovery.fragments.TutorialFragment;
-import com.contentful.java.model.CDAAsset;
-import com.contentful.java.model.CDAContentType;
-import com.contentful.java.model.CDAEntry;
+import com.contentful.java.cda.model.CDAAsset;
+import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.model.CDAEntry;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import java.io.IOException;
@@ -42,7 +42,7 @@ public class Utils {
   public static final String FONT_LATO_BOLD = "fonts/lato_bold.ttf";
 
   // Loaders
-  private static final LinkedHashMap<Class, Integer> LOADERS = new LinkedHashMap<Class, Integer>();
+  private static final LinkedHashMap<Class, Integer> LOADERS = new LinkedHashMap<>();
 
   // Mime Types
   private static HashMap<String, String> mimeTypesMap;
@@ -112,7 +112,7 @@ public class Utils {
       is = context.getResources().openRawResource(R.raw.file_groups);
       String data = IOUtils.toString(is);
       JSONObject jsonObject = new JSONObject(data);
-      mimeTypesMap = new HashMap<String, String>();
+      mimeTypesMap = new HashMap<>();
 
       Iterator<String> keys = jsonObject.keys();
 
@@ -126,9 +126,7 @@ public class Utils {
           mimeTypesMap.put((String) item.get("type"), key);
         }
       }
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (JSONException e) {
+    } catch (IOException | JSONException e) {
       e.printStackTrace();
     } finally {
       if (is != null) {
