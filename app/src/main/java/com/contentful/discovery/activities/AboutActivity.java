@@ -26,7 +26,7 @@ public class AboutActivity extends CFFragmentActivity {
   static {
     CFApp context = CFApp.getInstance();
 
-    sLinks = new SparseArray<String>();
+    sLinks = new SparseArray<>();
     sLinks.put(R.id.btn_faq, context.getString(R.string.url_faq));
     sLinks.put(R.id.btn_feedback, context.getString(R.string.url_feedback));
     sLinks.put(R.id.btn_contact, context.getString(R.string.url_contact));

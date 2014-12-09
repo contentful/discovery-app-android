@@ -2,10 +2,10 @@ package com.contentful.discovery.loaders;
 
 import com.contentful.discovery.api.CFClient;
 import com.contentful.discovery.api.ContentTypeWrapper;
-import com.contentful.java.api.CDAClient;
-import com.contentful.java.model.CDAArray;
-import com.contentful.java.model.CDAContentType;
-import com.contentful.java.model.CDAResource;
+import com.contentful.java.cda.CDAClient;
+import com.contentful.java.cda.model.CDAArray;
+import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.model.CDAResource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import retrofit.RetrofitError;
@@ -19,22 +19,19 @@ public class ContentTypesLoader extends AbsAsyncTaskLoader<ArrayList<ContentType
     CDAClient client = CFClient.getClient();
 
     try {
-      ArrayList<CDAResource> items = client.fetchContentTypesBlocking().getItems();
-      ArrayList<ContentTypeWrapper> tmp = new ArrayList<ContentTypeWrapper>();
+      ArrayList<CDAResource> items = client.contentTypes().fetchAll().getItems();
+      ArrayList<ContentTypeWrapper> tmp = new ArrayList<>();
 
       if (items.size() > 0) {
         for (CDAResource res : items) {
           CDAContentType cdaContentType = (CDAContentType) res;
 
           // Entries count
-          HashMap<String, String> query = new HashMap<String, String>();
+          HashMap<String, String> query = new HashMap<>();
           query.put("content_type", (String) cdaContentType.getSys().get("id"));
           query.put("limit", "1");
-
-          CDAArray entries = client.fetchEntriesMatchingBlocking(query);
-
+          CDAArray entries = client.entries().fetchAll(query);
           ContentTypeWrapper ct = new ContentTypeWrapper(cdaContentType, entries.getTotal());
-
           tmp.add(ct);
         }
       }

@@ -14,16 +14,16 @@ import com.contentful.discovery.activities.TextPreviewActivity;
 import com.contentful.discovery.fragments.CFListFragment;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.lib.Constants;
-import com.contentful.java.model.CDAContentType;
-import com.contentful.java.model.CDAEntry;
-import com.contentful.java.model.CDAResource;
+import com.contentful.java.cda.Constants;
+import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.model.CDAEntry;
+import com.contentful.java.cda.model.CDAResource;
 import com.google.android.gms.maps.model.LatLng;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.contentful.java.lib.Constants.CDAFieldType;
+import static com.contentful.java.cda.Constants.CDAFieldType;
 
 /**
  * Entry List Fragment.
@@ -59,7 +59,7 @@ public class EntryListFragment extends CFListFragment {
     contentType = Utils.getContentTypeForEntry(contentTypesMap, entry);
 
     // Content Type fields
-    contentTypesFields = new HashMap<String, Map>();
+    contentTypesFields = new HashMap<>();
 
     for (Map f : contentType.getFields()) {
       contentTypesFields.put((String) f.get("id"), f);

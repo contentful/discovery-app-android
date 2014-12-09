@@ -18,9 +18,8 @@ Google Maps Android API V2 requires that you create an API key which corresponds
 
 In the Android SDK Manager, ensure that the following are installed, and are updated to the latest available version:
 - Tools > Android SDK Platform-tools (rev 21 or above)
-- Tools > Android SDK Tools (rev 23.0.5 or above)
-- Tools > Android SDK Build-tools version 20
-- Tools > Android SDK Build-tools version 21 (rev 21.0.1 or above)
+- Tools > Android SDK Tools (rev 24 or above)
+- Tools > Android SDK Build-tools version 21 (rev 21.1.1 or above)
 - Android 5.0 > SDK Platform (API 21)
 - Extras > Android Support Repository
 - Extras > Android Support Library

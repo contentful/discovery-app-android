@@ -20,7 +20,7 @@ public class HistoryAdapter extends BaseAdapter {
   private static final String DATE_PATTERN = "EEE', 'MMM dd yyyy";
 
   private final Context context;
-  private ArrayList<Credentials> data = new ArrayList<Credentials>();
+  private ArrayList<Credentials> data = new ArrayList<>();
 
   public HistoryAdapter(Context context) {
     this.context = context;

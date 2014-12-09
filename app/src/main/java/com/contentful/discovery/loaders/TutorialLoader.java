@@ -3,9 +3,9 @@ package com.contentful.discovery.loaders;
 import com.contentful.discovery.CFApp;
 import com.contentful.discovery.R;
 import com.contentful.discovery.api.CFDiscoveryClient;
-import com.contentful.java.model.CDAArray;
-import com.contentful.java.model.CDAAsset;
-import com.contentful.java.model.CDAEntry;
+import com.contentful.java.cda.model.CDAArray;
+import com.contentful.java.cda.model.CDAAsset;
+import com.contentful.java.cda.model.CDAEntry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import retrofit.RetrofitError;
@@ -17,10 +17,10 @@ public class TutorialLoader extends AbsAsyncTaskLoader<TutorialLoader.Tutorial> 
   @Override protected Tutorial performLoad() {
     try {
       Tutorial tmp = new Tutorial();
-      HashMap<String, String> query = new HashMap<String, String>();
+      HashMap<String, String> query = new HashMap<>();
       query.put("sys.id",
           CFApp.getInstance().getResources().getString(R.string.discovery_space_tutorial_id));
-      CDAArray array = CFDiscoveryClient.getClient().fetchEntriesMatchingBlocking(query);
+      CDAArray array = CFDiscoveryClient.getClient().entries().fetchAll(query);
       CDAEntry entry = (CDAEntry) array.getItems().get(0);
       CDAAsset bgAsset = (CDAAsset) entry.getFields().get("backgroundImageIPad");
 
@@ -28,7 +28,7 @@ public class TutorialLoader extends AbsAsyncTaskLoader<TutorialLoader.Tutorial> 
       tmp.backgroundImageUrl = bgAsset.getUrl();
 
       // Pages
-      tmp.pages = new ArrayList<Tutorial.Page>();
+      tmp.pages = new ArrayList<>();
       ArrayList<?> pages = (ArrayList<?>) entry.getFields().get("pages");
       for (Object p : pages) {
         if (p instanceof CDAEntry) {

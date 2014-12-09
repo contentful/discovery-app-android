@@ -11,10 +11,10 @@ import com.contentful.discovery.adapters.ResourcesAdapter;
 import com.contentful.discovery.api.ResourceList;
 import com.contentful.discovery.ui.AbsListContainer;
 import com.contentful.discovery.utils.IntentConsts;
-import com.contentful.java.model.CDAAsset;
-import com.contentful.java.model.CDAContentType;
-import com.contentful.java.model.CDAEntry;
-import com.contentful.java.model.CDAResource;
+import com.contentful.java.cda.model.CDAAsset;
+import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.model.CDAEntry;
+import com.contentful.java.cda.model.CDAResource;
 import java.io.Serializable;
 import java.util.Map;
 

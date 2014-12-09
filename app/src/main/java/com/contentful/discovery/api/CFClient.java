@@ -2,7 +2,7 @@ package com.contentful.discovery.api;
 
 import android.content.SharedPreferences;
 import com.contentful.discovery.utils.CFPrefs;
-import com.contentful.java.api.CDAClient;
+import com.contentful.java.cda.CDAClient;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -20,7 +20,7 @@ public class CFClient {
    *
    * @param space String representing the Space key.
    * @param token String representing the access token required to log in to the Space.
-   * @return {@link com.contentful.java.api.CDAClient} instance.
+   * @return {@link com.contentful.java.cda.CDAClient} instance.
    */
   public synchronized static CDAClient init(String space, String token) {
     SharedPreferences prefs = CFPrefs.getInstance();

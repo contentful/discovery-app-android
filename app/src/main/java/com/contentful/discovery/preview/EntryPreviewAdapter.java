@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.contentful.java.lib.Constants.CDAFieldType;
+import static com.contentful.java.cda.Constants.CDAFieldType;
 
 /**
  * Entry Preview Adapter.
@@ -21,7 +21,7 @@ public class EntryPreviewAdapter extends BaseAdapter {
   public static final int VIEW_TYPE_ARRAY = 2;
 
   private final Context context;
-  private List<DisplayItem> data = new ArrayList<DisplayItem>();
+  private List<DisplayItem> data = new ArrayList<>();
 
   // View Factories
   private static final GenericViewFactory VF_GENERIC = new GenericViewFactory();
@@ -30,7 +30,7 @@ public class EntryPreviewAdapter extends BaseAdapter {
 
   // View Factory mapping
   private HashMap<CDAFieldType, PreviewViewFactory> typeToViewFactoryMap =
-      new HashMap<CDAFieldType, PreviewViewFactory>();
+      new HashMap<>();
 
   public EntryPreviewAdapter(Context context) {
     this.context = context;

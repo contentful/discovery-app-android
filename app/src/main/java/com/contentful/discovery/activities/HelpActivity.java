@@ -12,15 +12,14 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.api.CFDiscoveryClient;
 import com.contentful.discovery.api.CallbackSet;
 import com.contentful.discovery.ui.CFTextView;
-import com.contentful.java.api.CDACallback;
-import com.contentful.java.model.CDAArray;
-import com.contentful.java.model.CDAAsset;
-import com.contentful.java.model.CDAEntry;
-import com.contentful.java.model.CDAResource;
+import com.contentful.java.cda.CDACallback;
+import com.contentful.java.cda.model.CDAArray;
+import com.contentful.java.cda.model.CDAAsset;
+import com.contentful.java.cda.model.CDAEntry;
+import com.contentful.java.cda.model.CDAResource;
 import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.List;
-import retrofit.client.Response;
 
 /**
  * Help Activity.
@@ -55,14 +54,14 @@ public class HelpActivity extends CFFragmentActivity {
   private void loadData() {
     emptyView.setVisibility(View.VISIBLE);
 
-    HashMap<String, String> query = new HashMap<String, String>();
+    HashMap<String, String> query = new HashMap<>();
     query.put("sys.id", getString(R.string.discovery_space_entry_id));
 
     CFDiscoveryClient.getClient()
-        .fetchEntriesMatching(query, callbacks.add(new CDACallback<CDAArray>() {
+        .entries().async().fetchAll(query, callbacks.add(new CDACallback<CDAArray>() {
               @SuppressWarnings("unchecked")
               @Override
-              protected void onSuccess(CDAArray array, Response response) {
+              protected void onSuccess(CDAArray array) {
                 for (CDAResource res : array.getItems()) {
                   CDAEntry entry = (CDAEntry) res;
 

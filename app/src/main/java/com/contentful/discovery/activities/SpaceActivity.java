@@ -12,8 +12,8 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.adapters.SpacePagerAdapter;
 import com.contentful.discovery.api.CFClient;
 import com.contentful.discovery.utils.IntentConsts;
-import com.contentful.java.model.CDASpace;
-import com.contentful.java.model.Locale;
+import com.contentful.java.cda.model.CDASpace;
+import com.contentful.java.cda.model.CDALocale;
 import java.util.ArrayList;
 
 /**
@@ -67,16 +67,16 @@ public class SpaceActivity extends AbsTabsActivity {
    * {@link com.contentful.discovery.api.CFClient#setLocale(String)} method.
    */
   private void selectLocale() {
-    ArrayList<String> list = new ArrayList<String>();
+    ArrayList<String> list = new ArrayList<>();
 
     // Construct a list of locales as strings
-    for (Locale locale : CFClient.getClient().getSpace().getLocales()) {
-      list.add(locale.code);
+    for (CDALocale locale : CFClient.getClient().getSpace().getLocales()) {
+      list.add(locale.getCode());
     }
 
     // Create an Adapter to be used with an AlertDialog
     final ArrayAdapter<String> adapter =
-        new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, list);
+        new ArrayAdapter<>(this, android.R.layout.select_dialog_item, list);
 
     // Create an show an AlertDialog
     new AlertDialog.Builder(this).setTitle(getString(R.string.select_locale))

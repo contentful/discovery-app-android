@@ -12,8 +12,8 @@ import com.contentful.discovery.preview.EntryPreviewAdapter;
 import com.contentful.discovery.ui.DisplayItem;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.model.CDAContentType;
-import com.contentful.java.model.CDAEntry;
+import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.model.CDAEntry;
 import java.util.List;
 
 /**

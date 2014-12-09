@@ -5,8 +5,8 @@ import android.support.v4.view.PagerAdapter;
 import com.contentful.discovery.adapters.EntryPagerAdapter;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.model.CDAContentType;
-import com.contentful.java.model.CDAEntry;
+import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.model.CDAEntry;
 import java.util.Map;
 
 /**

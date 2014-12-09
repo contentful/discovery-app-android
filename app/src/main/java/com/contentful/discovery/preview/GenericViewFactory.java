@@ -6,8 +6,8 @@ import com.contentful.discovery.CFApp;
 import com.contentful.discovery.R;
 import com.contentful.discovery.ui.DisplayItem;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.lib.Constants;
-import com.contentful.java.model.CDAAsset;
+import com.contentful.java.cda.Constants;
+import com.contentful.java.cda.model.CDAAsset;
 import com.squareup.picasso.Picasso;
 
 /**

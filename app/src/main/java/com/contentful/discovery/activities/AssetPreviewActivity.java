@@ -18,7 +18,7 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.adapters.AssetInfoAdapter;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.model.CDAAsset;
+import com.contentful.java.cda.model.CDAAsset;
 import org.apache.commons.lang3.StringUtils;
 
 /**

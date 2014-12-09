@@ -6,7 +6,7 @@ import com.contentful.discovery.api.ResourceList;
 import com.contentful.discovery.loaders.EntriesByContentTypeLoader;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.model.CDAContentType;
+import com.contentful.java.cda.model.CDAContentType;
 
 /**
  * Entries Activity.

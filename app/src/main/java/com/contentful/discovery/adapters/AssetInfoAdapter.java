@@ -10,7 +10,7 @@ import com.contentful.discovery.CFApp;
 import com.contentful.discovery.R;
 import com.contentful.discovery.ui.FieldViewHolder;
 import com.contentful.discovery.utils.ViewHelper;
-import com.contentful.java.model.CDAAsset;
+import com.contentful.java.cda.model.CDAAsset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -28,7 +28,7 @@ public class AssetInfoAdapter extends BaseAdapter {
   private final ArrayList<Pair<String, String>> fields;
 
   private final static HashSet<String> CLICKABLE_TITLES =
-      new HashSet<String>(Arrays.asList(new String[] {
+      new HashSet<>(Arrays.asList(new String[] {
           CFApp.getInstance().getString(R.string.asset_info_title),
           CFApp.getInstance().getString(R.string.asset_info_description)
       }));
@@ -36,32 +36,32 @@ public class AssetInfoAdapter extends BaseAdapter {
   public AssetInfoAdapter(Context context, CDAAsset asset) {
     this.context = context;
 
-    fields = new ArrayList<Pair<String, String>>();
+    fields = new ArrayList<>();
     Map assetFields = asset.getFields();
 
     // Title
-    fields.add(new Pair<String, String>(context.getString(R.string.asset_info_title),
+    fields.add(new Pair<>(context.getString(R.string.asset_info_title),
         (String) assetFields.get("title")));
 
     // Description
-    fields.add(new Pair<String, String>(context.getString(R.string.asset_info_description),
+    fields.add(new Pair<>(context.getString(R.string.asset_info_description),
         (String) assetFields.get("description")));
 
     // Creation Date
     DateTime createdAt = DateTime.parse((String) asset.getSys().get("createdAt"));
 
-    fields.add(new Pair<String, String>(context.getString(R.string.asset_info_created_at),
+    fields.add(new Pair<>(context.getString(R.string.asset_info_created_at),
         createdAt.toString(DateTimeFormat.forStyle("MM"))));
 
     // MIME Type
-    fields.add(new Pair<String, String>(context.getString(R.string.asset_info_mime_type),
+    fields.add(new Pair<>(context.getString(R.string.asset_info_mime_type),
         asset.getMimeType()));
 
     Double sizeInBytes =
         (Double) ((Map) ((Map) assetFields.get("file")).get("details")).get("size");
     String displaySize = FileUtils.byteCountToDisplaySize(sizeInBytes.longValue());
 
-    fields.add(new Pair<String, String>(context.getString(R.string.asset_info_size), displaySize));
+    fields.add(new Pair<>(context.getString(R.string.asset_info_size), displaySize));
   }
 
   @Override public int getCount() {

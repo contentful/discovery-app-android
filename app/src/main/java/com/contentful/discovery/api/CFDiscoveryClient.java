@@ -3,7 +3,7 @@ package com.contentful.discovery.api;
 import android.content.Context;
 import com.contentful.discovery.CFApp;
 import com.contentful.discovery.R;
-import com.contentful.java.api.CDAClient;
+import com.contentful.java.cda.CDAClient;
 
 /**
  * Shared Client to Demo Space.

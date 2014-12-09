@@ -33,13 +33,12 @@ import com.contentful.discovery.utils.CFPrefs;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
 import com.contentful.discovery.utils.ViewHelper;
-import com.contentful.java.api.CDACallback;
-import com.contentful.java.model.CDASpace;
+import com.contentful.java.cda.CDACallback;
+import com.contentful.java.cda.model.CDASpace;
 import com.squareup.picasso.Picasso;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 /**
  * Credentials Activity.
@@ -194,17 +193,17 @@ public class CredentialsActivity extends CFFragmentActivity {
     // Note that we're adding the CDACallback instance to our callbacks set, case we
     // would need to cancel the request in the future (i.e. onDestroy).
     CFClient.init(credentials.getSpace(), credentials.getAccessToken())
-        .fetchSpace(callbacks.add(new CDACallback<CDASpace>() {
-          @Override protected void onSuccess(CDASpace space, Response response) {
-            loginDialog.dismiss();
-            handleLoginSuccess(space, response, credentials);
-          }
+        .spaces().async().fetch(callbacks.add(new CDACallback<CDASpace>() {
+      @Override protected void onSuccess(CDASpace space) {
+        loginDialog.dismiss();
+        handleLoginSuccess(space, credentials);
+      }
 
-          @Override protected void onFailure(RetrofitError retrofitError) {
-            loginDialog.dismiss();
-            handleLoginFailure(retrofitError, credentials);
-          }
-        }));
+      @Override protected void onFailure(RetrofitError retrofitError) {
+        loginDialog.dismiss();
+        handleLoginFailure(retrofitError, credentials);
+      }
+    }));
   }
 
   private void handleLoginFailure(RetrofitError retrofitError, final Credentials credentials) {
@@ -255,7 +254,7 @@ public class CredentialsActivity extends CFFragmentActivity {
     builder.show();
   }
 
-  private void handleLoginSuccess(CDASpace space, Response response, Credentials credentials) {
+  private void handleLoginSuccess(CDASpace space, Credentials credentials) {
     // Invalidate options menu
     supportInvalidateOptionsMenu();
 
