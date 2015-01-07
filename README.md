@@ -34,7 +34,7 @@ Also, make sure to have JDK 7 installed on your machine, and configured in your 
 
 ## License
 
-Copyright (c) 2014 Contentful GmbH. See [LICENSE.txt][2] for further details.
+Copyright (c) 2015 Contentful GmbH. See [LICENSE.txt][2] for further details.
 
 
 [1]: https://www.contentful.com
