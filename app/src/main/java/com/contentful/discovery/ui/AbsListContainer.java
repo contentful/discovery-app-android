@@ -8,14 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import com.contentful.discovery.R;
 
 public abstract class AbsListContainer<T extends AbsListView> extends FrameLayout {
-  @InjectView(R.id.empty) ViewGroup emptyView;
-  @InjectView(R.id.extra_views_wrapper) ViewGroup extraViewsWrapper;
+  @Bind(R.id.empty) ViewGroup emptyView;
+  @Bind(R.id.extra_views_wrapper) ViewGroup extraViewsWrapper;
   T list;
   Listener listener;
 
@@ -40,7 +40,7 @@ public abstract class AbsListContainer<T extends AbsListView> extends FrameLayou
 
   private void init() {
     View.inflate(getContext(), R.layout.view_list_container, this);
-    ButterKnife.inject(this);
+    ButterKnife.bind(this);
 
     addView(list = inflateList(), 0);
 

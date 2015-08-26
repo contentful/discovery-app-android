@@ -19,8 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import com.contentful.discovery.R;
 import com.contentful.discovery.api.CFClient;
@@ -43,13 +43,12 @@ public class CredentialsActivity extends CFFragmentActivity {
   private static final int RC_HISTORY = 1;
   private boolean didLogin;
 
-  // Views
-  @InjectView(R.id.iv_background) ImageView ivBackground;
-  @InjectView(R.id.iv_logo) ImageView ivLogo;
-  @InjectView(R.id.btn_secondary) Button btnSecondary;
-  @InjectView(R.id.et_space) EditText etSpace;
-  @InjectView(R.id.et_token) EditText etToken;
-  @InjectView(R.id.btn_go) Button btnGo;
+  @Bind(R.id.iv_background) ImageView ivBackground;
+  @Bind(R.id.iv_logo) ImageView ivLogo;
+  @Bind(R.id.btn_secondary) Button btnSecondary;
+  @Bind(R.id.et_space) EditText etSpace;
+  @Bind(R.id.et_token) EditText etToken;
+  @Bind(R.id.btn_go) Button btnGo;
 
   // Animations stuff
   private Handler handler;
@@ -67,7 +66,7 @@ public class CredentialsActivity extends CFFragmentActivity {
     didLogin = CFPrefs.didLogin();
 
     // Inject views
-    ButterKnife.inject(this);
+    ButterKnife.bind(this);
 
     // Callbacks
     callbacks = new CallbackSet();

@@ -6,8 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import butterknife.Bind;
+import butterknife.BindDimen;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.contentful.discovery.R;
 import com.contentful.discovery.api.CFDiscoveryClient;
 import com.contentful.discovery.api.CallbackSet;
@@ -20,8 +21,9 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class HelpActivity extends CFFragmentActivity {
-  @InjectView(R.id.container) ViewGroup container;
-  @InjectView(R.id.empty) View emptyView;
+  @Bind(R.id.container) ViewGroup container;
+  @Bind(R.id.empty) View emptyView;
+  @BindDimen(R.dimen.help_title_font_size) int helpTitleFontSize;
 
   private CallbackSet callbacks;
 
@@ -31,7 +33,7 @@ public class HelpActivity extends CFFragmentActivity {
     setContentView(R.layout.activity_help);
 
     // Inject views
-    ButterKnife.inject(this);
+    ButterKnife.bind(this);
 
     // Callbacks
     callbacks = new CallbackSet();
@@ -52,7 +54,9 @@ public class HelpActivity extends CFFragmentActivity {
     callbacks.add(CFDiscoveryClient.getClient()
         .fetch(CDAEntry.class)
         .one(getString(R.string.discovery_space_entry_id), new CDACallback<CDAEntry>() {
-          @Override protected void onSuccess(CDAEntry entry) {
+          @Override
+          @SuppressWarnings("unchecked")
+          protected void onSuccess(CDAEntry entry) {
             insertTitle((String) entry.getField("title"));
 
             //noinspection unchecked
@@ -67,13 +71,13 @@ public class HelpActivity extends CFFragmentActivity {
   }
 
   class HelpItemViewHolder {
-    @InjectView(R.id.tv_text) TextView tvText;
-    @InjectView(R.id.iv_photo) ImageView ivPhoto;
+    @Bind(R.id.tv_text) TextView tvText;
+    @Bind(R.id.iv_photo) ImageView ivPhoto;
     View rootView;
 
     HelpItemViewHolder(View v) {
       this.rootView = v;
-      ButterKnife.inject(this, v);
+      ButterKnife.bind(this, v);
     }
   }
 
@@ -104,10 +108,7 @@ public class HelpActivity extends CFFragmentActivity {
   private void insertTitle(String text) {
     CFTextView textView = getTitleView(text);
     textView.setFont(true);
-
-    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-        getResources().getDimensionPixelSize(R.dimen.help_title_font_size));
-
+    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, helpTitleFontSize);
     container.addView(textView);
   }
 }

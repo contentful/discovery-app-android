@@ -91,7 +91,6 @@ public class AssetsFragment extends Fragment
   }
 
   private void initGridView() {
-
     gridView = new GridView(getActivity());
 
     gridView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
