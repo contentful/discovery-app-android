@@ -4,9 +4,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.contentful.discovery.CFApp;
 
-/**
- * Shared Preferences wrapper.
- */
 public class CFPrefs {
   private CFPrefs() {
   }

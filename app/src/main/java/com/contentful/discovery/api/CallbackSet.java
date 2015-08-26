@@ -4,10 +4,6 @@ import com.contentful.java.cda.CDACallback;
 import java.util.HashMap;
 import java.util.HashSet;
 
-/**
- * CallbackSet.
- * A thread-safe container of {@link com.contentful.java.cda.CDACallback} instances.
- */
 public class CallbackSet {
   private final HashSet<CDACallback> data;
   private final HashMap<String, HashSet<CDACallback>> tags;

@@ -2,9 +2,6 @@ package com.contentful.discovery.db.schema;
 
 import android.provider.BaseColumns;
 
-/**
- * Credentials DB table.
- */
 public final class CredentialsTable {
   private CredentialsTable() {
   }

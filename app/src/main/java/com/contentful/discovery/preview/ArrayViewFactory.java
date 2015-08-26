@@ -9,13 +9,9 @@ import android.widget.TextView;
 import com.contentful.discovery.R;
 import com.contentful.discovery.ui.DisplayItem;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.cda.Constants;
-import com.contentful.java.cda.model.CDAAsset;
-import com.contentful.java.cda.model.CDAEntry;
+import com.contentful.java.cda.CDAAsset;
+import com.contentful.java.cda.CDAEntry;
 
-/**
- * Array View Factory.
- */
 public class ArrayViewFactory extends PreviewViewFactory<ArrayViewHolder> {
   @Override protected int getLayoutResId() {
     return R.layout.view_preview_array;
@@ -28,12 +24,12 @@ public class ArrayViewFactory extends PreviewViewFactory<ArrayViewHolder> {
   @Override protected void setViewData(ArrayViewHolder viewHolder, DisplayItem displayItem) {
     viewHolder.tvTitle.setText(displayItem.key);
 
-    if (Constants.CDAFieldType.Link.equals(displayItem.arrayItemType)) {
+    if ("Link".equals(displayItem.arrayItemType)) {
       // Link
-      if (Constants.CDAResourceType.Asset.equals(displayItem.arrayLinkType)) {
+      if ("Asset".equals(displayItem.arrayLinkType)) {
         // Array of Assets
         setArrayOfAssets(viewHolder, displayItem);
-      } else if (Constants.CDAResourceType.Entry.equals(displayItem.arrayLinkType)) {
+      } else if ("Entry".equals(displayItem.arrayLinkType)) {
         // Array of Entries
         setArrayOfEntries(viewHolder, displayItem);
       }
@@ -43,9 +39,6 @@ public class ArrayViewFactory extends PreviewViewFactory<ArrayViewHolder> {
     }
   }
 
-  /**
-   * Array of Assets.
-   */
   private void setArrayOfAssets(ArrayViewHolder viewHolder, DisplayItem displayItem) {
     for (Object node : displayItem.array) {
       // Ensure Link is resolved
@@ -56,31 +49,22 @@ public class ArrayViewFactory extends PreviewViewFactory<ArrayViewHolder> {
     }
   }
 
-  /**
-   * Array of Entries.
-   */
   private void setArrayOfEntries(ArrayViewHolder viewHolder, DisplayItem displayItem) {
     for (Object node : displayItem.array) {
       // Ensure Link is resolved
       if (node instanceof CDAEntry) {
         viewHolder.wrapper.addView(
-            createTextView(viewHolder.rootView.getContext(), ((CDAEntry) node).getSys().get("id")));
+            createTextView(viewHolder.rootView.getContext(), ((CDAEntry) node).id()));
       }
     }
   }
 
-  /**
-   * Array of generic type.
-   */
   private void setArrayOfGenericType(ArrayViewHolder viewHolder, DisplayItem displayItem) {
     for (Object node : displayItem.array) {
       viewHolder.wrapper.addView(createTextView(viewHolder.rootView.getContext(), node));
     }
   }
 
-  /**
-   * Create view for Asset.
-   */
   private View createAssetView(Context context, CDAAsset asset) {
     ImageView imageView = new ImageView(context);
 

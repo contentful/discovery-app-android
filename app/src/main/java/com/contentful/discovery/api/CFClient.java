@@ -5,9 +5,6 @@ import com.contentful.discovery.utils.CFPrefs;
 import com.contentful.java.cda.CDAClient;
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * Client.
- */
 public class CFClient {
   private static CDAClient sInstance;
   private static String locale;
@@ -30,7 +27,7 @@ public class CFClient {
         .putString(CFPrefs.KEY_ACCESS_TOKEN, token)
         .apply();
 
-    sInstance = new CDAClient.Builder().setSpaceKey(space).setAccessToken(token).build();
+    sInstance = CDAClient.builder().setSpace(space).setToken(token).build();
 
     locale = null;
 

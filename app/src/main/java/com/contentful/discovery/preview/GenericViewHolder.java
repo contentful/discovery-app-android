@@ -7,9 +7,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.contentful.discovery.R;
 
-/**
- * Generic View Holder.
- */
 public class GenericViewHolder extends AbsViewHolder {
   @InjectView(R.id.tv_title) TextView tvTitle;
   @InjectView(R.id.tv_body) TextView tvBody;

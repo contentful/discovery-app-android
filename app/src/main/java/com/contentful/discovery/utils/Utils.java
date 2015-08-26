@@ -13,9 +13,9 @@ import android.widget.ImageView;
 import com.contentful.discovery.CFApp;
 import com.contentful.discovery.R;
 import com.contentful.discovery.fragments.TutorialFragment;
-import com.contentful.java.cda.model.CDAAsset;
-import com.contentful.java.cda.model.CDAContentType;
-import com.contentful.java.cda.model.CDAEntry;
+import com.contentful.java.cda.CDAAsset;
+import com.contentful.java.cda.CDAContentType;
+import com.contentful.java.cda.CDAEntry;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import java.io.IOException;
@@ -30,9 +30,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Utils.
- */
 public class Utils {
   private Utils() {
   }
@@ -85,7 +82,7 @@ public class Utils {
       loadMimeTypes(context);
     }
 
-    String drawableName = mimeTypesMap.get(asset.getMimeType());
+    String drawableName = mimeTypesMap.get(asset.mimeType());
     Integer thumbnailResId = null;
 
     if (drawableName == null) {
@@ -154,7 +151,7 @@ public class Utils {
     boolean hasExplicitDimensions = width != null && height != null;
 
     if (thumbnailResId == null) {
-      String url = asset.getUrl();
+      String url = "http:" + asset.url();
 
       if (hasExplicitDimensions) {
         if (url.contains("?")) {
@@ -239,7 +236,7 @@ public class Utils {
   public static CDAContentType getContentTypeForEntry(Map<String, CDAContentType> contentTypesMap,
       CDAEntry entry) {
 
-    Map contentType = (Map) entry.getSys().get("contentType");
+    Map contentType = entry.getAttribute("contentType");
     String contentTypeId = (String) ((Map) contentType.get("sys")).get("id");
 
     return contentTypesMap.get(contentTypeId);
@@ -257,10 +254,10 @@ public class Utils {
   }
 
   public static String getTitleForEntry(CDAEntry entry, CDAContentType contentType) {
-    String displayField = contentType.getDisplayField();
+    String displayField = contentType.displayField();
 
     if (!StringUtils.isBlank(displayField)) {
-      String result = (String) entry.getFields().get(displayField);
+      String result = entry.getField(displayField);
 
       if (StringUtils.isNotBlank(result)) {
         return result;

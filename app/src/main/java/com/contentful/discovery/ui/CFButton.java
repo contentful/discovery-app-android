@@ -6,9 +6,6 @@ import android.util.AttributeSet;
 import android.widget.Button;
 import com.contentful.discovery.utils.Utils;
 
-/**
- * CF Button.
- */
 public class CFButton extends Button {
   public CFButton(Context context) {
     super(context);

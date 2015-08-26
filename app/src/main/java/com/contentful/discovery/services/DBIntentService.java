@@ -11,10 +11,6 @@ import com.contentful.discovery.db.schema.CredentialsTable;
 import com.contentful.discovery.utils.IntentConsts;
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * Database IntentService.
- * An IntentService to use for performing operations against the local SQLite database.
- */
 public class DBIntentService extends IntentService {
   public static Intent withAction(String action) {
     return new Intent(CFApp.getInstance(), DBIntentService.class).setAction(action);
@@ -32,9 +28,6 @@ public class DBIntentService extends IntentService {
     }
   }
 
-  /**
-   * Saves a set of Credentials to the database.
-   */
   private void saveCredentials(Intent intent) {
     Credentials credentials = intent.getParcelableExtra(IntentConsts.EXTRA_CREDENTIALS);
 

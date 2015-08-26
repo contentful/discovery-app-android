@@ -7,10 +7,6 @@ import com.contentful.discovery.db.DBHelper;
 import com.contentful.discovery.db.schema.CredentialsTable;
 import java.util.LinkedHashSet;
 
-/**
- * Credentials Loader.
- * Use to load all CDA Content Types from the current Space.
- */
 public class CredentialsLoader extends AbsAsyncTaskLoader<LinkedHashSet<Credentials>> {
   @Override protected LinkedHashSet<Credentials> performLoad() {
     SQLiteDatabase db = DBHelper.getInstance().getReadableDatabase();

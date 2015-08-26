@@ -29,9 +29,6 @@ import com.contentful.discovery.utils.Utils;
 import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
 
-/**
- * TutorialFragment.
- */
 public class TutorialFragment extends Fragment implements TutorialAdapter.Listener {
   @InjectView(R.id.iv_background) ImageView ivBackground;
   @InjectView(R.id.view_pager) ViewPager viewPager;

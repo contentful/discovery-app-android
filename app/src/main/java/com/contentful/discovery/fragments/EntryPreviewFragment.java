@@ -12,14 +12,10 @@ import com.contentful.discovery.preview.EntryPreviewAdapter;
 import com.contentful.discovery.ui.DisplayItem;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.cda.model.CDAContentType;
-import com.contentful.java.cda.model.CDAEntry;
+import com.contentful.java.cda.CDAContentType;
+import com.contentful.java.cda.CDAEntry;
 import java.util.List;
 
-/**
- * Entry Preview Fragment.
- * Displays a single Entry in preview mode.
- */
 public class EntryPreviewFragment extends CFListFragment
     implements LoaderManager.LoaderCallbacks<List<DisplayItem>> {
 

@@ -17,9 +17,6 @@ import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
 import java.util.ArrayList;
 
-/**
- * Content Types Fragment.
- */
 public class ContentTypesFragment extends CFListFragment
     implements LoaderManager.LoaderCallbacks<ArrayList<ContentTypeWrapper>>,
     AbsListContainer.Listener {

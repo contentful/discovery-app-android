@@ -7,13 +7,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.contentful.discovery.R;
 import com.contentful.discovery.fragments.EntryPreviewFragment;
 import com.contentful.discovery.preview.EntryListFragment;
-import com.contentful.java.cda.model.CDAContentType;
-import com.contentful.java.cda.model.CDAEntry;
+import com.contentful.java.cda.CDAContentType;
+import com.contentful.java.cda.CDAEntry;
 import java.util.Map;
 
-/**
- * Entry PagerAdapter.
- */
 public class EntryPagerAdapter extends FragmentPagerAdapter {
   private final Context context;
   private final CDAEntry entry;

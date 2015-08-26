@@ -6,13 +6,9 @@ import com.contentful.discovery.CFApp;
 import com.contentful.discovery.R;
 import com.contentful.discovery.ui.DisplayItem;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.cda.Constants;
-import com.contentful.java.cda.model.CDAAsset;
+import com.contentful.java.cda.CDAAsset;
 import com.squareup.picasso.Picasso;
 
-/**
- * Generic View Factory.
- */
 public class GenericViewFactory extends PreviewViewFactory<GenericViewHolder> {
   @Override protected int getLayoutResId() {
     return R.layout.view_preview_item;
@@ -23,9 +19,9 @@ public class GenericViewFactory extends PreviewViewFactory<GenericViewHolder> {
   }
 
   @Override protected void setViewData(GenericViewHolder viewHolder, DisplayItem displayItem) {
-    if (Constants.CDAFieldType.Link.equals(displayItem.fieldType)) {
+    if ("Link".equals(displayItem.fieldType)) {
       setLinkData(viewHolder, displayItem);
-    } else if (Constants.CDAFieldType.Location.equals(displayItem.fieldType)) {
+    } else if ("Location".equals(displayItem.fieldType)) {
       setLocationData(viewHolder, displayItem);
     } else {
       setPairData(viewHolder, displayItem);
@@ -62,7 +58,7 @@ public class GenericViewFactory extends PreviewViewFactory<GenericViewHolder> {
 
       viewHolder.ivThumbnail.setVisibility(View.VISIBLE);
     } else {
-      setTextAndShow(viewHolder.tvBody, (String) displayItem.resource.getSys().get("id"));
+      setTextAndShow(viewHolder.tvBody, displayItem.resource.id());
     }
   }
 

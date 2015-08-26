@@ -14,25 +14,20 @@ import com.contentful.discovery.activities.TextPreviewActivity;
 import com.contentful.discovery.fragments.CFListFragment;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.cda.Constants;
-import com.contentful.java.cda.model.CDAContentType;
-import com.contentful.java.cda.model.CDAEntry;
-import com.contentful.java.cda.model.CDAResource;
+import com.contentful.java.cda.CDAContentType;
+import com.contentful.java.cda.CDAEntry;
+import com.contentful.java.cda.CDAField;
+import com.contentful.java.cda.CDAResource;
 import com.google.android.gms.maps.model.LatLng;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.contentful.java.cda.Constants.CDAFieldType;
-
-/**
- * Entry List Fragment.
- */
 public class EntryListFragment extends CFListFragment {
   private CDAEntry entry;
   private CDAContentType contentType;
   private EntryListAdapter adapter;
-  private Map<String, Map> contentTypesFields;
+  private Map<String, CDAField> contentTypesFields;
   private Map<String, CDAContentType> contentTypesMap;
 
   public static EntryListFragment newInstance(CDAEntry entry,
@@ -61,8 +56,8 @@ public class EntryListFragment extends CFListFragment {
     // Content Type fields
     contentTypesFields = new HashMap<>();
 
-    for (Map f : contentType.getFields()) {
-      contentTypesFields.put((String) f.get("id"), f);
+    for (CDAField f : contentType.fields()) {
+      contentTypesFields.put(f.id(), f);
     }
 
     // Adapter
@@ -77,32 +72,29 @@ public class EntryListFragment extends CFListFragment {
   @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
     super.onItemClick(parent, view, position, id);
 
-    Map item = adapter.getItem(position);
-    CDAFieldType fieldType = CDAFieldType.valueOf((String) item.get("type"));
-    Object value = entry.getFields().get(item.get("id"));
+    CDAField item = adapter.getItem(position);
+    String fieldType = item.type();
+    Object value = entry.getField(item.id());
 
     if (value != null) {
-      if (CDAFieldType.Object.equals(fieldType)
-          || CDAFieldType.Text.equals(fieldType)
-          || CDAFieldType.Symbol.equals(fieldType)) {
+      if ("Object".equals(fieldType)
+          || "Text".equals(fieldType)
+          || "Symbol".equals(fieldType)) {
         onTextItemClicked(item, value);
-      } else if (CDAFieldType.Location.equals(fieldType)) {
+      } else if ("Location".equals(fieldType)) {
         onLocationItemClicked(item, value);
-      } else if (CDAFieldType.Link.equals(fieldType)) {
+      } else if ("Link".equals(fieldType)) {
         onLinkItemClicked(item, value);
-      } else if (CDAFieldType.Array.equals(fieldType)) {
+      } else if ("Array".equals(fieldType)) {
         onArrayItemClicked(item, value);
       }
     }
   }
 
-  /**
-   * Click handler for a field of type {@code Array}.
-   */
-  private void onArrayItemClicked(Map item, Object value) {
-    String id = (String) item.get("id");
+  private void onArrayItemClicked(CDAField item, Object value) {
+    String id = item.id();
 
-    Map items = (Map) contentTypesFields.get(id).get("items");
+    Map<String, Object> items = contentTypesFields.get(id).items();
     String arrayItemsType = (String) items.get("type");
 
     if ("Link".equalsIgnoreCase(arrayItemsType)) {
@@ -120,38 +112,34 @@ public class EntryListFragment extends CFListFragment {
    * Click handler for a field of type {@code Location}.
    */
   @SuppressWarnings("unchecked")
-  private void onLocationItemClicked(Map item, Object value) {
+  private void onLocationItemClicked(CDAField item, Object value) {
     Map<String, Object> map = (Map) value;
 
     startActivity(new Intent(getActivity(), MapActivity.class)
-        .putExtra(IntentConsts.EXTRA_TITLE, (String) item.get("name"))
+        .putExtra(IntentConsts.EXTRA_TITLE, item.name())
         .putExtra(IntentConsts.EXTRA_LOCATION,
             new LatLng((Double) map.get("lat"), (Double) map.get("lon"))));
   }
 
-  /**
-   * Click handler for a field of type {@code Text}.
-   */
-  private void onTextItemClicked(Map item, Object value) {
+  private void onTextItemClicked(CDAField item, Object value) {
     startActivity(new Intent(getActivity(), TextPreviewActivity.class)
-        .putExtra(IntentConsts.EXTRA_TITLE, (String) item.get("name"))
+        .putExtra(IntentConsts.EXTRA_TITLE, item.name())
         .putExtra(IntentConsts.EXTRA_TEXT, value.toString()));
   }
 
   /**
    * Click handler for a field of type {@code Link}.
    */
-  private void onLinkItemClicked(Map item, Object value) {
+  private void onLinkItemClicked(CDAField item, Object value) {
     CDAResource resource = (CDAResource) value;
 
-    Constants.CDAResourceType linkType =
-        Constants.CDAResourceType.valueOf((String) item.get("linkType"));
+    String linkType = item.linkType();
 
-    if (Constants.CDAResourceType.Asset.equals(linkType)) {
+    if ("Asset".equals(linkType)) {
       startActivity(new Intent(getActivity(), AssetPreviewActivity.class)
-          .putExtra(IntentConsts.EXTRA_TITLE, (String) item.get("name"))
+          .putExtra(IntentConsts.EXTRA_TITLE, item.name())
           .putExtra(IntentConsts.EXTRA_ASSET, resource));
-    } else if (Constants.CDAResourceType.Entry.equals(linkType)) {
+    } else if ("Entry".equals(linkType)) {
       CDAEntry linkedEntry = (CDAEntry) resource;
 
       startActivity(new Intent(getActivity(), EntryActivity.class)

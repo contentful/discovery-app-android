@@ -15,9 +15,6 @@ import com.contentful.discovery.fragments.TutorialFragment;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
 
-/**
- * About Activity.
- */
 public class AboutActivity extends CFFragmentActivity {
   @InjectView(R.id.tv_version) TextView tvVersion;
 

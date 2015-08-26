@@ -12,9 +12,6 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.loaders.TutorialLoader;
 import com.squareup.picasso.Picasso;
 
-/**
- * TutorialView.
- */
 public class TutorialView extends LinearLayout {
   @InjectView(R.id.tv_headline) TextView tvHeadline;
   @InjectView(R.id.iv_photo) ImageView ivPhoto;
@@ -51,7 +48,11 @@ public class TutorialView extends LinearLayout {
     tvHeadline.setText(page.headline);
 
     // Photo
-    Picasso.with(getContext()).load(page.asset.getUrl()).fit().centerInside().into(ivPhoto);
+    Picasso.with(getContext())
+        .load("http:" + page.asset.url())
+        .fit()
+        .centerInside()
+        .into(ivPhoto);
 
     // Content
     tvContent.setText(page.content.trim());

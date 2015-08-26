@@ -2,9 +2,6 @@ package com.contentful.discovery.preview;
 
 import android.content.Intent;
 
-/**
- * Entry List Item.
- */
 class EntryListItem {
   public final String title;
   public final String value;

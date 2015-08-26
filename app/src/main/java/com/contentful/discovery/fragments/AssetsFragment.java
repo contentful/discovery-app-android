@@ -20,13 +20,9 @@ import com.contentful.discovery.loaders.AssetsLoader;
 import com.contentful.discovery.ui.AbsListContainer;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.cda.model.CDAAsset;
+import com.contentful.java.cda.CDAAsset;
 import java.util.ArrayList;
 
-/**
- * Assets Fragment.
- * Displays a collection of Assets inside a list.
- */
 public class AssetsFragment extends Fragment
     implements LoaderManager.LoaderCallbacks<ArrayList<CDAAsset>>, AdapterView.OnItemClickListener,
     AbsListContainer.Listener {

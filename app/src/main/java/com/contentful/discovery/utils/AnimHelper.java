@@ -4,9 +4,6 @@ import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.os.Build;
 
-/**
- * Animations Helper.
- */
 public class AnimHelper {
   private AnimHelper() {
   }

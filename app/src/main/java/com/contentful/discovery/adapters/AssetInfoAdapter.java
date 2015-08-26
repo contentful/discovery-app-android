@@ -10,7 +10,7 @@ import com.contentful.discovery.CFApp;
 import com.contentful.discovery.R;
 import com.contentful.discovery.ui.FieldViewHolder;
 import com.contentful.discovery.utils.ViewHelper;
-import com.contentful.java.cda.model.CDAAsset;
+import com.contentful.java.cda.CDAAsset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -19,9 +19,6 @@ import org.apache.commons.io.FileUtils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
-/**
- * Asset Info Adapter.
- */
 public class AssetInfoAdapter extends BaseAdapter {
   private final Context context;
 
@@ -37,28 +34,26 @@ public class AssetInfoAdapter extends BaseAdapter {
     this.context = context;
 
     fields = new ArrayList<>();
-    Map assetFields = asset.getFields();
 
     // Title
     fields.add(new Pair<>(context.getString(R.string.asset_info_title),
-        (String) assetFields.get("title")));
+        (String) asset.getField("title")));
 
     // Description
     fields.add(new Pair<>(context.getString(R.string.asset_info_description),
-        (String) assetFields.get("description")));
+        (String) asset.getField("description")));
 
     // Creation Date
-    DateTime createdAt = DateTime.parse((String) asset.getSys().get("createdAt"));
+    DateTime createdAt = DateTime.parse((String) asset.getAttribute("createdAt"));
 
     fields.add(new Pair<>(context.getString(R.string.asset_info_created_at),
         createdAt.toString(DateTimeFormat.forStyle("MM"))));
 
     // MIME Type
-    fields.add(new Pair<>(context.getString(R.string.asset_info_mime_type),
-        asset.getMimeType()));
+    fields.add(new Pair<>(context.getString(R.string.asset_info_mime_type), asset.mimeType()));
 
-    Double sizeInBytes =
-        (Double) ((Map) ((Map) assetFields.get("file")).get("details")).get("size");
+    Map details = asset.fileField("details");
+    Double sizeInBytes = (Double) details.get("size");
     String displaySize = FileUtils.byteCountToDisplaySize(sizeInBytes.longValue());
 
     fields.add(new Pair<>(context.getString(R.string.asset_info_size), displaySize));

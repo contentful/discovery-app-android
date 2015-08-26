@@ -3,9 +3,6 @@ package com.contentful.discovery.loaders;
 import android.support.v4.content.AsyncTaskLoader;
 import com.contentful.discovery.CFApp;
 
-/**
- * {@link android.content.AsyncTaskLoader} base implementation.
- */
 abstract class AbsAsyncTaskLoader<T> extends AsyncTaskLoader<T> {
   protected T result;
 

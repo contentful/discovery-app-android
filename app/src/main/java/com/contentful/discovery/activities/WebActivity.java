@@ -9,9 +9,6 @@ import butterknife.InjectView;
 import com.contentful.discovery.R;
 import com.contentful.discovery.utils.IntentConsts;
 
-/**
- * Web Activity.
- */
 public class WebActivity extends CFFragmentActivity {
   @InjectView(R.id.web_view) WebView webView;
   @InjectView(R.id.empty) View emptyView;

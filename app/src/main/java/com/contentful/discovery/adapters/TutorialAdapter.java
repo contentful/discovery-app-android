@@ -7,9 +7,6 @@ import android.view.ViewGroup;
 import com.contentful.discovery.loaders.TutorialLoader;
 import com.contentful.discovery.ui.TutorialView;
 
-/**
- * TutorialAdapter.
- */
 public class TutorialAdapter extends PagerAdapter {
   private static final int POS_VIDEO = 0;
 

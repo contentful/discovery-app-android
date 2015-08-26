@@ -1,10 +1,7 @@
 package com.contentful.discovery.api;
 
-import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.CDAContentType;
 
-/**
- * Content Type Wrapper.
- */
 public class ContentTypeWrapper {
   private final CDAContentType contentType;
   private final int entriesCount;

@@ -9,9 +9,6 @@ import com.contentful.discovery.activities.TextPreviewActivity;
 import com.contentful.discovery.ui.DisplayItem;
 import org.apache.commons.lang3.CharEncoding;
 
-/**
- * RTF View Factory.
- */
 public class RTFViewFactory extends PreviewViewFactory<RTFViewHolder> {
   @Override protected int getLayoutResId() {
     return R.layout.view_preview_rtf;

@@ -34,15 +34,11 @@ import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
 import com.contentful.discovery.utils.ViewHelper;
 import com.contentful.java.cda.CDACallback;
-import com.contentful.java.cda.model.CDASpace;
+import com.contentful.java.cda.CDASpace;
 import com.squareup.picasso.Picasso;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpStatus;
 import retrofit.RetrofitError;
 
-/**
- * Credentials Activity.
- */
 public class CredentialsActivity extends CFFragmentActivity {
   private static final int RC_HISTORY = 1;
   private boolean didLogin;
@@ -192,41 +188,45 @@ public class CredentialsActivity extends CFFragmentActivity {
     // their corresponding {@link Space}.
     // Note that we're adding the CDACallback instance to our callbacks set, case we
     // would need to cancel the request in the future (i.e. onDestroy).
-    CFClient.init(credentials.getSpace(), credentials.getAccessToken())
-        .spaces().async().fetch(callbacks.add(new CDACallback<CDASpace>() {
+    CFClient.init(credentials.getSpace(), credentials.getAccessToken());
+
+    callbacks.add(CFClient.getClient().fetchSpace(new CDACallback<CDASpace>() {
       @Override protected void onSuccess(CDASpace space) {
         loginDialog.dismiss();
         handleLoginSuccess(space, credentials);
       }
 
-      @Override protected void onFailure(RetrofitError retrofitError) {
+      @Override protected void onFailure(Throwable error) {
         loginDialog.dismiss();
-        handleLoginFailure(retrofitError, credentials);
+        handleLoginFailure(error, credentials);
       }
     }));
   }
 
-  private void handleLoginFailure(RetrofitError retrofitError, final Credentials credentials) {
+  private void handleLoginFailure(Throwable error, final Credentials credentials) {
     // Set error message according to HTTP status code
     String title = getString(R.string.ad_login_error_title);
     String body = getString(R.string.ad_error_message_generic);
     boolean retry = true;
 
-    if (!RetrofitError.Kind.NETWORK.equals(retrofitError.getKind())) {
-      int statusCode = retrofitError.getResponse().getStatus();
+    if (error instanceof RetrofitError) {
+      RetrofitError retrofitError = (RetrofitError) error;
+      if (!RetrofitError.Kind.NETWORK.equals(retrofitError.getKind())) {
+        int statusCode = retrofitError.getResponse().getStatus();
 
-      switch (statusCode) {
-        case HttpStatus.SC_UNAUTHORIZED:
-          body = getString(R.string.ad_login_error_message_unauthorized);
-          retry = false;
-          break;
+        switch (statusCode) {
+          case 401:
+            body = getString(R.string.ad_login_error_message_unauthorized);
+            retry = false;
+            break;
 
-        case HttpStatus.SC_NOT_FOUND:
-          body = getString(R.string.ad_login_error_message_not_found);
-          retry = false;
-          break;
+          case 404:
+            body = getString(R.string.ad_login_error_message_not_found);
+            retry = false;
+            break;
 
-        default:
+          default:
+        }
       }
     }
 
@@ -259,7 +259,7 @@ public class CredentialsActivity extends CFFragmentActivity {
     supportInvalidateOptionsMenu();
 
     // Set additional data on Credentials instance
-    credentials.setSpaceName(space.getName());
+    credentials.setSpaceName(space.name());
     credentials.setLastLogin(System.currentTimeMillis());
 
     // Since request was successful, save these Credentials to the database

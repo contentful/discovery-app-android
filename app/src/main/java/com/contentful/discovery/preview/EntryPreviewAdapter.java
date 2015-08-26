@@ -9,11 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.contentful.java.cda.Constants.CDAFieldType;
-
-/**
- * Entry Preview Adapter.
- */
 public class EntryPreviewAdapter extends BaseAdapter {
   // View types
   public static final int VIEW_TYPE_GENERIC = 0;
@@ -29,27 +24,27 @@ public class EntryPreviewAdapter extends BaseAdapter {
   private static final ArrayViewFactory VF_ARRAY = new ArrayViewFactory();
 
   // View Factory mapping
-  private HashMap<CDAFieldType, PreviewViewFactory> typeToViewFactoryMap =
+  private HashMap<String, PreviewViewFactory> typeToViewFactoryMap =
       new HashMap<>();
 
   public EntryPreviewAdapter(Context context) {
     this.context = context;
 
     // GenericViewFactory
-    registerViewFactory(CDAFieldType.Boolean, VF_GENERIC);
-    registerViewFactory(CDAFieldType.Date, VF_GENERIC);
-    registerViewFactory(CDAFieldType.Integer, VF_GENERIC);
-    registerViewFactory(CDAFieldType.Number, VF_GENERIC);
-    registerViewFactory(CDAFieldType.Object, VF_GENERIC);
-    registerViewFactory(CDAFieldType.Symbol, VF_GENERIC);
-    registerViewFactory(CDAFieldType.Location, VF_GENERIC);
-    registerViewFactory(CDAFieldType.Link, VF_GENERIC);
+    registerViewFactory("Boolean", VF_GENERIC);
+    registerViewFactory("Date", VF_GENERIC);
+    registerViewFactory("Integer", VF_GENERIC);
+    registerViewFactory("Number", VF_GENERIC);
+    registerViewFactory("Object", VF_GENERIC);
+    registerViewFactory("Symbol", VF_GENERIC);
+    registerViewFactory("Location", VF_GENERIC);
+    registerViewFactory("Link", VF_GENERIC);
 
     // ArrayViewFactory
-    registerViewFactory(CDAFieldType.Array, VF_ARRAY);
+    registerViewFactory("Array", VF_ARRAY);
 
     // RTFViewFactory
-    registerViewFactory(CDAFieldType.Text, VF_RTF);
+    registerViewFactory("Text", VF_RTF);
   }
 
   @Override public int getCount() {
@@ -87,7 +82,7 @@ public class EntryPreviewAdapter extends BaseAdapter {
     this.data = data;
   }
 
-  private void registerViewFactory(CDAFieldType fieldType, PreviewViewFactory factory) {
+  private void registerViewFactory(String fieldType, PreviewViewFactory factory) {
     typeToViewFactoryMap.put(fieldType, factory);
   }
 

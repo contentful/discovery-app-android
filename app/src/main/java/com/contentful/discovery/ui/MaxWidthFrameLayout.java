@@ -5,9 +5,6 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import com.contentful.discovery.R;
 
-/**
- * MaxWidthFrameLayout.
- */
 public class MaxWidthFrameLayout extends FrameLayout {
   private int maxWidth;
 

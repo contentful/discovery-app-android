@@ -6,12 +6,8 @@ import com.contentful.discovery.api.ResourceList;
 import com.contentful.discovery.loaders.EntriesByContentTypeLoader;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.cda.model.CDAContentType;
+import com.contentful.java.cda.CDAContentType;
 
-/**
- * Entries Activity.
- * Displays a collection of Entries given a {@code CDAContentType}.
- */
 public class EntriesActivity extends ResourceListActivity {
   private CDAContentType contentType;
 
@@ -21,7 +17,7 @@ public class EntriesActivity extends ResourceListActivity {
     contentType =
         (CDAContentType) getIntent().getSerializableExtra(IntentConsts.EXTRA_CONTENT_TYPE);
 
-    setTitle(contentType.getName());
+    setTitle(contentType.name());
   }
 
   @Override protected void initLoader() {

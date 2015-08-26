@@ -13,10 +13,6 @@ import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
 import org.apache.commons.lang3.CharEncoding;
 
-/**
- * Text Preview Activity.
- * Displays text inside a {@code WebView}, supporting Markdown.
- */
 public class TextPreviewActivity extends CFFragmentActivity
     implements LoaderManager.LoaderCallbacks<String> {
 

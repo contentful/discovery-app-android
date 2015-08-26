@@ -2,12 +2,9 @@ package com.contentful.discovery.loaders;
 
 import com.contentful.discovery.api.ResourceList;
 import com.contentful.java.cda.CDAClient;
-import com.contentful.java.cda.model.CDAResource;
+import com.contentful.java.cda.CDAResource;
 import java.util.ArrayList;
 
-/**
- * Static Resource Array Loader.
- */
 public class ResourceArrayLoader extends AbsResourceListLoader {
   private final ArrayList<Object> resources;
 

@@ -6,9 +6,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.contentful.discovery.R;
 
-/**
- * Field View Holder.
- */
 public class FieldViewHolder {
   public @InjectView(R.id.tv_title) CFTextView tvTitle;
   public @InjectView(R.id.tv_value) CFTextView tvValue;

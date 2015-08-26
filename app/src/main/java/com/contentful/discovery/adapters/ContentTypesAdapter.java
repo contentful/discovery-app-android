@@ -12,9 +12,6 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.api.ContentTypeWrapper;
 import java.util.ArrayList;
 
-/**
- * Content Types Adapter.
- */
 public class ContentTypesAdapter extends BaseAdapter {
   private final Context context;
 
@@ -50,8 +47,8 @@ public class ContentTypesAdapter extends BaseAdapter {
     ContentTypeWrapper contentTypeWrapper = getItem(position);
     convertView.setTag(R.id.tag_content_type, contentTypeWrapper);
 
-    vh.tvName.setText(contentTypeWrapper.getContentType().getName());
-    vh.tvDescription.setText(contentTypeWrapper.getContentType().getUserDescription());
+    vh.tvName.setText(contentTypeWrapper.getContentType().name());
+    vh.tvDescription.setText(contentTypeWrapper.getContentType().description());
     vh.tvEntriesCount.setText(
         context.getString(R.string.num_of_entries, contentTypeWrapper.getEntriesCount()));
 
