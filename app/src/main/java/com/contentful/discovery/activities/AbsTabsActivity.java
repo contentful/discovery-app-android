@@ -3,15 +3,14 @@ package com.contentful.discovery.activities;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.contentful.discovery.R;
 import com.contentful.discovery.ui.PagerSlidingTabStrip;
 
 abstract class AbsTabsActivity extends CFFragmentActivity {
-  // Views
-  @InjectView(R.id.tabs) PagerSlidingTabStrip tabStrip;
-  @InjectView(R.id.view_pager) ViewPager viewPager;
+  @Bind(R.id.tabs) PagerSlidingTabStrip tabStrip;
+  @Bind(R.id.view_pager) ViewPager viewPager;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -22,7 +21,7 @@ abstract class AbsTabsActivity extends CFFragmentActivity {
     setContentView(R.layout.activity_tabs);
 
     // Inject views
-    ButterKnife.inject(this);
+    ButterKnife.bind(this);
 
     // Title
     setTitle(getTitleForActivity());

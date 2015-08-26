@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.contentful.discovery.R;
 import com.contentful.discovery.utils.Utils;
 import com.contentful.java.cda.CDAAsset;
@@ -59,14 +59,11 @@ public class AssetsAdapter extends BaseAdapter {
     data.clear();
   }
 
-  /**
-   * View Holder
-   */
-  class ViewHolder {
-    @InjectView(R.id.iv_thumbnail) ImageView ivThumbnail;
+  static class ViewHolder {
+    @Bind(R.id.iv_thumbnail) ImageView ivThumbnail;
 
     ViewHolder(View v) {
-      ButterKnife.inject(this, v);
+      ButterKnife.bind(this, v);
     }
   }
 }

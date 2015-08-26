@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.TextView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import com.contentful.discovery.CFApp;
 import com.contentful.discovery.R;
@@ -16,7 +16,7 @@ import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
 
 public class AboutActivity extends CFFragmentActivity {
-  @InjectView(R.id.tv_version) TextView tvVersion;
+  @Bind(R.id.tv_version) TextView tvVersion;
 
   private static SparseArray<String> sLinks;
 
@@ -35,7 +35,7 @@ public class AboutActivity extends CFFragmentActivity {
     setContentView(R.layout.activity_about);
 
     // Inject views
-    ButterKnife.inject(this);
+    ButterKnife.bind(this);
 
     // Set version
     setVersion();

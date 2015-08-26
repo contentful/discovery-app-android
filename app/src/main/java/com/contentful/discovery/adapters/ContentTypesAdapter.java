@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.contentful.discovery.R;
 import com.contentful.discovery.api.ContentTypeWrapper;
 import java.util.ArrayList;
@@ -67,12 +67,12 @@ public class ContentTypesAdapter extends BaseAdapter {
    * View Holder
    */
   class ViewHolder {
-    @InjectView(R.id.tv_name) TextView tvName;
-    @InjectView(R.id.tv_description) TextView tvDescription;
-    @InjectView(R.id.tv_entries_count) TextView tvEntriesCount;
+    @Bind(R.id.tv_name) TextView tvName;
+    @Bind(R.id.tv_description) TextView tvDescription;
+    @Bind(R.id.tv_entries_count) TextView tvEntriesCount;
 
     ViewHolder(View v) {
-      ButterKnife.inject(this, v);
+      ButterKnife.bind(this, v);
     }
   }
 }

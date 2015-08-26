@@ -5,8 +5,8 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.contentful.discovery.R;
 import com.contentful.discovery.loaders.TextProcessorLoader;
 import com.contentful.discovery.utils.IntentConsts;
@@ -19,7 +19,7 @@ public class TextPreviewActivity extends CFFragmentActivity
   public static final String MIME_TYPE_TEXT_HTML = "text/html";
 
   // Views
-  @InjectView(R.id.web_view) WebView webView;
+  @Bind(R.id.web_view) WebView webView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -27,7 +27,7 @@ public class TextPreviewActivity extends CFFragmentActivity
     setContentView(R.layout.activity_text_preview);
 
     // Inject views
-    ButterKnife.inject(this);
+    ButterKnife.bind(this);
 
     // Setup WebView
     if (!getIntent().getBooleanExtra(IntentConsts.EXTRA_ALLOW_LINKS, false)) {

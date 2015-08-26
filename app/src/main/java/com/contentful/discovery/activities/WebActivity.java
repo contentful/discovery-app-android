@@ -4,14 +4,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.contentful.discovery.R;
 import com.contentful.discovery.utils.IntentConsts;
 
 public class WebActivity extends CFFragmentActivity {
-  @InjectView(R.id.web_view) WebView webView;
-  @InjectView(R.id.empty) View emptyView;
+  @Bind(R.id.web_view) WebView webView;
+  @Bind(R.id.empty) View emptyView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -19,7 +19,7 @@ public class WebActivity extends CFFragmentActivity {
     setContentView(R.layout.activity_web);
 
     // Inject views
-    ButterKnife.inject(this);
+    ButterKnife.bind(this);
 
     webView.setWebViewClient(new WebViewClient() {
       @Override

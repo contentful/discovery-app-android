@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.contentful.discovery.R;
 import com.contentful.discovery.api.Credentials;
 import java.util.ArrayList;
@@ -68,11 +68,11 @@ public class HistoryAdapter extends BaseAdapter {
   }
 
   static class ViewHolder {
-    @InjectView(R.id.tv_space_name) TextView tvSpaceName;
-    @InjectView(R.id.tv_last_login) TextView tvLastLogin;
+    @Bind(R.id.tv_space_name) TextView tvSpaceName;
+    @Bind(R.id.tv_last_login) TextView tvLastLogin;
 
     ViewHolder(View v) {
-      ButterKnife.inject(this, v);
+      ButterKnife.bind(this, v);
     }
   }
 }

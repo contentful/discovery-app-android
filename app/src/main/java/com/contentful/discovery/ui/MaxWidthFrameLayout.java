@@ -3,10 +3,12 @@ package com.contentful.discovery.ui;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+import butterknife.BindDimen;
+import butterknife.ButterKnife;
 import com.contentful.discovery.R;
 
 public class MaxWidthFrameLayout extends FrameLayout {
-  private int maxWidth;
+  @BindDimen(R.dimen.global_max_width) int maxWidth;
 
   public MaxWidthFrameLayout(Context context) {
     super(context);
@@ -24,7 +26,7 @@ public class MaxWidthFrameLayout extends FrameLayout {
   }
 
   private void init(Context context) {
-    maxWidth = getResources().getDimensionPixelSize(R.dimen.global_max_width);
+    ButterKnife.bind(this);
   }
 
   @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

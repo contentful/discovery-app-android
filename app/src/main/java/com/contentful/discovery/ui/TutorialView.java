@@ -6,16 +6,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import butterknife.Bind;
+import butterknife.BindDimen;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.contentful.discovery.R;
 import com.contentful.discovery.loaders.TutorialLoader;
 import com.squareup.picasso.Picasso;
 
 public class TutorialView extends LinearLayout {
-  @InjectView(R.id.tv_headline) TextView tvHeadline;
-  @InjectView(R.id.iv_photo) ImageView ivPhoto;
-  @InjectView(R.id.tv_content) TextView tvContent;
+  @Bind(R.id.tv_headline) TextView tvHeadline;
+  @Bind(R.id.iv_photo) ImageView ivPhoto;
+  @Bind(R.id.tv_content) TextView tvContent;
+  @BindDimen(R.dimen.view_tutorial_padding) int padding;
 
   public TutorialView(Context context) {
     super(context);
@@ -34,13 +36,9 @@ public class TutorialView extends LinearLayout {
 
   private void init(Context context) {
     setOrientation(VERTICAL);
-
-    int p = getResources().getDimensionPixelSize(R.dimen.view_tutorial_padding);
-    setPadding(p, 0, p, p);
-
     View.inflate(context, R.layout.view_tutorial, this);
-
-    ButterKnife.inject(this);
+    ButterKnife.bind(this);
+    setPadding(padding, 0, padding, padding);
   }
 
   public void setPage(TutorialLoader.Tutorial.Page page) {

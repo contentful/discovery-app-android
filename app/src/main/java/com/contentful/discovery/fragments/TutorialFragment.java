@@ -18,8 +18,8 @@ import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.VideoView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import com.contentful.discovery.R;
 import com.contentful.discovery.adapters.TutorialAdapter;
@@ -30,12 +30,12 @@ import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
 
 public class TutorialFragment extends Fragment implements TutorialAdapter.Listener {
-  @InjectView(R.id.iv_background) ImageView ivBackground;
-  @InjectView(R.id.view_pager) ViewPager viewPager;
-  @InjectView(R.id.vp_indicator) CirclePageIndicator vpIndicator;
-  @InjectView(R.id.video_wrapper) ViewGroup videoWrapper;
-  @InjectView(R.id.video_view) VideoView videoView;
-  @InjectView(R.id.pb_video) ProgressBar pbVideo;
+  @Bind(R.id.iv_background) ImageView ivBackground;
+  @Bind(R.id.view_pager) ViewPager viewPager;
+  @Bind(R.id.vp_indicator) CirclePageIndicator vpIndicator;
+  @Bind(R.id.video_wrapper) ViewGroup videoWrapper;
+  @Bind(R.id.video_view) VideoView videoView;
+  @Bind(R.id.pb_video) ProgressBar pbVideo;
 
   private ProgressDialog tutDialog;
   private TutorialAdapter adapter;
@@ -92,7 +92,7 @@ public class TutorialFragment extends Fragment implements TutorialAdapter.Listen
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    ButterKnife.inject(this, view);
+    ButterKnife.bind(this, view);
     viewPager.setAdapter(adapter);
     vpIndicator.setViewPager(viewPager);
   }
