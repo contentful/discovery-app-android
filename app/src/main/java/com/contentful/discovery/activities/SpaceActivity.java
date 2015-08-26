@@ -12,14 +12,10 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.adapters.SpacePagerAdapter;
 import com.contentful.discovery.api.CFClient;
 import com.contentful.discovery.utils.IntentConsts;
-import com.contentful.java.cda.model.CDASpace;
-import com.contentful.java.cda.model.CDALocale;
+import com.contentful.java.cda.CDALocale;
+import com.contentful.java.cda.CDASpace;
 import java.util.ArrayList;
 
-/**
- * Space Activity.
- * Displays all available Content Types and Assets of a single Space in a tabbed layout.
- */
 public class SpaceActivity extends AbsTabsActivity {
   private CDASpace space;
   private SpacePagerAdapter adapter;
@@ -50,7 +46,7 @@ public class SpaceActivity extends AbsTabsActivity {
   }
 
   @Override protected String getTitleForActivity() {
-    return space.getName();
+    return space.name();
   }
 
   @Override protected PagerAdapter getAdapter() {
@@ -70,8 +66,8 @@ public class SpaceActivity extends AbsTabsActivity {
     ArrayList<String> list = new ArrayList<>();
 
     // Construct a list of locales as strings
-    for (CDALocale locale : CFClient.getClient().getSpace().getLocales()) {
-      list.add(locale.getCode());
+    for (CDALocale locale : space.locales()) {
+      list.add(locale.code());
     }
 
     // Create an Adapter to be used with an AlertDialog

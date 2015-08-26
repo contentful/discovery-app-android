@@ -12,18 +12,13 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.api.CFDiscoveryClient;
 import com.contentful.discovery.api.CallbackSet;
 import com.contentful.discovery.ui.CFTextView;
+import com.contentful.java.cda.CDAAsset;
 import com.contentful.java.cda.CDACallback;
-import com.contentful.java.cda.model.CDAArray;
-import com.contentful.java.cda.model.CDAAsset;
-import com.contentful.java.cda.model.CDAEntry;
-import com.contentful.java.cda.model.CDAResource;
+import com.contentful.java.cda.CDAEntry;
+import com.contentful.java.cda.CDAResource;
 import com.squareup.picasso.Picasso;
-import java.util.HashMap;
 import java.util.List;
 
-/**
- * Help Activity.
- */
 public class HelpActivity extends CFFragmentActivity {
   @InjectView(R.id.container) ViewGroup container;
   @InjectView(R.id.empty) View emptyView;
@@ -54,29 +49,21 @@ public class HelpActivity extends CFFragmentActivity {
   private void loadData() {
     emptyView.setVisibility(View.VISIBLE);
 
-    HashMap<String, String> query = new HashMap<>();
-    query.put("sys.id", getString(R.string.discovery_space_entry_id));
+    callbacks.add(CFDiscoveryClient.getClient()
+        .fetch(CDAEntry.class)
+        .one(getString(R.string.discovery_space_entry_id), new CDACallback<CDAEntry>() {
+          @Override protected void onSuccess(CDAEntry entry) {
+            insertTitle((String) entry.getField("title"));
 
-    CFDiscoveryClient.getClient()
-        .entries().async().fetchAll(query, callbacks.add(new CDACallback<CDAArray>() {
-              @SuppressWarnings("unchecked")
-              @Override
-              protected void onSuccess(CDAArray array) {
-                for (CDAResource res : array.getItems()) {
-                  CDAEntry entry = (CDAEntry) res;
+            //noinspection unchecked
+            for (CDAResource helpItem : (List<CDAResource>) entry.getField("helpItems")) {
+              insertHelpItem((CDAEntry) helpItem);
+            }
 
-                  insertTitle((String) entry.getFields().get("title"));
-
-                  for (CDAResource childRes : (List<CDAResource>) entry.getFields()
-                      .get("helpItems")) {
-                    insertHelpItem((CDAEntry) childRes);
-                  }
-                }
-
-                emptyView.setVisibility(View.GONE);
-                container.setVisibility(View.VISIBLE);
-              }
-            }));
+            emptyView.setVisibility(View.GONE);
+            container.setVisibility(View.VISIBLE);
+          }
+        }));
   }
 
   class HelpItemViewHolder {
@@ -95,12 +82,15 @@ public class HelpActivity extends CFFragmentActivity {
         new HelpItemViewHolder(View.inflate(this, R.layout.view_help_item, null));
 
     // Text
-    vh.tvText.setText((String) helpItemEntry.getFields().get("text"));
+    vh.tvText.setText((String) helpItemEntry.getField("text"));
 
     // Image
-    CDAAsset asset = (CDAAsset) helpItemEntry.getFields().get("image");
+    CDAAsset asset = helpItemEntry.getField("image");
 
-    Picasso.with(this).load(asset.getUrl()).fit().centerInside().into(vh.ivPhoto);
+    Picasso.with(this).load("http:" + asset.url())
+        .fit()
+        .centerInside()
+        .into(vh.ivPhoto);
 
     container.addView(vh.rootView);
   }

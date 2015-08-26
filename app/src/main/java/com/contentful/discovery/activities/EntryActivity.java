@@ -5,14 +5,10 @@ import android.support.v4.view.PagerAdapter;
 import com.contentful.discovery.adapters.EntryPagerAdapter;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.cda.model.CDAContentType;
-import com.contentful.java.cda.model.CDAEntry;
+import com.contentful.java.cda.CDAContentType;
+import com.contentful.java.cda.CDAEntry;
 import java.util.Map;
 
-/**
- * Entry Activity.
- * Displays a single Entry in various forms using a tabbed layout.
- */
 public class EntryActivity extends AbsTabsActivity {
   private CDAEntry entry;
   private CDAContentType contentType;

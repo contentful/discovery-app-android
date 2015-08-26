@@ -9,9 +9,6 @@ import android.view.ViewParent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
-/**
- * Clearable EditText.
- */
 public class ClearableEditText extends EditText {
   public ClearableEditText(Context context) {
     super(context);

@@ -13,9 +13,6 @@ import com.contentful.discovery.api.Credentials;
 import java.util.ArrayList;
 import org.joda.time.DateTime;
 
-/**
- * History Adapter.
- */
 public class HistoryAdapter extends BaseAdapter {
   private static final String DATE_PATTERN = "EEE', 'MMM dd yyyy";
 
@@ -70,10 +67,7 @@ public class HistoryAdapter extends BaseAdapter {
     this.data = data;
   }
 
-  /**
-   * View Holder
-   */
-  class ViewHolder {
+  static class ViewHolder {
     @InjectView(R.id.tv_space_name) TextView tvSpaceName;
     @InjectView(R.id.tv_last_login) TextView tvLastLogin;
 

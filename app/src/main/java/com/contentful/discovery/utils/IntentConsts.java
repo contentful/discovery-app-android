@@ -2,9 +2,6 @@ package com.contentful.discovery.utils;
 
 import com.contentful.discovery.CFApp;
 
-/**
- * Intent Constants.
- */
 public class IntentConsts {
   private IntentConsts() {
   }

@@ -1,6 +1,5 @@
 package com.contentful.discovery.activities;
 
-import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,10 +8,6 @@ import android.text.SpannableString;
 import com.contentful.discovery.ui.TypefaceSpan;
 import com.contentful.discovery.utils.Utils;
 
-/**
- * Base Fragment Activity.
- */
-@SuppressLint("Registered")
 public class CFFragmentActivity extends FragmentActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

@@ -8,10 +8,6 @@ import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
 import java.util.ArrayList;
 
-/**
- * Resource Array Activity.
- * Displays a static collection of CDA resources inside a list.
- */
 public class ResourceArrayActivity extends ResourceListActivity {
   @Override protected void initLoader() {
     getSupportLoaderManager().initLoader(Utils.getLoaderId(this), null, this);

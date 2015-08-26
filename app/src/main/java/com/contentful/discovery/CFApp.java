@@ -2,9 +2,6 @@ package com.contentful.discovery;
 
 import android.app.Application;
 
-/**
- * Application Class.
- */
 public class CFApp extends Application {
   public static CFApp sInstance;
 

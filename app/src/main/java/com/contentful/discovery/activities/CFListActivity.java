@@ -1,6 +1,5 @@
 package com.contentful.discovery.activities;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +8,6 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import com.contentful.discovery.ui.AbsListContainer;
 
-/**
- * ListActivity.
- */
-@SuppressLint("Registered")
 public class CFListActivity extends CFFragmentActivity implements AdapterView.OnItemClickListener {
   // Views
   AbsListContainer<ListView> listContainerView;

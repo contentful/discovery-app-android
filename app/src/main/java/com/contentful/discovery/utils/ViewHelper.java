@@ -5,9 +5,6 @@ import android.os.Build;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
-/**
- * View Helper.
- */
 public class ViewHelper {
   private ViewHelper() {
   }

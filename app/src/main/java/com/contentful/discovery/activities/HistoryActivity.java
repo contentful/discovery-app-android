@@ -16,10 +16,6 @@ import com.contentful.discovery.utils.Utils;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
-/**
- * History Activity.
- * Displays a list of all previously used Credentials which resulted in successful authentications.
- */
 public class HistoryActivity extends CFListActivity
     implements LoaderManager.LoaderCallbacks<LinkedHashSet<Credentials>> {
 

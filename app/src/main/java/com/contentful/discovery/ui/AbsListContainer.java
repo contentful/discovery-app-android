@@ -13,9 +13,6 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import com.contentful.discovery.R;
 
-/**
- * AbsListContainer.
- */
 public abstract class AbsListContainer<T extends AbsListView> extends FrameLayout {
   @InjectView(R.id.empty) ViewGroup emptyView;
   @InjectView(R.id.extra_views_wrapper) ViewGroup extraViewsWrapper;

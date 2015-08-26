@@ -8,11 +8,6 @@ import butterknife.InjectView;
 import com.contentful.discovery.R;
 import com.contentful.discovery.ui.PagerSlidingTabStrip;
 
-/**
- * Abstract Tabs Activity.
- * Consists of a simple tabbed layout using a {@code ViewPager} and
- * a {@link com.contentful.discovery.ui.PagerSlidingTabStrip} view.
- */
 abstract class AbsTabsActivity extends CFFragmentActivity {
   // Views
   @InjectView(R.id.tabs) PagerSlidingTabStrip tabStrip;

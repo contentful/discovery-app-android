@@ -6,9 +6,6 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 import com.contentful.discovery.utils.Utils;
 
-/**
- * CF TextView.
- */
 public class CFTextView extends TextView {
   public CFTextView(Context context) {
     super(context);

@@ -14,10 +14,6 @@ import com.contentful.discovery.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * String List Activity.
- * Displays a collection of objects as a list of strings.
- */
 public class StringListActivity extends CFListActivity implements AbsListView.RecyclerListener {
   @SuppressWarnings("unchecked")
   @Override

@@ -9,15 +9,12 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.api.ResourceList;
 import com.contentful.discovery.ui.FieldViewHolder;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.cda.model.CDAContentType;
-import com.contentful.java.cda.model.CDAEntry;
-import com.contentful.java.cda.model.CDAResource;
+import com.contentful.java.cda.CDAContentType;
+import com.contentful.java.cda.CDAEntry;
+import com.contentful.java.cda.CDAResource;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * Resources Adapter.
- */
 public class ResourcesAdapter extends BaseAdapter {
   private final Context context;
   private ResourceList data;
@@ -65,12 +62,12 @@ public class ResourcesAdapter extends BaseAdapter {
       String displayField = getEntryDisplayField((CDAEntry) resource);
 
       if (StringUtils.isNotBlank(displayField)) {
-        name = (String) ((CDAEntry) resource).getFields().get(displayField);
+        name = ((CDAEntry) resource).getField(displayField);
       }
     }
 
     if (StringUtils.isBlank(name)) {
-      name = (String) resource.getSys().get("id");
+      name = resource.id();
     }
 
     vh.tvTitle.setText(name);
@@ -79,7 +76,7 @@ public class ResourcesAdapter extends BaseAdapter {
   }
 
   private String getEntryDisplayField(CDAEntry entry) {
-    return Utils.getContentTypeForEntry(data.contentTypes, entry).getDisplayField();
+    return Utils.getContentTypeForEntry(data.contentTypes, entry).displayField();
   }
 
   public Map<String, CDAContentType> getContentTypesMap() {

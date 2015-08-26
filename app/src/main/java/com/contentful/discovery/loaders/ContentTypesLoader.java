@@ -2,24 +2,21 @@ package com.contentful.discovery.loaders;
 
 import com.contentful.discovery.api.CFClient;
 import com.contentful.discovery.api.ContentTypeWrapper;
+import com.contentful.java.cda.CDAArray;
 import com.contentful.java.cda.CDAClient;
-import com.contentful.java.cda.model.CDAArray;
-import com.contentful.java.cda.model.CDAContentType;
-import com.contentful.java.cda.model.CDAResource;
+import com.contentful.java.cda.CDAContentType;
+import com.contentful.java.cda.CDAEntry;
+import com.contentful.java.cda.CDAResource;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import retrofit.RetrofitError;
 
-/**
- * Content Types Loader.
- * Use to load all CDA {@code Content Type}s from the current {@code Space}.
- */
 public class ContentTypesLoader extends AbsAsyncTaskLoader<ArrayList<ContentTypeWrapper>> {
   @Override protected ArrayList<ContentTypeWrapper> performLoad() {
     CDAClient client = CFClient.getClient();
 
     try {
-      ArrayList<CDAResource> items = client.contentTypes().fetchAll().getItems();
+      List<CDAResource> items = client.fetch(CDAContentType.class).all().items();
       ArrayList<ContentTypeWrapper> tmp = new ArrayList<>();
 
       if (items.size() > 0) {
@@ -27,11 +24,12 @@ public class ContentTypesLoader extends AbsAsyncTaskLoader<ArrayList<ContentType
           CDAContentType cdaContentType = (CDAContentType) res;
 
           // Entries count
-          HashMap<String, String> query = new HashMap<>();
-          query.put("content_type", (String) cdaContentType.getSys().get("id"));
-          query.put("limit", "1");
-          CDAArray entries = client.entries().fetchAll(query);
-          ContentTypeWrapper ct = new ContentTypeWrapper(cdaContentType, entries.getTotal());
+          CDAArray entries = client.fetch(CDAEntry.class)
+              .where("content_type", cdaContentType.id())
+              .where("limit", "1")
+              .all();
+
+          ContentTypeWrapper ct = new ContentTypeWrapper(cdaContentType, entries.total());
           tmp.add(ct);
         }
       }

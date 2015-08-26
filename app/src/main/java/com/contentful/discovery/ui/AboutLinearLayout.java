@@ -6,9 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-/**
- * About Linear Layout.
- */
 public class AboutLinearLayout extends LinearLayout {
   public AboutLinearLayout(Context context) {
     super(context);

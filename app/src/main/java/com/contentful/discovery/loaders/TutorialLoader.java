@@ -3,33 +3,26 @@ package com.contentful.discovery.loaders;
 import com.contentful.discovery.CFApp;
 import com.contentful.discovery.R;
 import com.contentful.discovery.api.CFDiscoveryClient;
-import com.contentful.java.cda.model.CDAArray;
-import com.contentful.java.cda.model.CDAAsset;
-import com.contentful.java.cda.model.CDAEntry;
+import com.contentful.java.cda.CDAAsset;
+import com.contentful.java.cda.CDAEntry;
 import java.util.ArrayList;
-import java.util.HashMap;
 import retrofit.RetrofitError;
 
-/**
- * TutorialLoader.
- */
 public class TutorialLoader extends AbsAsyncTaskLoader<TutorialLoader.Tutorial> {
   @Override protected Tutorial performLoad() {
     try {
       Tutorial tmp = new Tutorial();
-      HashMap<String, String> query = new HashMap<>();
-      query.put("sys.id",
-          CFApp.getInstance().getResources().getString(R.string.discovery_space_tutorial_id));
-      CDAArray array = CFDiscoveryClient.getClient().entries().fetchAll(query);
-      CDAEntry entry = (CDAEntry) array.getItems().get(0);
-      CDAAsset bgAsset = (CDAAsset) entry.getFields().get("backgroundImageIPad");
+      CDAEntry entry = CFDiscoveryClient.getClient().fetch(CDAEntry.class)
+          .one(CFApp.getInstance().getResources().getString(R.string.discovery_space_tutorial_id));
+
+      CDAAsset bgAsset = entry.getField("backgroundImageIPad");
 
       // Background image
-      tmp.backgroundImageUrl = bgAsset.getUrl();
+      tmp.backgroundImageUrl = "http:" + bgAsset.url();
 
       // Pages
       tmp.pages = new ArrayList<>();
-      ArrayList<?> pages = (ArrayList<?>) entry.getFields().get("pages");
+      ArrayList<?> pages = entry.getField("pages");
       for (Object p : pages) {
         if (p instanceof CDAEntry) {
           CDAEntry pageEntry = (CDAEntry) p;
@@ -47,9 +40,9 @@ public class TutorialLoader extends AbsAsyncTaskLoader<TutorialLoader.Tutorial> 
 
   private static Tutorial.Page getPageForEntry(CDAEntry entry) {
     Tutorial.Page page = new Tutorial.Page();
-    page.headline = (String) entry.getFields().get("headline");
-    page.content = (String) entry.getFields().get("content");
-    page.asset = (CDAAsset) entry.getFields().get("asset");
+    page.headline = entry.getField("headline");
+    page.content = entry.getField("content");
+    page.asset = entry.getField("asset");
     return page;
   }
 

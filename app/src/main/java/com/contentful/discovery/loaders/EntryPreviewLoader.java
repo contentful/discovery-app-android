@@ -2,20 +2,16 @@ package com.contentful.discovery.loaders;
 
 import com.contentful.discovery.ui.DisplayItem;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.cda.Constants;
-import com.contentful.java.cda.model.CDAContentType;
-import com.contentful.java.cda.model.CDAEntry;
-import com.contentful.java.cda.model.CDAResource;
+import com.contentful.java.cda.CDAContentType;
+import com.contentful.java.cda.CDAEntry;
+import com.contentful.java.cda.CDAField;
+import com.contentful.java.cda.CDAResource;
 import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.markdownj.MarkdownProcessor;
 
-/**
- * Entry Preview Loader.
- * Prepares a {@code CDAEntry} to be displayed in preview mode.
- */
 public class EntryPreviewLoader extends AbsAsyncTaskLoader<List<DisplayItem>> {
   private final CDAEntry entry;
   private final CDAContentType contentType;
@@ -28,14 +24,14 @@ public class EntryPreviewLoader extends AbsAsyncTaskLoader<List<DisplayItem>> {
 
   @Override protected List<DisplayItem> performLoad() {
     List<DisplayItem> tmp = new ArrayList<>();
-    List<Map> fields = contentType.getFields();
+    List<CDAField> fields = contentType.fields();
     MarkdownProcessor processor = new MarkdownProcessor();
 
     // Iterate Entry fields
-    for (Map f : fields) {
-      String id = (String) f.get("id");
+    for (CDAField f : fields) {
+      String id = f.id();
 
-      Object value = entry.getFields().get(id);
+      Object value = entry.getField(id);
 
       // Skip if the value is empty
       if (value == null) {
@@ -46,19 +42,19 @@ public class EntryPreviewLoader extends AbsAsyncTaskLoader<List<DisplayItem>> {
       DisplayItem displayItem = new DisplayItem();
 
       // CDAFieldType of this item
-      displayItem.fieldType = Constants.CDAFieldType.valueOf((String) f.get("type"));
+      displayItem.fieldType = f.type();
 
       // Original field ID (from Content Type)
       displayItem.key = id;
 
-      if (Constants.CDAFieldType.Text.equals(displayItem.fieldType)) {
+      if ("Text".equals(displayItem.fieldType)) {
         prepareTextItem(displayItem, value, processor);
-      } else if (Constants.CDAFieldType.Link.equals(displayItem.fieldType)) {
+      } else if ("Link".equals(displayItem.fieldType)) {
         prepareLinkItem(displayItem, value);
-      } else if (Constants.CDAFieldType.Location.equals(displayItem.fieldType)) {
+      } else if ("Location".equals(displayItem.fieldType)) {
         prepareLocationItem(displayItem, value);
-      } else if (Constants.CDAFieldType.Array.equals(displayItem.fieldType)) {
-        prepareArrayItem(displayItem, value, (Map) f.get("items"));
+      } else if ("Array".equals(displayItem.fieldType)) {
+        prepareArrayItem(displayItem, value, f.items());
       } else {
         prepareDefaultItem(displayItem, value);
       }
@@ -81,11 +77,10 @@ public class EntryPreviewLoader extends AbsAsyncTaskLoader<List<DisplayItem>> {
    */
   @SuppressWarnings("unchecked")
   private void prepareArrayItem(DisplayItem displayItem, Object value, Map arrayItems) {
-    displayItem.arrayItemType = Constants.CDAFieldType.valueOf((String) arrayItems.get("type"));
+    displayItem.arrayItemType = (String) arrayItems.get("type");
 
-    if (Constants.CDAFieldType.Link.equals(displayItem.arrayItemType)) {
-      displayItem.arrayLinkType =
-          Constants.CDAResourceType.valueOf((String) arrayItems.get("linkType"));
+    if ("Link".equals(displayItem.arrayItemType)) {
+      displayItem.arrayLinkType = (String) arrayItems.get("linkType");
     }
 
     displayItem.array = (List<Object>) value;

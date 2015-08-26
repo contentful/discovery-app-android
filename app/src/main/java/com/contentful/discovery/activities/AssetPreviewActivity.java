@@ -18,13 +18,9 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.adapters.AssetInfoAdapter;
 import com.contentful.discovery.utils.IntentConsts;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.cda.model.CDAAsset;
+import com.contentful.java.cda.CDAAsset;
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * Asset Preview Activity.
- * Displays a single {@code Asset} using a thumbnail and a list of fields.
- */
 public class AssetPreviewActivity extends CFListActivity {
   private AssetInfoAdapter adapter;
   private CDAAsset asset;
@@ -97,10 +93,10 @@ public class AssetPreviewActivity extends CFListActivity {
    * mime-type (i.e. using their web browser).
    */
   void onPhotoClicked() {
-    final Uri uri = Uri.parse(asset.getUrl());
+    final Uri uri = Uri.parse("http:" + asset.url());
 
     Intent intent = new Intent(Intent.ACTION_VIEW);
-    intent.setDataAndType(uri, asset.getMimeType());
+    intent.setDataAndType(uri, asset.mimeType());
 
     if (Utils.resolveActivity(intent)) {
       startActivity(intent);

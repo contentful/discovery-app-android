@@ -11,17 +11,13 @@ import com.contentful.discovery.adapters.ResourcesAdapter;
 import com.contentful.discovery.api.ResourceList;
 import com.contentful.discovery.ui.AbsListContainer;
 import com.contentful.discovery.utils.IntentConsts;
-import com.contentful.java.cda.model.CDAAsset;
-import com.contentful.java.cda.model.CDAContentType;
-import com.contentful.java.cda.model.CDAEntry;
-import com.contentful.java.cda.model.CDAResource;
+import com.contentful.java.cda.CDAAsset;
+import com.contentful.java.cda.CDAContentType;
+import com.contentful.java.cda.CDAEntry;
+import com.contentful.java.cda.CDAResource;
 import java.io.Serializable;
 import java.util.Map;
 
-/**
- * Abstract {@code Resource} List {@code Activity}.
- * Displays a collection of CDA {@code Resources} in a list.
- */
 public abstract class ResourceListActivity extends CFListActivity
     implements LoaderManager.LoaderCallbacks<ResourceList> {
 

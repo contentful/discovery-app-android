@@ -11,9 +11,6 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import com.contentful.discovery.ui.AbsListContainer;
 
-/**
- * ListFragment.
- */
 public class CFListFragment extends Fragment implements AdapterView.OnItemClickListener {
   protected ListView listView;
   AbsListContainer<ListView> listContainerView;

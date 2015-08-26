@@ -7,9 +7,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.contentful.discovery.R;
 
-/**
- * Array View Holder.
- */
 public class ArrayViewHolder extends AbsViewHolder {
   @InjectView(R.id.wrapper) ViewGroup wrapper;
   @InjectView(R.id.tv_title) TextView tvTitle;

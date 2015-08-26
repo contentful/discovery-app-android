@@ -7,33 +7,29 @@ import android.widget.BaseAdapter;
 import com.contentful.discovery.R;
 import com.contentful.discovery.ui.FieldViewHolder;
 import com.contentful.discovery.utils.ViewHelper;
-import com.contentful.java.cda.model.CDAContentType;
-import com.contentful.java.cda.model.CDAEntry;
+import com.contentful.java.cda.CDAContentType;
+import com.contentful.java.cda.CDAEntry;
+import com.contentful.java.cda.CDAField;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.contentful.java.cda.Constants.CDAFieldType;
-
-/**
- * Entry List Adapter.
- */
 public class EntryListAdapter extends BaseAdapter {
   private final Context context;
   private final CDAEntry entry;
-  private final List<Map> contentTypeFields;
+  private final List<CDAField> contentTypeFields;
 
   public EntryListAdapter(Context context, CDAEntry entry, CDAContentType contentType) {
     this.context = context;
     this.entry = entry;
-    this.contentTypeFields = contentType.getFields();
+    this.contentTypeFields = contentType.fields();
   }
 
   @Override public int getCount() {
     return contentTypeFields.size();
   }
 
-  @Override public Map getItem(int position) {
+  @Override public CDAField getItem(int position) {
     return contentTypeFields.get(position);
   }
 
@@ -51,12 +47,12 @@ public class EntryListAdapter extends BaseAdapter {
       vh = (FieldViewHolder) convertView.getTag();
     }
 
-    Map item = getItem(position);
-    Object value = entry.getFields().get(item.get("id"));
-    CDAFieldType fieldType = CDAFieldType.valueOf((String) item.get("type"));
+    CDAField item = getItem(position);
+    Object value = entry.getField(item.id());
+    String fieldType = item.type();
 
     // Title
-    vh.tvTitle.setText((CharSequence) item.get("name"));
+    vh.tvTitle.setText(item.name());
 
     // Value
     if (value != null && isDisplayableFieldType(fieldType)) {
@@ -72,29 +68,29 @@ public class EntryListAdapter extends BaseAdapter {
     return convertView;
   }
 
-  private boolean isDisplayableFieldType(CDAFieldType fieldType) {
-    return CDAFieldType.Boolean.equals(fieldType)
-        || CDAFieldType.Date.equals(fieldType)
-        || CDAFieldType.Integer.equals(fieldType)
-        || CDAFieldType.Number.equals(fieldType)
-        || CDAFieldType.Symbol.equals(fieldType)
-        || CDAFieldType.Text.equals(fieldType)
-        || CDAFieldType.Location.equals(fieldType);
+  private boolean isDisplayableFieldType(String fieldType) {
+    return "Boolean".equals(fieldType)
+        || "Date".equals(fieldType)
+        || "Integer".equals(fieldType)
+        || "Number".equals(fieldType)
+        || "Symbol".equals(fieldType)
+        || "Text".equals(fieldType)
+        || "Location".equals(fieldType);
   }
 
-  private static boolean isClickableFieldType(CDAFieldType fieldType) {
-    return CDAFieldType.Array.equals(fieldType)
-        || CDAFieldType.Link.equals(fieldType)
-        || CDAFieldType.Location.equals(fieldType)
-        || CDAFieldType.Object.equals(fieldType)
-        || CDAFieldType.Symbol.equals(fieldType)
-        || CDAFieldType.Text.equals(fieldType);
+  private static boolean isClickableFieldType(String fieldType) {
+    return "Array".equals(fieldType)
+        || "Link".equals(fieldType)
+        || "Location".equals(fieldType)
+        || "Object".equals(fieldType)
+        || "Symbol".equals(fieldType)
+        || "Text".equals(fieldType);
   }
 
-  private static String normalizeDisplayValue(CDAFieldType fieldType, Object object) {
-    if (CDAFieldType.Integer.equals(fieldType)) {
+  private static String normalizeDisplayValue(String fieldType, Object object) {
+    if ("Integer".equals(fieldType)) {
       return Integer.toString(((Double) object).intValue());
-    } else if (CDAFieldType.Location.equals(fieldType)) {
+    } else if ("Location".equals(fieldType)) {
       Map map = (Map) object;
 
       Double lat = (Double) map.get("lat");

@@ -8,9 +8,6 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.fragments.AssetsFragment;
 import com.contentful.discovery.fragments.ContentTypesFragment;
 
-/**
- * Space PagerAdapter.
- */
 public class SpacePagerAdapter extends FragmentPagerAdapter {
   private final Context context;
   private static final int COUNT = 2;

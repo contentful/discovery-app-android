@@ -3,10 +3,6 @@ package com.contentful.discovery.api;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Credentials.
- * Represents a set of credentials which can be used to authenticate against the CDA API.
- */
 public class Credentials implements Parcelable {
   private String spaceName;
   private String space;

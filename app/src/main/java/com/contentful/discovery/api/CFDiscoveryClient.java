@@ -5,9 +5,6 @@ import com.contentful.discovery.CFApp;
 import com.contentful.discovery.R;
 import com.contentful.java.cda.CDAClient;
 
-/**
- * Shared Client to Demo Space.
- */
 public class CFDiscoveryClient {
   private static CDAClient sInstance;
 
@@ -19,8 +16,8 @@ public class CFDiscoveryClient {
       Context context = CFApp.getInstance();
 
       sInstance =
-          new CDAClient.Builder().setSpaceKey(context.getString(R.string.discovery_space_key))
-              .setAccessToken(context.getString(R.string.discovery_space_token))
+          CDAClient.builder().setSpace(context.getString(R.string.discovery_space_key))
+              .setToken(context.getString(R.string.discovery_space_token))
               .build();
     }
 

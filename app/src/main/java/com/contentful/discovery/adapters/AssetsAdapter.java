@@ -10,12 +10,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.contentful.discovery.R;
 import com.contentful.discovery.utils.Utils;
-import com.contentful.java.cda.model.CDAAsset;
+import com.contentful.java.cda.CDAAsset;
 import java.util.ArrayList;
 
-/**
- * Assets Adapter.
- */
 public class AssetsAdapter extends BaseAdapter {
   private final Context context;
   private ArrayList<CDAAsset> data = new ArrayList<>();

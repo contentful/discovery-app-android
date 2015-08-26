@@ -10,15 +10,9 @@ import com.contentful.discovery.R;
 import com.contentful.discovery.db.schema.CredentialsTable;
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * Database Helper.
- */
 public class DBHelper extends SQLiteOpenHelper {
   private static DBHelper sInstance;
 
-  /**
-   * Database configurations
-   */
   private static final String DB_NAME =
       CFApp.getInstance().getResources().getString(R.string.db_name);
 
