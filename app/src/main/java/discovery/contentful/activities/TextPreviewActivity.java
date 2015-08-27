@@ -1,0 +1,68 @@
+package discovery.contentful.activities;
+
+import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import discovery.contentful.R;
+import discovery.contentful.loaders.TextProcessorLoader;
+import discovery.contentful.utils.IntentConsts;
+import discovery.contentful.utils.Utils;
+import org.apache.commons.lang3.CharEncoding;
+
+public class TextPreviewActivity extends CFFragmentActivity
+    implements LoaderManager.LoaderCallbacks<String> {
+
+  public static final String MIME_TYPE_TEXT_HTML = "text/html";
+
+  // Views
+  @Bind(R.id.web_view) WebView webView;
+
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_text_preview);
+
+    // Inject views
+    ButterKnife.bind(this);
+
+    // Setup WebView
+    if (!getIntent().getBooleanExtra(IntentConsts.EXTRA_ALLOW_LINKS, false)) {
+      webView.setWebViewClient(new WebViewClient() {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+          return true;
+        }
+      });
+    }
+
+    // Title
+    Utils.setTitleFromIntent(this);
+
+    // Init Loader
+    getSupportLoaderManager().initLoader(Utils.getLoaderId(this), null, this);
+  }
+
+  @Override protected void onDestroy() {
+    webView.loadUrl("about:blank");
+
+    super.onDestroy();
+  }
+
+  @Override public Loader<String> onCreateLoader(int id, Bundle args) {
+    return new TextProcessorLoader(getIntent().getStringExtra(IntentConsts.EXTRA_TEXT));
+  }
+
+  @Override public void onLoadFinished(Loader<String> loader, String data) {
+    webView.loadDataWithBaseURL(getString(R.string.url_contentful), data, MIME_TYPE_TEXT_HTML,
+        CharEncoding.UTF_8, null);
+
+    webView.setBackgroundColor(0);
+  }
+
+  @Override public void onLoaderReset(Loader<String> loader) {
+  }
+}

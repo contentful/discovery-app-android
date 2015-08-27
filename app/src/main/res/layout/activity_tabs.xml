@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cf="http://schemas.android.com/apk/res-auto">
 
-    <com.contentful.discovery.ui.PagerSlidingTabStrip
+    <discovery.contentful.ui.PagerSlidingTabStrip
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tabs_height"

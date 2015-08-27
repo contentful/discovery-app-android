@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.contentful.discovery.ui.CFTextView
+    <discovery.contentful.ui.CFTextView
         android:id="@+id/tv_headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"/>
 
-    <com.contentful.discovery.ui.CFTextView
+    <discovery.contentful.ui.CFTextView
         android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

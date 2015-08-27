@@ -10,11 +10,11 @@ Quick intro:
 
 ## Google Play
 
-[![Get it on Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=com.contentful.discovery)
+[![Get it on Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=discovery.contentful)
 
 ## Setup
 
-Google Maps Android API V2 requires that you create an API key which corresponds with your keystore used to sign the APK once it is compiled. Please refer to the [official documentation][3] and follow a few easy steps to create an API key with your debug/release keystores, depending on your usage. When required to specify your SHA1 fingerprint along with the package name, you should provide the package name of this project: "**com.contentful.discovery**". Once you have created your API key, please update [config.xml][4] accordingly.
+Google Maps Android API V2 requires that you create an API key which corresponds with your keystore used to sign the APK once it is compiled. Please refer to the [official documentation][3] and follow a few easy steps to create an API key with your debug/release keystores, depending on your usage. When required to specify your SHA1 fingerprint along with the package name, you should provide the package name of this project: "**discovery.contentful**". Once you have created your API key, please update [config.xml][4] accordingly.
 
 In the Android SDK Manager, ensure that the following are installed, and are updated to the latest available version:
 - Tools > Android SDK Platform-tools (rev 21 or above)

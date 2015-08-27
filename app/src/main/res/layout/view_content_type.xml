@@ -12,13 +12,13 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <com.contentful.discovery.ui.CFTextView
+        <discovery.contentful.ui.CFTextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"/>
 
-        <com.contentful.discovery.ui.CFTextView
+        <discovery.contentful.ui.CFTextView
             android:id="@+id/tv_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
 
     </LinearLayout>
 
-    <com.contentful.discovery.ui.CFTextView
+    <discovery.contentful.ui.CFTextView
         android:id="@+id/tv_entries_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

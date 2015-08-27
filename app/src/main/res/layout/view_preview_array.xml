@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/entry_preview_padding"
     android:paddingTop="@dimen/entry_preview_padding">
 
-    <com.contentful.discovery.ui.CFTextView
+    <discovery.contentful.ui.CFTextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

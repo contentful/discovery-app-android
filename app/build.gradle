@@ -7,19 +7,14 @@ android {
   defaultConfig {
     minSdkVersion 14
     targetSdkVersion 23
-    applicationId "com.contentful.discovery"
-    versionCode 6
-    versionName "1.0.1"
-  }
-
-  signingConfigs {
-    release {}
+    applicationId 'discovery.contentful'
+    versionCode 1
+    versionName '1.0.0'
   }
 
   buildTypes {
     release {
       minifyEnabled false
-      signingConfig signingConfigs.release
     }
   }
 
@@ -56,19 +51,6 @@ dependencies {
   compile 'joda-time:joda-time:2.4'
   compile 'com.contentful.java:java-sdk:4.0.2'
   compile 'com.viewpagerindicator:library:2.4.1@aar'
-}
-
-// Sign properties
-File f = file(project.file("sign.properties"))
-
-if (f.exists()) {
-  Properties props = new Properties()
-  props.load(new FileInputStream(file(project.file("sign.properties"))))
-
-  android.signingConfigs.release.storeFile = file((String) props["key.store"].toURI())
-  android.signingConfigs.release.keyAlias = props["key.alias"]
-  android.signingConfigs.release.storePassword = props["key.store.password"]
-  android.signingConfigs.release.keyPassword = props["key.alias.password"]
 }
 
 apply from: rootProject.file('gradle/checkstyle.gradle')

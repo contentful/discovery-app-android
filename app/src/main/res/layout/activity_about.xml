@@ -4,7 +4,7 @@
        xmlns:tools="http://schemas.android.com/tools">
 
     <!-- About -->
-    <com.contentful.discovery.ui.AboutLinearLayout
+    <discovery.contentful.ui.AboutLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -34,7 +34,7 @@
                     android:layout_height="60dp"
                     android:src="@drawable/logo_contentful"/>
 
-                <com.contentful.discovery.ui.CFTextView
+                <discovery.contentful.ui.CFTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -42,7 +42,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="20sp"/>
 
-                <com.contentful.discovery.ui.CFTextView
+                <discovery.contentful.ui.CFTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
@@ -51,7 +51,7 @@
                     android:textColor="@color/cf_yellow"
                     android:textSize="16sp"/>
 
-                <com.contentful.discovery.ui.CFTextView
+                <discovery.contentful.ui.CFTextView
                     android:id="@+id/tv_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.contentful.discovery.ui.CFButton
+                <discovery.contentful.ui.CFButton
                     android:id="@+id/btn_faq"
                     style="@style/CFButton.About"
                     android:layout_width="match_parent"
@@ -85,7 +85,7 @@
 
                 <include layout="@layout/view_dividier"/>
 
-                <com.contentful.discovery.ui.CFButton
+                <discovery.contentful.ui.CFButton
                     android:id="@+id/btn_feedback"
                     style="@style/CFButton.About"
                     android:layout_width="match_parent"
@@ -94,7 +94,7 @@
 
                 <include layout="@layout/view_dividier"/>
 
-                <com.contentful.discovery.ui.CFButton
+                <discovery.contentful.ui.CFButton
                     android:id="@+id/btn_contact"
                     style="@style/CFButton.About"
                     android:layout_width="match_parent"
@@ -103,7 +103,7 @@
 
                 <include layout="@layout/view_dividier"/>
 
-                <com.contentful.discovery.ui.CFButton
+                <discovery.contentful.ui.CFButton
                     android:id="@+id/btn_product_tour"
                     style="@style/CFButton.About"
                     android:layout_width="match_parent"
@@ -112,7 +112,7 @@
 
                 <include layout="@layout/view_dividier"/>
 
-                <com.contentful.discovery.ui.CFButton
+                <discovery.contentful.ui.CFButton
                     android:id="@+id/btn_licensing"
                     style="@style/CFButton.About"
                     android:layout_width="match_parent"
@@ -123,7 +123,7 @@
 
         </ScrollView>
 
-    </com.contentful.discovery.ui.AboutLinearLayout>
+    </discovery.contentful.ui.AboutLinearLayout>
 
     <!-- Tutorial Fragment -->
     <FrameLayout

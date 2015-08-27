@@ -8,7 +8,7 @@
              android:background="@color/cf_gray_background"
              android:visibility="gone">
 
-    <com.contentful.discovery.ui.CFTextView
+    <discovery.contentful.ui.CFTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
